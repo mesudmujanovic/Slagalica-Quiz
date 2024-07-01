@@ -1,0 +1,36 @@
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 270px;
+}
+  
+  .column {
+    text-align: center;
+    flex: 1;
+    margin: 4px;
+  }
+  
+  .item{
+   padding: 10px;
+   cursor: pointer;
+  }
+  
+  .finall{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  }
+
+  .text{
+    background-color: red;
+    color: white;
+  }
+
+  input::placeholder{
+    background-color: red;
+    color: white;
+  
+  }
+  
+  

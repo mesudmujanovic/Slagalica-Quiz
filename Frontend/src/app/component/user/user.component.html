@@ -1,0 +1,21 @@
+<!-- Forma za unos imena korisnika -->
+<form [formGroup]="userForm" (ngSubmit)="onUser()" class="form">
+  <div class="form-group">
+    <label for="username">User Name</label>
+    <input type="text" class="form-control" name="username" formControlName="username">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<div *ngIf="users$ | async as users">
+  <h4>
+    Sort by:
+    <button class="btn btn-primary" (click)="sortUsersByScoreDesc()">Highest to Lowest</button>
+    <button class="btn btn-primary" (click)="sortUsersByScoreAsc()">Lowest to Highest</button>
+  </h4>
+  <div *ngFor="let user of users">
+    <h4>{{ user.username }}</h4>
+    <p>Score: {{ user.userscore }}</p>
+  </div>
+</div>
+

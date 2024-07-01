@@ -1,0 +1,41 @@
+<div class="blue-bacground">
+    <div class="allDiv">
+        <div id="num1" class="num"></div>
+        <div id="num2" class="num"></div>
+        <div id="num3" class="num"></div>
+        <div id="num4" class="num"></div>
+        <div id="num5" class="num numBig"></div>
+        <div id="num6" class="num numBig "></div>
+        <div class="button-container">
+            <button class="button" (click)="addNumToDivs()">Dodaj brojeve</button>
+        </div>
+    </div>
+    <div class="result">
+        {{result}}
+    </div>
+
+    <div class="containerCalc hide" id="app">
+        <input [(ngModel)]="toShow" type="text">
+        <div class="btt">
+            <button (click)="writeToInput('1')">1</button>
+            <button (click)="writeToInput('2')">2</button>
+            <button (click)="writeToInput('3')">3</button>
+            <button (click)="writeToInput('4')">4</button>
+            <button (click)="writeToInput('5')">5</button>
+            <button (click)="writeToInput('6')">6</button>
+            <button (click)="writeToInput('7')">7</button>
+            <button (click)="writeToInput('8')">8</button>
+            <button (click)="writeToInput('9')">9</button>
+            <button (click)="writeToInput('0')">0</button>
+            <button (click)="back()">back</button>
+            <button (click)="writeToInput('+')">+</button>
+            <button (click)="writeToInput('-')">-</button>
+            <button (click)="writeToInput('*')">*</button>
+            <button (click)="writeToInput('/')">/</button>
+            <button (click)="writeToInput('(')">(</button>
+            <button (click)="writeToInput(')')">)</button>
+            <button id="clear" (click)="clear()">C</button>
+            <button id="equals" (click)="equals()">=</button>
+        </div>
+    </div>
+</div>

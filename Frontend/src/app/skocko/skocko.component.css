@@ -1,0 +1,43 @@
+#signs-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .sign {
+    cursor: pointer;
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .arr1-1 {
+    margin-top: 10px;
+  }
+  
+  button {
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  .hit {
+    margin-top: 10px;
+  }
+  
+  .red-text {
+    color: red !important;
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  .yellow-text {
+    color: yellow;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .black-text {
+    color: black;
+    width: 30px;
+    height: 30px;
+  }
+  
