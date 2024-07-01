@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MyNumberService } from 'src/app/service/my-number.service';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable} from 'rxjs';
 import { MyNumber } from 'src/app/interface/MyNumber-Interface';
 import { ScoreService } from 'src/app/service/score.service';
 import { Router } from '@angular/router';
+import { CalculationService } from 'src/app/service/calculation.service';
 
 @Component({
   selector: 'app-my-number',
@@ -12,25 +13,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./my-number.component.css']
 })
 export class MyNumberComponent {
+  public result: number | undefined;
 
   allNumber$: Observable<MyNumber[]> = this.myNumberService.getAllNumber();
-  num1: number | undefined;
-  num2: number | undefined;
-  num3: number | undefined;
-  num4: number | undefined;
-  num5: number | undefined;
-  num6: number | undefined;
+  public num1: number | undefined;
+  public num2: number | undefined;
+  public num3: number | undefined;
+  public num4: number | undefined;
+  public num5: number | undefined;
+  public num6: number | undefined
   currentDivIndex: number = 1;
-  result: number | undefined;
   public counter: number = 60
   public toShow: any;
   public currValue: string = '';
   public counterButton: number = 0;
+  numbers: (number | undefined)[] = [undefined, undefined, undefined, undefined, undefined, undefined];
 
   constructor(private http: HttpClient,
     private myNumberService: MyNumberService,
     private scoreService: ScoreService,
-    private router: Router) { }
+    private router: Router,
+    public calculationService: CalculationService) { }
 
     addNumToDivs() {
       const currentNum = this['num' + this.currentDivIndex];
@@ -70,58 +73,74 @@ export class MyNumberComponent {
           this.num5 = number5;
           this.num6 = number6;
           this.result = result;
+          console.log("res",this.result);
+          
         }
       },
       error => {
         console.error("Error fetching numbers", error);
       }
     );
+    
   }
-
-  equals() {
-    const allNumbers = [
-      this.num1.toString(),
-      this.num2.toString(),
-      this.num3.toString(),
-      this.num4.toString(),
-      this.num5.toString(),
-      this.num6.toString()
-    ];
-
-    const enteredNumbers = this.toShow.match(/\d+/g);
-    if (
-      enteredNumbers.every((everyNumber) => {
-        return allNumbers.includes(everyNumber);
-      })
-    ) {
-      try {
-        this.toShow = eval(this.toShow);
-        alert("Čestitamo! Pogodili ste tačan broj!");
-        this.scoreService.addToScore(15);
-        this.router.navigate(['/association']);
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      alert(
-        "Žao nam je, niste pobedili!! Broj koji ste uneli ne pripada grupi vaših izabranih brojeva, pokušajte ponovo"
-      );
-      this.router.navigate(['/user']);
-    }
-  }
-
   writeToInput(value: string) {
-    this.currValue = this.currValue + value;
-    this.toShow = this.currValue;
+    this.calculationService.writeToInput(value);
   }
 
   clear() {
-    this.toShow = '0'
+    this.calculationService.clear();
   }
 
   back() {
-    this.currValue = this.currValue.slice(0, -1);
-    this.toShow = this.currValue;
+    this.calculationService.back();
   }
+
+  equals() {    
+    this.calculationService.equals(this.num1, this.num2, this.num3, this.num4, this.num5, this.num6, this.result);
+  }
+
+  // equals() {
+  //   const enteredNumbers = this.toShow.match(/\d+/g);
+  //   const allNumbers = [
+  //     this.num1, this.num2, this.num3, this.num4, this.num5, this.num6
+  //   ].map(num => num?.toString() ?? '');
+  
+  //   if (enteredNumbers && enteredNumbers.every(everyNumber => allNumbers.includes(everyNumber))) {
+  //     const sum = enteredNumbers.reduce((acc, curr) => acc + parseInt(curr), 0);
+  
+  //     try {
+  //       const result = this.result;
+  //       if (!isNaN(result) && result === sum) {
+  //         alert("Čestitamo! Pogodili ste tačan broj!");
+  //         this.scoreService.addToScore(15);
+  //       } else {
+  //         alert("Rezultat se ne poklapa sa unetim izrazom, pokušajte ponovo.");
+  //       }
+  //       this.toShow = sum.toString(); 
+  //     } catch (err) {
+  //       console.error(err);
+  //       alert("Došlo je do greške prilikom izračunavanja izraza.");
+  //     }
+  //   } else {
+  //     alert(
+  //       "Žao nam je, niste uneli ispravan izraz. Molimo unesite validne brojeve i operatore."
+  //     );
+  //   }
+  // }
+  
+
+  // writeToInput(value: string) {
+  //   this.currValue = this.currValue + value;
+  //   this.toShow = this.currValue;    
+  // }
+
+  // clear() {
+  //   this.toShow = '0'
+  // }
+
+  // back() {
+  //   this.currValue = this.currValue.slice(0, -1);
+  //   this.toShow = this.currValue;
+  // }
 
 }
