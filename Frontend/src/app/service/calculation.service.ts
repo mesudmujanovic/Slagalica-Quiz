@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { catchError, from, map, of, reduce } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalculationService {
   private currValue: string = '0';
-  public toShow: string = '0'; // Inicijalizirali smo toShow na '0'
+  public toShow: string = '0'; 
 
   equals(
     num1: number | undefined,
@@ -14,35 +15,47 @@ export class CalculationService {
     num4: number | undefined,
     num5: number | undefined,
     num6: number | undefined,
-    result: number | undefined  
-  ) {   
-    // Izdvoji brojeve iz this.toShow koristeći regularni izraz
-    const numbersInShow = this.toShow.match(/\d+/g);
-    
-    // Ako su pronađeni brojevi, pretvori ih u niz brojeva
-    const numbers = numbersInShow ? numbersInShow.map(num => parseInt(num)) : [];
-    
-    // Izračunaj sumu svih brojeva uključenih u this.toShow i unesene brojeve
-    const sum = numbers.reduce((acc, curr) => acc + curr, 0);
-  console.log(this.toShow);
-  console.log(result);
-  console.log(sum);
-  
-  
-  
-    try {
-      // Provjeri da li je result definiran i da li se poklapa sa izračunatom sumom
-      if (typeof result === 'number' && result === sum) {
-        alert("Čestitamo! Pogodili ste tačan broj!");
-      } else {
-        alert("Rezultat se ne poklapa sa unetim izrazom, pokušajte ponovo.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Došlo je do greške prilikom izračunavanja izraza.");
-    }
+    result: number | undefined
+  ) {
+    const allNumbers = [
+      num1?.toString(),
+      num2?.toString(),
+      num3?.toString(),
+      num4?.toString(),
+      num5?.toString(),
+      num6?.toString()
+    ];
+
+    const numbersInShow = this.toShow.match(/\d+/g) || [];
+    const numbersObservable = from(numbersInShow).pipe(
+      map(num => parseInt(num)),
+      reduce((acc, curr) => acc + curr, 0),
+      catchError(err => {
+        console.error(err);
+        return of(NaN); 
+      })
+    );
+
+    if(numbersInShow) {
+      numbersObservable.subscribe(
+        sum => {
+          if (numbersInShow.every(everyNumber => allNumbers.includes(everyNumber))) {
+            if (result === sum) {
+              alert("Čestitamo! Pogodili ste tačan broj!");
+            } else {
+              alert("Rezultat se ne poklapa sa unetim izrazom, pokušajte ponovo.");
+            }
+          } else {
+            alert("Uneti brojevi se ne nalaze u izrazu.");
+          }
+        },
+        err => {
+          console.error(err);
+          alert(`Došlo je do greške: ${err.message}`);
+        }
+      );
+    } 
   }
-  
   
   writeToInput(value: string) {
     this.currValue = this.currValue + value;

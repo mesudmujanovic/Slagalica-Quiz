@@ -1,0 +1,16 @@
+<div class="containerCalc hide" id="app">
+    <input [(ngModel)]="calculationService.toShow" type="text">
+    <div class="buttons">
+      <div class="numbers">
+        <ng-template ngFor let-digit [ngForOf]="[1, 2, 3, 4, 5, 6, 7, 8, 9, 0]">
+          <button (click)="writeToInput(digit.toString())">{{ digit }}</button>
+        </ng-template>
+      </div>
+      <div class="operators">
+        <button *ngFor="let operator of ['+', '-', '*', '/', '(', ')']" (click)="writeToInput(operator)">{{ operator }}</button>
+        <button id="clear" (click)="clear()">C</button>
+        <button id="back" (click)="back()">back</button>
+        <button id="equals" (click)="equals()">=</button>
+      </div>
+    </div>
+  </div>

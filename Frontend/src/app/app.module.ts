@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './component/user/user.component';
 import { AssociationComponent } from './component/association/association.component';
 import { SkockoComponent } from './skocko/skocko.component';
+import { CalculatorComponent } from './calculator/calculator.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SkockoComponent } from './skocko/skocko.component';
     MyNumberComponent,
     UserComponent,
     AssociationComponent,
-    SkockoComponent
+    SkockoComponent,
+    CalculatorComponent
   ],
   imports: [
     BrowserModule,
