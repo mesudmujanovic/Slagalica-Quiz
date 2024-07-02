@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './component/user/user.component';
 import { AssociationComponent } from './component/association/association.component';
-import { SkockoComponent } from './skocko/skocko.component';
-import { CalculatorComponent } from './calculator/calculator.component';
+import { SkockoComponent } from './component/skocko/skocko.component';
+import { CalculatorComponent } from './component/calculator/calculator.component';
 
 @NgModule({
   declarations: [

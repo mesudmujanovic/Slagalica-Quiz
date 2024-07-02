@@ -8,23 +8,17 @@ export class CalculationService {
   private currValue: string = '0';
   public toShow: string = '0'; 
 
-  equals(
-    num1: number | undefined,
-    num2: number | undefined,
-    num3: number | undefined,
-    num4: number | undefined,
-    num5: number | undefined,
-    num6: number | undefined,
-    result: number | undefined
-  ) {
+  equals( num1: number | undefined, num2: number | undefined, num3: number | undefined, 
+    num4: number | undefined, num5: number | undefined, num6: number | undefined, result: number | undefined) {
+      
     const allNumbers = [
-      num1?.toString(),
-      num2?.toString(),
-      num3?.toString(),
-      num4?.toString(),
-      num5?.toString(),
-      num6?.toString()
-    ];
+      num1,
+      num2,
+      num3,
+      num4,
+      num5,
+      num6
+    ].map(num => num?.toString());
 
     const numbersInShow = this.toShow.match(/\d+/g) || [];
     const numbersObservable = from(numbersInShow).pipe(
