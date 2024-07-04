@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CalculationService } from 'src/app/service/calculation.service';
 import { NumberStateService } from 'src/app/service/number-state.service';
 
 @Component({
@@ -15,20 +14,20 @@ export class MyNumberComponent {
   public counterButton: number = 0;
   numbers: (number | undefined)[] = [undefined, undefined, undefined, undefined, undefined, undefined];
 
-  constructor( public calculationService: CalculationService,
+  constructor( 
                public numberStateService: NumberStateService
              ) { }
 
     addNumToDivs() {
-      const currentNum = this.numberStateService['num' + this.currentDivIndex];
-      const currentDiv = document.getElementById('num' + this.currentDivIndex);
+      const currentNum = this.numberStateService['number' + this.currentDivIndex];
+      const currentDiv = document.getElementById('number' + this.currentDivIndex);
 
       if (currentDiv) {
         if (currentDiv.classList.contains('numSpin')) {
           currentDiv.textContent = currentNum?.toString() ?? '';
           currentDiv.classList.remove('numSpin');
           this.currentDivIndex++;
-          const nextDiv = document.getElementById('num' + this.currentDivIndex);
+          const nextDiv = document.getElementById('number' + this.currentDivIndex);
           if (nextDiv) {
             nextDiv.classList.add('numSpin');
           }

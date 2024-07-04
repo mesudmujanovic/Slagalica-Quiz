@@ -1,7 +1,7 @@
 <div class="blue-bacground">
     <div class="allDiv">
-        <div *ngFor="let num of [1, 2, 3, 4, 5, 6]" [attr.id]="'num' + num" class="num" [ngClass]="{'numBig': num === 5 || num === 6}">
-            {{ numbers[num - 1] }}
+        <div *ngFor="let number of [1, 2, 3, 4, 5, 6]" [attr.id]="'number' + number" class="num" [ngClass]="{'numBig': number === 5 || number === 6}">
+            {{ numbers[number - 1] }}
           </div>
         <div class="button-container">
             <button class="button" (click)="addNumToDivs()">Dodaj brojeve</button>

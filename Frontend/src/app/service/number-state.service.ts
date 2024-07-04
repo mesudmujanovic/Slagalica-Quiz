@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 })
 export class NumberStateService {
 
-  public num1: number | undefined;
-  public num2: number | undefined;
-  public num3: number | undefined;
-  public num4: number | undefined;
-  public num5: number | undefined;
-  public num6: number | undefined;
+  public number1: number | undefined;
+  public number2: number | undefined;
+  public number3: number | undefined;
+  public number4: number | undefined;
+  public number5: number | undefined;
+  public number6: number | undefined;
   public result: number | undefined;
   allNumber$: Observable<MyNumber[]> = this.myNumberService.getAllNumber();
 
@@ -25,12 +25,12 @@ export class NumberStateService {
         if (numbers.length > 0) {
           const randIndex = Math.floor(Math.random() * numbers.length);
           const { number1, number2, number3, number4, number5, number6, result } = numbers[randIndex];
-          this.num1 = number1;
-          this.num2 = number2;
-          this.num3 = number3;
-          this.num4 = number4;
-          this.num5 = number5;
-          this.num6 = number6;
+          this.number1 = number1;
+          this.number2 = number2;
+          this.number3 = number3;
+          this.number4 = number4;
+          this.number5 = number5;
+          this.number6 = number6;
           this.result = result;
         }
       },
@@ -41,7 +41,7 @@ export class NumberStateService {
   };
 
   getNumbers(): (number | undefined)[] {
-    return [this.num1, this.num2, this.num3, this.num4, this.num5, this.num6, this.result];
+    return [this.number1, this.number2, this.number3, this.number4, this.number5, this.number6, this.result];
   }
 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { catchError, from, map, of, reduce } from 'rxjs';
+import { MyNumber } from '../interface/MyNumber-Interface';
 
 @Injectable({
   providedIn: 'root'
@@ -8,19 +9,11 @@ export class CalculationService {
   private currValue: string = '0';
   public toShow: string = '0'; 
 
-  equals( num1: number | undefined, num2: number | undefined, num3: number | undefined, 
-    num4: number | undefined, num5: number | undefined, num6: number | undefined, result: number | undefined) {
-      
-    const allNumbers = [
-      num1,
-      num2,
-      num3,
-      num4,
-      num5,
-      num6
-    ].map(num => num?.toString());
+  equals( { number1, number2, number3, number4, number5, number6, result }: MyNumber) {
 
+    const allNumbers = [number1, number2, number3, number4, number5, number6].map(num => num?.toString());
     const numbersInShow = this.toShow.match(/\d+/g) || [];
+    
     const numbersObservable = from(numbersInShow).pipe(
       map(num => parseInt(num)),
       reduce((acc, curr) => acc + curr, 0),
@@ -43,8 +36,6 @@ export class CalculationService {
           const allNumbersCount = countOccurrences(allNumbers);          
           const numbersInShowCount = countOccurrences(numbersInShow);
     console.log(allNumbersCount);
-    console.log(numbersInShowCount);
-    
     
           const isEveryNumberIncluded = Object.keys(numbersInShowCount).every(key => {
             return allNumbersCount[key] && numbersInShowCount[key] <= allNumbersCount[key];
