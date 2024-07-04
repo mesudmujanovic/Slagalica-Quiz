@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MyNumber } from '../interface/MyNumber-Interface';
 import { MyNumberService } from './my-number.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

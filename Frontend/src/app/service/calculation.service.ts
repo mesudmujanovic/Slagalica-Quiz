@@ -30,17 +30,34 @@ export class CalculationService {
       })
     );
 
-    if(numbersInShow) {
+    if (numbersInShow) {
       numbersObservable.subscribe(
         sum => {
-          if (numbersInShow.every(everyNumber => allNumbers.includes(everyNumber))) {
+          const countOccurrences = (arr: string[]) => {
+            return arr.reduce((acc, num) => {
+              acc[num] = (acc[num] || 0) + 1;
+              return acc;
+            }, {} as { [key: number]: string });
+          };
+    
+          const allNumbersCount = countOccurrences(allNumbers);          
+          const numbersInShowCount = countOccurrences(numbersInShow);
+    console.log(allNumbersCount);
+    console.log(numbersInShowCount);
+    
+    
+          const isEveryNumberIncluded = Object.keys(numbersInShowCount).every(key => {
+            return allNumbersCount[key] && numbersInShowCount[key] <= allNumbersCount[key];
+          });
+    
+          if (isEveryNumberIncluded) {
             if (result === sum) {
               alert("Čestitamo! Pogodili ste tačan broj!");
             } else {
               alert("Rezultat se ne poklapa sa unetim izrazom, pokušajte ponovo.");
             }
           } else {
-            alert("Uneti brojevi se ne nalaze u izrazu.");
+            alert("Uneti brojevi se ne nalaze u izrazu ili su uneti više puta nego što je dozvoljeno.");
           }
         },
         err => {
@@ -48,7 +65,8 @@ export class CalculationService {
           alert(`Došlo je do greške: ${err.message}`);
         }
       );
-    } 
+    }
+    
   }
   
   writeToInput(value: string) {
