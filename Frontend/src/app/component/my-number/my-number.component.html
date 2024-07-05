@@ -7,8 +7,8 @@
             <button class="button" (click)="addNumToDivs()">Dodaj brojeve</button>
         </div>
     </div>
-    <div class="result">
-        {{numberStateService.numbers?.result}}
+    <div *ngIf="(result$ | async) !== undefined" class="result">
+      {{ result$ | async }}
     </div>
     <app-calculator></app-calculator>
   </div>

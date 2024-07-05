@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CalculationService } from '../../service/calculation.service';
 import { NumberStateService } from '../../service/number-state.service';
-import { MyNumber } from 'src/app/interface/MyNumber-Interface';
 
 @Component({
   selector: 'app-calculator',
