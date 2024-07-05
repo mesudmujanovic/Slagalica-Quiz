@@ -6,7 +6,6 @@ import { MyNumber } from '../interface/MyNumber-Interface';
   providedIn: 'root'
 })
 export class CalculationService {
-  private currValue: string = '0';
   public toShow: string = '0'; 
 
   equals( { number1, number2, number3, number4, number5, number6, result }: MyNumber) {
@@ -34,9 +33,7 @@ export class CalculationService {
           };
     
           const allNumbersCount = countOccurrences(allNumbers);          
-          const numbersInShowCount = countOccurrences(numbersInShow);
-    console.log(allNumbersCount);
-    
+          const numbersInShowCount = countOccurrences(numbersInShow);    
           const isEveryNumberIncluded = Object.keys(numbersInShowCount).every(key => {
             return allNumbersCount[key] && numbersInShowCount[key] <= allNumbersCount[key];
           });
@@ -57,12 +54,10 @@ export class CalculationService {
         }
       );
     }
-    
   }
   
   writeToInput(value: string) {
-    this.currValue = this.currValue + value;
-    this.toShow = this.currValue;    
+    this.toShow += value;          
   }
 
   clear() {
@@ -70,7 +65,6 @@ export class CalculationService {
   }
 
   back() {
-    this.currValue = this.currValue.slice(0, -1);
-    this.toShow = this.currValue;
+    this.toShow = this.toShow.slice(0, -1);
   }
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { MyNumber } from 'src/app/interface/MyNumber-Interface';
 import { NumberStateService } from 'src/app/service/number-state.service';
 
 @Component({
@@ -9,17 +11,14 @@ import { NumberStateService } from 'src/app/service/number-state.service';
 export class MyNumberComponent {
   currentDivIndex: number = 1;
   public counter: number = 60
-  public toShow: any;
-  public currValue: string = '';
+  public toShow: string;
   public counterButton: number = 0;
   numbers: (number | undefined)[] = [undefined, undefined, undefined, undefined, undefined, undefined];
 
-  constructor( 
-               public numberStateService: NumberStateService
-             ) { }
+  constructor(public numberStateService: NumberStateService) { }
 
     addNumToDivs() {
-      const currentNum = this.numberStateService['number' + this.currentDivIndex];
+      const currentNum = this.numberStateService.numbers['number' + this.currentDivIndex];
       const currentDiv = document.getElementById('number' + this.currentDivIndex);
 
       if (currentDiv) {
@@ -44,6 +43,7 @@ export class MyNumberComponent {
     }
 
     ngOnInit() {
-      this.numberStateService.fetchNumbers();
-    } 
+ 
+}
+
 }
