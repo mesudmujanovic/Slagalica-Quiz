@@ -18,15 +18,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
-
     @Override
     public UserDto createUser(UserDto userDto) {
         UserEntity userEntity = UserMapper.INSTANCE.apply(userDto);
         UserEntity userEntitySave = userRepo.save(userEntity);
         return UserDtoMapper.INSTANCE.apply(userEntitySave);
     }
-
-
     @Override
     public List<UserDto> getAllUsers() {
         List<UserEntity> userList = userRepo.findAll();

@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/quiz")
 @CrossOrigin("*")
 public class QuizMyNumberController {
-
     private final QuizMyNumberServiceImpl quizService;
 
     public QuizMyNumberController(QuizMyNumberServiceImpl quizService) {
