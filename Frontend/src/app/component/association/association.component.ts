@@ -134,7 +134,6 @@ export class AssociationComponent {
     });
   }
 
-  //prolazimo kroz solution i vracamo samo ono sto pocinje sa column da bi mogli da dodelimo gore povise svakoj koloni konacan rezultat
   getSolutionForColumn(column: string): string {
     const solution = this.randIndexAssoc.solutions.find(s => s.startsWith(column));
     if (solution) {

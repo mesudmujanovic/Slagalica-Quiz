@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NumberStateService } from 'src/app/service/number-state.service';
 
@@ -8,6 +8,10 @@ import { NumberStateService } from 'src/app/service/number-state.service';
   styleUrls: ['./my-number.component.css']
 })
 export class MyNumberComponent {
+
+  @ViewChildren('numDiv') numDivs!: QueryList<ElementRef>;  
+  @ViewChildren('containerCalc', { read: ElementRef }) containerCalc!: QueryList<ElementRef>;
+
   currentDivIndex: number = 1;
   public counter: number = 60
   public toShow: string;
@@ -15,33 +19,36 @@ export class MyNumberComponent {
   numbers: (number | undefined)[] = [undefined, undefined, undefined, undefined, undefined, undefined];
   result$: Observable<number | undefined>;
   
-  constructor(public numberStateService: NumberStateService) {
-    this.result$ = this.numberStateService.getResult();
-   }
+  constructor(private numberStateService: NumberStateService,
+             private renderer: Renderer2 )
+     {this.result$ = this.numberStateService.getResult();
+     }
+     
+  addNumToDivs() {
+    const currentNum = this.numberStateService.numbers['number' + this.currentDivIndex];
+    const currentDiv = this.numDivs.toArray()[this.currentDivIndex - 1]?.nativeElement;
 
-    addNumToDivs() {
-      const currentNum = this.numberStateService.numbers['number' + this.currentDivIndex];
-      const currentDiv = document.getElementById('number' + this.currentDivIndex);
-
-      if (currentDiv) {
-        if (currentDiv.classList.contains('numSpin')) {
-          currentDiv.textContent = currentNum?.toString() ?? '';
-          currentDiv.classList.remove('numSpin');
-          this.currentDivIndex++;
-          const nextDiv = document.getElementById('number' + this.currentDivIndex);
-          if (nextDiv) {
-            nextDiv.classList.add('numSpin');
-          }
-            this.counterButton++;
-          
-          if (this.counterButton === 6) {
-            const calcDiv = document.getElementsByClassName('containerCalc')[0] as HTMLElement;
-            calcDiv.classList.remove('hide');
-          }
-        } else {
-          currentDiv.classList.add('numSpin');
+    if (currentDiv) {
+      if (currentDiv.classList.contains('numSpin')) {
+        currentDiv.textContent = currentNum?.toString() ?? '';
+        this.renderer.removeClass(currentDiv, 'numSpin');
+        this.currentDivIndex++;
+        const nextDiv = this.numDivs.toArray()[this.currentDivIndex - 1]?.nativeElement;
+        if (nextDiv) {
+          this.renderer.addClass(nextDiv, 'numSpin');
         }
+        this.counterButton++;
+        if (this.counterButton === 6) {
+          const calcDiv = this.containerCalc.first?.nativeElement;
+          if (calcDiv) {
+            this.renderer.removeClass(calcDiv, 'hide');
+          }
+        }
+      } else {
+        this.renderer.addClass(currentDiv, 'numSpin');
       }
     }
+  }
+ 
 
 }
