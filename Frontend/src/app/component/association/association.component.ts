@@ -21,15 +21,16 @@ export class AssociationComponent {
   columnBInput: string;
   columnCInput: string;
   columnDInput: string;
-  columnASolution;
-  columnBSolution;
-  columnCSolution;
-  columnDSolution;
+  columnASolution: string;
+  columnBSolution: string;
+  columnCSolution: string;
+  columnDSolution: string;
   isColumnGueseedA: boolean = false;
   isColumnGueseedB: boolean = false;
   isColumnGueseedC: boolean = false;
   isColumnGueseedD: boolean = false;
   isColumnGueseedF: boolean = false;
+  isColumnGueseed: boolean = false;
 
   constructor(private assocService: AssociationService,
     private scoreService: ScoreService,
@@ -48,16 +49,21 @@ export class AssociationComponent {
 
   finallColumn() {
     if (this.finallResult == this.finallSolution) {
-      this.itemText['A'] = this.randIndexAssoc.columnA;
-      this.itemText['B'] = this.randIndexAssoc.columnB
-      this.itemText['C'] = this.randIndexAssoc.columnC
-      this.itemText['D'] = this.randIndexAssoc.columnD
+      this.itemText = {
+        'A': this.randIndexAssoc.columnA,
+        'B': this.randIndexAssoc.columnB,
+        'C': this.randIndexAssoc.columnC,
+        'D': this.randIndexAssoc.columnD
+      };
+
       this.columnAInput = this.columnASolution;
       this.columnBInput = this.columnBSolution;
       this.columnCInput = this.columnCSolution;
       this.columnDInput = this.columnDSolution;
+
       this.isColumnGueseedF = true;
       this.scoreService.addToScore(15); 
+
        setTimeout(()=> {
         this.router.navigate(['/user']);
        },3000)
@@ -70,7 +76,6 @@ export class AssociationComponent {
   handleInputChange(column: string): void {
     const solution = this['column' + column.toUpperCase() + 'Solution']; 
     const input = this['column' + column.toUpperCase() + 'Input']; 
-
     if (input === solution) {
       this.itemText[column] = this.randIndexAssoc['column' + column];
       this['isColumnGueseed' + column.toUpperCase()] = true;

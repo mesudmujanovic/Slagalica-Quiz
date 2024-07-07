@@ -4,8 +4,11 @@
       <div class="text" *ngIf="!itemText['A'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['A'][i]">{{itemText['A'][i]}}</div>
     </div>
-    <input type="text" [(ngModel)]="columnAInput" placeholder="Column A" [disabled]="isColumnGueseedA"
-      (change)="handleInputChange('A')">
+    <input type="text"
+    [(ngModel)]="columnAInput"
+    placeholder="Column A" 
+    [disabled]="isColumnGueseedA"
+    (change)="handleInputChange('A')">
   </div>
 
   <div class="column" *ngIf="randIndexAssoc">
