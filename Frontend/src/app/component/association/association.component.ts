@@ -21,6 +21,10 @@ export class AssociationComponent {
   columnBInput: string;
   columnCInput: string;
   columnDInput: string;
+  columnASolution;
+  columnBSolution;
+  columnCSolution;
+  columnDSolution;
   isColumnGueseedA: boolean = false;
   isColumnGueseedB: boolean = false;
   isColumnGueseedC: boolean = false;
@@ -33,6 +37,7 @@ export class AssociationComponent {
     private router: Router) {
     this.itemText = { A: ["A1", "A2", "A3", "A4"], B: ["B1", "B2", "B3", "B4"], C: ["C1", "C2", "C3", "C4"], D: ["D1", "D2", "D3", "D4"] };
   }
+  
 
   showText(item: string, column: string, index: number): void {
     this.itemText[column][index] = item;
@@ -44,13 +49,13 @@ export class AssociationComponent {
       this.itemText['B'] = this.randIndexAssoc.columnB
       this.itemText['C'] = this.randIndexAssoc.columnC
       this.itemText['D'] = this.randIndexAssoc.columnD
-      this.columnAInput = this.randIndexAssoc.columnA_solution;
-      this.columnBInput = this.randIndexAssoc.columnB_solution;
-      this.columnCInput = this.randIndexAssoc.columnC_solution;
-      this.columnDInput = this.randIndexAssoc.columnD_solution;
+      this.columnAInput = this.columnASolution;
+      this.columnBInput = this.columnBSolution;
+      this.columnCInput = this.columnCSolution;
+      this.columnDInput = this.columnDSolution;
 
       this.isColumnGueseedF = true;
-      this.scoreService.addToScore(15); // Dodaj 15 poena
+      this.scoreService.addToScore(15); 
        setTimeout(()=> {
         this.router.navigate(['/user']);
        },3000)
@@ -61,8 +66,7 @@ export class AssociationComponent {
   }
 
   handleInputChangeB(): void {
-    const solution = this.getSolutionForColumn('columnB');
-    if (this.columnBInput === solution) {
+    if (this.columnBInput === this.columnBSolution) {
       this.itemText['B'] = this.randIndexAssoc.columnB
       this.isColumnGueseedB = true;
       this.scoreService.addToScore(5);
@@ -72,8 +76,8 @@ export class AssociationComponent {
   }
 
   handleInputChangeC(): void {
-    const solution = this.getSolutionForColumn('columnB');
-    if (this.columnCInput === solution) {
+    const solution = "dsa";
+    if (this.columnCInput === this.columnCSolution) {
       this.itemText['C'] = this.randIndexAssoc.columnC
       this.isColumnGueseedC = true;
       this.scoreService.addToScore(5);
@@ -83,8 +87,8 @@ export class AssociationComponent {
   }
 
   handleInputChangeD(): void {
-    const solution = this.getSolutionForColumn('columnD');
-    if (this.columnDInput === solution) {
+    const solution = "dsa";
+    if (this.columnDInput === this.columnDSolution) {
       this.isColumnGueseedD = true;
       this.itemText['D'] = this.randIndexAssoc.columnD
       this.scoreService.addToScore(5);
@@ -94,11 +98,13 @@ export class AssociationComponent {
   }
 
   handleInputChangeA(): void {
-    const solution = this.getSolutionForColumn('columnA');
-    if (this.columnAInput === solution) {
+    const solution = "dsa";
+    if (this.columnAInput === this.columnASolution) {
       this.itemText['A'] = this.randIndexAssoc.columnA;
       this.isColumnGueseedA = true;
       this.scoreService.addToScore(5);
+      console.log("PBEA");
+      
     } else {
       this.columnAInput = '';
     }
@@ -114,33 +120,26 @@ export class AssociationComponent {
   }
 
   ngOnInit(): void {
-    this.getAllAssoc().pipe(
-      map(resp => {
-        console.log("resp", resp);
-        const allAs = resp;
-        const random = Math.floor(Math.random() * allAs.length)
-        this.randIndexAssoc = allAs[random]
-        this.randIndexAssoc.columnA_solution = this.getSolutionForColumn('columnA');
-        this.randIndexAssoc.columnB_solution = this.getSolutionForColumn('columnB');
-        this.randIndexAssoc.columnC_solution = this.getSolutionForColumn('columnC');
-        this.randIndexAssoc.columnD_solution = this.getSolutionForColumn('columnD');
-        this.finallSolution = this.randIndexAssoc.finallSolutions;
-        console.log(this.randIndexAssoc);
-        console.log(this.finallSolution);
-
-
-      })
-    ).subscribe(assoc => {
+    this.getAllAssoc().subscribe(resp => {
+      console.log("resp", resp);
+      const allAs = resp;
+      const random = Math.floor(Math.random() * allAs.length);
+      this.randIndexAssoc = allAs[random];  
+      this.columnASolution = this.getColumnSolution('ColumnA');
+      this.columnBSolution = this.getColumnSolution('columnB');
+      this.columnCSolution = this.getColumnSolution('columnC');
+      this.columnDSolution = this.getColumnSolution('columnD');
+      this.finallSolution = this.randIndexAssoc.finallSolutions;
     });
   }
-
-  getSolutionForColumn(column: string): string {
-    const solution = this.randIndexAssoc.solutions.find(s => s.startsWith(column));
-    if (solution) {
-      const solutionWithoutPrefix = solution.split('_')[1];
-      return solutionWithoutPrefix.replace('solution ', '');
-    }
-    return '';
+  
+  getColumnSolution(key: string): string | undefined {
+    const formattedKey = key.toLowerCase() + ':';
+    const foundValue = this.randIndexAssoc.solutions.find(item => {
+      return item.toLowerCase().startsWith(formattedKey);
+    });
+  
+    return foundValue ? foundValue.split(': ')[1] : undefined;
   }
-
+  
 }
