@@ -19,7 +19,6 @@ public class QuestionsAssociation {
         columnB.add("staro");
         columnB.add("krv");
 
-
         List<String> columnC = new ArrayList<>();
         columnC.add("djakuzi");
         columnC.add("kupka");
@@ -32,17 +31,16 @@ public class QuestionsAssociation {
         columnD.add("rampa");
         columnD.add("tobogan");
 
-        AssociationEntity entity = AssociationEntity.builder()
-                .columnA(columnA)
-                .columnB(columnB)
-                .columnC(columnC)
-                .columnD(columnD)
-                .build();
+        AssociationEntity entity = new AssociationEntity();
+        entity.setColumnA(columnA);
+        entity.setColumnB(columnB);
+        entity.setColumnC(columnC);
+        entity.setColumnD(columnD);
 
-        entity.addSolution("columnA_solution dim");
-        entity.addSolution("columnB_solution gvozdje");
-        entity.addSolution("columnC_solution kada");
-        entity.addSolution("columnD_solution spustanje");
+        entity.addSolutionToColumn("ColumnA", "dim");
+        entity.addSolutionToColumn("columnB", "gvozdje");
+        entity.addSolutionToColumn("columnC", "kada");
+        entity.addSolutionToColumn("columnD", "spustanje");
         entity.addFinalSolution("zavesa");
 
         return entity;
@@ -55,13 +53,11 @@ public class QuestionsAssociation {
         columnA.add("horor");
         columnA.add("televizor");
 
-
         List<String> columnB = new ArrayList<>();
         columnB.add("odelo");
         columnB.add("navika");
         columnB.add("naporan");
         columnB.add("honorar");
-
 
         List<String> columnC = new ArrayList<>();
         columnC.add("odgovor");
@@ -69,28 +65,24 @@ public class QuestionsAssociation {
         columnC.add("akcija");
         columnC.add("hemija");
 
-
         List<String> columnD = new ArrayList<>();
         columnD.add("pesak");
         columnD.add("fifa");
         columnD.add("uefa");
         columnD.add("stadion");
 
+        AssociationEntity entity = new AssociationEntity();
+        entity.setColumnA(columnA);
+        entity.setColumnB(columnB);
+        entity.setColumnC(columnC);
+        entity.setColumnD(columnD);
 
-        AssociationEntity entity = AssociationEntity.builder()
-                .columnA(columnA)
-                .columnB(columnB)
-                .columnC(columnC)
-                .columnD(columnD)
-                .build();
-
-        entity.addSolution("columnA_solution film");
-        entity.addSolution("columnB_solution rad");
-        entity.addSolution("columnC_solution reakcija");
-        entity.addSolution("columnD_solution fudbal");
+        entity.addSolutionToColumn("columnA", "film");
+        entity.addSolutionToColumn("columnB", "rad");
+        entity.addSolutionToColumn("columnC", "reakcija");
+        entity.addSolutionToColumn("columnD", "fudbal");
         entity.addFinalSolution("akcija");
+
         return entity;
     }
-
 }
-

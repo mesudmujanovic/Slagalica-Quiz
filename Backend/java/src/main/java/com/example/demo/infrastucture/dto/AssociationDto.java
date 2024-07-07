@@ -3,7 +3,11 @@ package com.example.demo.infrastucture.dto;
 import com.example.demo.infrastucture.Request.AssociationRequest;
 import com.example.demo.infrastucture.Response.AssociationResponse;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class AssociationDto {
@@ -17,11 +21,9 @@ public class AssociationDto {
 
     private List<String> columnD;
 
-    private List<String> solutions;
+    private Map<String, String> solutions;
 
     private List<String> finallSolutions;
-
-
 
     public static AssociationDto fromRequestToDto(AssociationRequest associationRequest){
         AssociationDto associationDto = new AssociationDto();
@@ -29,7 +31,11 @@ public class AssociationDto {
         associationDto.setColumnB(associationRequest.getColumnB());
         associationDto.setColumnC(associationRequest.getColumnC());
         associationDto.setColumnD(associationRequest.getColumnD());
-        associationDto.setSolutions(associationRequest.getSolutions());
+        Map<String, String> solutionsMap = new HashMap<>();
+        for (String solution : associationRequest.getSolutions()) {
+            solutionsMap.put("custom_key_" + solutionsMap.size(), solution);
+        }
+        associationDto.setSolutions(solutionsMap);
         associationDto.setFinallSolutions(associationRequest.getFinallSolutions());
         return associationDto;
     }
@@ -41,9 +47,14 @@ public class AssociationDto {
         associationResponse.setColumnB(this.getColumnB());
         associationResponse.setColumnC(this.getColumnC());
         associationResponse.setColumnD(this.getColumnD());
-        associationResponse.setSolutions(this.getSolutions());
+        List<String> solutionsList = convertMapToList(this.getSolutions());
+        associationResponse.setSolutions(solutionsList);
         associationResponse.setFinallSolutions(this.getFinallSolutions());
         return associationResponse;
     }
-
+    private List<String> convertMapToList(Map<String, String> solutionsMap) {
+        List<String> solutionsList = new ArrayList<>();
+        solutionsMap.forEach((key, value) -> solutionsList.add(key + ": " + value));
+        return solutionsList;
+    }
 }
