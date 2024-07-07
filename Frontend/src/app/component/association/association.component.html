@@ -1,11 +1,11 @@
-<div class="flex-container">
-  <div class="column columnA" *ngIf="randIndexAssoc">
+<div class="flex-container" *ngIf="randIndexAssoc">
+  <div class="column columnA">
     <div *ngFor="let item of randIndexAssoc.columnA; let i = index" (click)="showText(item, 'A', i)" class="item">
       <div class="text" *ngIf="!itemText['A'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['A'][i]">{{itemText['A'][i]}}</div>
     </div>
     <input type="text" [(ngModel)]="columnAInput" placeholder="Column A" [disabled]="isColumnGueseedA"
-      (change)="handleInputChangeA()">
+      (change)="handleInputChange('A')">
   </div>
 
   <div class="column" *ngIf="randIndexAssoc">
@@ -13,7 +13,7 @@
       <div class="text" *ngIf="!itemText['B'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['B'][i]">{{itemText['B'][i]}}</div>
     </div>
-    <input type="text" [(ngModel)]="columnBInput" [disabled]="isColumnGueseedB" (change)="handleInputChangeB()"
+    <input type="text" [(ngModel)]="columnBInput" [disabled]="isColumnGueseedB" (change)="handleInputChange('B')"
       placeholder="Column B">
   </div>
 </div>
@@ -23,15 +23,14 @@
     (change)="finallColumn()">
 </div>
 
-<div class="flex-container flex">
-  <div class="column" *ngIf="randIndexAssoc">
+<div class="flex-container flex" *ngIf="randIndexAssoc">
+  <div class="column">
     <div *ngFor="let item of randIndexAssoc.columnC; let i = index" (click)="showText(item, 'C', i)" class="item">
       <div class="text" *ngIf="!itemText['C'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['C'][i]">{{itemText['C'][i]}}</div>
     </div>
     <input type="text" placeholder="Column C" [(ngModel)]="columnCInput" [disabled]="isColumnGueseedC"
-      (change)="handleInputChangeC()">
-
+      (change)="handleInputChange('C')">
   </div>
 
   <div class="column" *ngIf="randIndexAssoc">
@@ -40,7 +39,7 @@
       <div class="text" *ngIf="itemText['D'][i]">{{itemText['D'][i]}}</div>
     </div>
     <input placeholder="Column D" type="text" [(ngModel)]="columnDInput" [disabled]="isColumnGueseedD"
-      (change)="handleInputChangeD()">
+      (change)="handleInputChange('D')">
 
   </div>
 </div>

@@ -12,8 +12,8 @@ import { ScoreService } from 'src/app/service/score.service';
 })
 export class AssociationComponent {
 
-  allAssoc$: Observable<Association[]>
-  randIndexAssoc: any;
+  allAssoc$: Observable<Association[]> = this.assocService.getAll();
+  randIndexAssoc: Association;
   finallSolution: string;
   finallResult: string;
   itemText: { [key: string]: string[] };
@@ -31,14 +31,17 @@ export class AssociationComponent {
   isColumnGueseedD: boolean = false;
   isColumnGueseedF: boolean = false;
 
-
   constructor(private assocService: AssociationService,
     private scoreService: ScoreService,
     private router: Router) {
-    this.itemText = { A: ["A1", "A2", "A3", "A4"], B: ["B1", "B2", "B3", "B4"], C: ["C1", "C2", "C3", "C4"], D: ["D1", "D2", "D3", "D4"] };
+    this.itemText = { 
+      A: ["A1", "A2", "A3", "A4"], 
+      B: ["B1", "B2", "B3", "B4"],
+      C: ["C1", "C2", "C3", "C4"],
+      D: ["D1", "D2", "D3", "D4"]
+    };
   }
   
-
   showText(item: string, column: string, index: number): void {
     this.itemText[column][index] = item;
   }
@@ -53,7 +56,6 @@ export class AssociationComponent {
       this.columnBInput = this.columnBSolution;
       this.columnCInput = this.columnCSolution;
       this.columnDInput = this.columnDSolution;
-
       this.isColumnGueseedF = true;
       this.scoreService.addToScore(15); 
        setTimeout(()=> {
@@ -65,72 +67,32 @@ export class AssociationComponent {
     }
   }
 
-  handleInputChangeB(): void {
-    if (this.columnBInput === this.columnBSolution) {
-      this.itemText['B'] = this.randIndexAssoc.columnB
-      this.isColumnGueseedB = true;
+  handleInputChange(column: string): void {
+    const solution = this['column' + column.toUpperCase() + 'Solution']; 
+    const input = this['column' + column.toUpperCase() + 'Input']; 
+
+    if (input === solution) {
+      this.itemText[column] = this.randIndexAssoc['column' + column];
+      this['isColumnGueseed' + column.toUpperCase()] = true;
       this.scoreService.addToScore(5);
     } else {
-      this.columnBInput = '';
+      this['column' + column.toUpperCase() + 'Input'] = '';
     }
-  }
-
-  handleInputChangeC(): void {
-    const solution = "dsa";
-    if (this.columnCInput === this.columnCSolution) {
-      this.itemText['C'] = this.randIndexAssoc.columnC
-      this.isColumnGueseedC = true;
-      this.scoreService.addToScore(5);
-    } else {
-      this.columnCInput = '';
-    }
-  }
-
-  handleInputChangeD(): void {
-    const solution = "dsa";
-    if (this.columnDInput === this.columnDSolution) {
-      this.isColumnGueseedD = true;
-      this.itemText['D'] = this.randIndexAssoc.columnD
-      this.scoreService.addToScore(5);
-    } else {
-      this.columnDInput = '';
-    }
-  }
-
-  handleInputChangeA(): void {
-    const solution = "dsa";
-    if (this.columnAInput === this.columnASolution) {
-      this.itemText['A'] = this.randIndexAssoc.columnA;
-      this.isColumnGueseedA = true;
-      this.scoreService.addToScore(5);
-      console.log("PBEA");
-      
-    } else {
-      this.columnAInput = '';
-    }
-  }
-
-  getAllAssoc(): Observable<Association[]> {
-    return this.allAssoc$ = this.assocService.getAll().pipe(
-      catchError((error) => {
-        console.log("error", error);
-        return of([]);
-      })
-    )
   }
 
   ngOnInit(): void {
-    this.getAllAssoc().subscribe(resp => {
-      console.log("resp", resp);
-      const allAs = resp;
-      const random = Math.floor(Math.random() * allAs.length);
-      this.randIndexAssoc = allAs[random];  
-      this.columnASolution = this.getColumnSolution('ColumnA');
-      this.columnBSolution = this.getColumnSolution('columnB');
-      this.columnCSolution = this.getColumnSolution('columnC');
-      this.columnDSolution = this.getColumnSolution('columnD');
-      this.finallSolution = this.randIndexAssoc.finallSolutions;
-    });
+    this.allAssoc$.pipe(
+      map(allRes => {
+        const allAs = allRes;
+        const random = Math.floor(Math.random() * allAs.length);
+        this.randIndexAssoc = allAs[random];  
+        this.columnASolution = this.getColumnSolution('columnA');
+        this.columnBSolution = this.getColumnSolution('columnB');
+        this.columnCSolution = this.getColumnSolution('columnC');
+        this.columnDSolution = this.getColumnSolution('columnD');
+        this.finallSolution = this.randIndexAssoc.finallSolutions;
+      })
+    ).subscribe()
   }
   
   getColumnSolution(key: string): string | undefined {
@@ -138,7 +100,6 @@ export class AssociationComponent {
     const foundValue = this.randIndexAssoc.solutions.find(item => {
       return item.toLowerCase().startsWith(formattedKey);
     });
-  
     return foundValue ? foundValue.split(': ')[1] : undefined;
   }
   

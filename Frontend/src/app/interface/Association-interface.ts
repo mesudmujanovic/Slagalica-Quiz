@@ -4,4 +4,6 @@ export interface Association{
     columnB: string[];
     columnC: string[];
     columnD: string[];
+    finallSolutions: string;
+    solutions: string[];
 }
