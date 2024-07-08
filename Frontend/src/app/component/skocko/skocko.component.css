@@ -30,9 +30,9 @@
   }
   
   .yellow-text {
-    color: yellow;
-    width: 30px;
-    height: 30px;
+    color: yellow !important;
+    width: 30px !important;
+    height: 30px !important;
   }
   
   .black-text {
