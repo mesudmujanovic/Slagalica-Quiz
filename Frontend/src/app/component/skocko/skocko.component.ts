@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { SymbolMastemindI } from 'src/app/interface/SymbolMastermind-interface';
+import { SymbolMastermindService } from 'src/app/service/symbol-mastermind.service';
 
 @Component({
   selector: 'app-skocko',
@@ -6,33 +9,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./skocko.component.css']
 })
 export class SkockoComponent implements OnInit {
-  signArr = [
-    { id: 1, name: "karo", imageUrl: "./assets/images/karo.jpg" },
-    { id: 2, name: "pik", imageUrl: "./assets/images/pik.jpg" },
-    { id: 3, name: "skocko", imageUrl: "./assets/images/skocko.jpg" },
-    { id: 4, name: "srce", imageUrl: "./assets/images/srce.jpg" },
-    { id: 5, name: "tref", imageUrl: "./assets/images/tref.jpg" },
-    { id: 6, name: "zvezda", imageUrl: "./assets/images/zvezda.jpg" },
-  ];
+  private symbolMastermindService = inject(SymbolMastermindService);
+  public symbols$: Observable<SymbolMastemindI[]>=this.symbolMastermindService.getAllSymbols();
 
-  fieldNumber = 4;
+  ngOnInit(): void {
+    this.generateFinalCombination();
+  }  
+
   finalCombination: number[] = [];
   customerResult: number[] = [];
   counter = 0;
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.generateFinalCombination();
+  private generateFinalCombination(): void {
+    this.symbols$.subscribe(
+      symbols => {
+        for (let i = 0; i < 4; i++) {
+          let randomIndex = Math.floor(Math.random() * symbols.length);
+          console.log(randomIndex);
+                  
+          let final = symbols[randomIndex];
+          this.finalCombination.push(final.id);
+          console.log(this.finalCombination);
+          
+        }
+      },
+      error => console.error(error)
+    );
   }
 
-  generateFinalCombination(): void {
-    for (let i = 0; i < this.fieldNumber; i++) {
-      let randomIndex = Math.floor(Math.random() * this.signArr.length);
-      let final = this.signArr[randomIndex];
-      this.finalCombination.push(final.id);
+  getSafeImage(symbols: SymbolMastemindI): string {
+    if (symbols && symbols.image) {
+      return 'data:image/jpeg;base64,' + symbols.image;
+    } else {
+      return '';
     }
-    console.log(this.finalCombination);
   }
 
   onSignClick(id: number, event: Event): void {
@@ -46,6 +58,8 @@ export class SkockoComponent implements OnInit {
     const matcArr = [];
     const tempRest = [...this.finalCombination];
     const secRest = [...this.customerResult];
+    console.log(secRest);
+    
     tempRest.forEach((tempR, index) => {
       if (tempR === secRest[index]) {
         delete tempRest[index];
