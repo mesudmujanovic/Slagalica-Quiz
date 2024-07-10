@@ -6,9 +6,7 @@ import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.IOException;
-
 
 @Data
 @AllArgsConstructor

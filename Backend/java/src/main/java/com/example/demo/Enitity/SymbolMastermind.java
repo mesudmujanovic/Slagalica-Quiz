@@ -12,6 +12,8 @@ import jakarta.persistence.*;
 @Builder
 @Table(name = "symbolMastermind")
 public class SymbolMastermind {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @Lob
