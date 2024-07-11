@@ -1,5 +1,5 @@
 import { Component, ElementRef, inject, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { catchError, finalize, map, Observable, of, startWith, tap } from 'rxjs';
+import { catchError, finalize, from, map, mergeMap, Observable, of, startWith, tap, toArray } from 'rxjs';
 import { SymbolMastemindI } from 'src/app/interface/SymbolMastermind-interface';
 import { SymbolMastermindService } from 'src/app/service/symbol-mastermind.service';
 
@@ -34,6 +34,8 @@ export class SkockoComponent implements OnInit {
           let final = symbols[randomIndex];
           finalCombination.push(final.id);
         }
+        console.log(finalCombination);
+        
         return finalCombination;
       }),
       catchError(error => {
@@ -42,7 +44,6 @@ export class SkockoComponent implements OnInit {
       }),
       tap(finalCombination => {
         this.finalCombination = finalCombination;
-        console.log(this.finalCombination);
       }),
       finalize(() => {
         console.log('Final combination generation completed.');
@@ -59,6 +60,7 @@ export class SkockoComponent implements OnInit {
   }
 
   onSignClick(id: number, event: Event): void {
+    const div1Skocko = this.arr1Ref.nativeElement;
     const img = event.target as HTMLImageElement;
     let clone = this.renderer.createElement('img');
     this.renderer.setAttribute(clone, 'src', img.src);
@@ -66,38 +68,59 @@ export class SkockoComponent implements OnInit {
     const targetElement = this.arr1Ref.nativeElement as HTMLElement;
     this.renderer.appendChild(targetElement, clone);
     this.customerResult.push(id);
+    if (this.customerResult.length > 4) {
+      alert('sad');
+      this.customerResult.pop();
+      const lastChild = div1Skocko.lastChild;
+      if (lastChild) {
+        this.renderer.removeChild(div1Skocko, lastChild);
+      }
+    }
   }
 
   validateGuess(): number[] {
-    const matcArr = [];
     const tempRest = [...this.finalCombination];
     const secRest = [...this.customerResult];
-    console.log(secRest);
+    const tempRest$ = from(tempRest).pipe(toArray());
+    const secRest$ = from(secRest).pipe(toArray());
+    let matchArr: number[] = [];
     
-    tempRest.forEach((tempR, index) => {
-      if (tempR === secRest[index]) {
-        delete tempRest[index];
-        delete secRest[index];
-        matcArr.push(2);
-      }
-    });
-
-    secRest.forEach((secR, index) => {
-      const hasMatch = tempRest.findIndex(tempRestItem => tempRestItem === secR);
-      if (hasMatch >= 0) {
-        delete tempRest[hasMatch];
-        delete secRest[index];
-        matcArr.push(1);
-      }
-    });
-
-    for (const secRestEnd of secRest) {
-      if (secRestEnd !== undefined) {
-        matcArr.push(0);
-      }
-    }
-
-    return matcArr;
+    tempRest$.pipe(
+      mergeMap(tempArray =>
+        secRest$.pipe(
+          map(secArray => {
+            tempArray.forEach((tempR, index) => {
+              if (tempR === secArray[index]) {
+                tempArray[index] = null; 
+                secArray[index] = null;
+                matchArr.push(2);
+              }
+            });
+  
+            secArray.forEach((secR, index) => {
+              if (secR !== null) {
+                const matchIndex = tempArray.findIndex(tempRestItem => tempRestItem === secR);
+                if (matchIndex >= 0) {
+                  tempArray[matchIndex] = null;
+                  secArray[index] = null;
+                  matchArr.push(1);
+                }
+              }
+            });
+  
+            secArray.forEach(secRestEnd => {
+              if (secRestEnd !== null) {
+                matchArr.push(0);
+              }
+            });
+  
+            return matchArr;
+          })
+        )
+      )
+    ).subscribe();
+  
+    return matchArr;
   }
 
 
@@ -123,7 +146,7 @@ export class SkockoComponent implements OnInit {
         this.renderer.appendChild(targetElement, h4);
       });
 
-      this.counter++;
+      this.counter++;      
       this.customerResult = [];
 
       if (JSON.stringify(matcArr) === JSON.stringify([2, 2, 2, 2])) {
@@ -134,14 +157,20 @@ export class SkockoComponent implements OnInit {
         alert("Žao mi je, niste uspeli da pogodite kombinaciju! Pokušajte ponovo");
         location.reload();
       }
+    }else{
+      alert("das")
     }
   }
 
   onClear(): void {
-    let div1Skocko = document.querySelector('.arr1-1');
-    if (div1Skocko?.childElementCount) {
+    const div1Skocko = this.arr1Ref;
+    if (div1Skocko?.nativeElement.childElementCount) {
       this.customerResult.pop();
-      div1Skocko.removeChild(div1Skocko.lastChild as Node);
+      const lastChild = div1Skocko.nativeElement.lastChild;
+      if (lastChild) {
+        this.renderer.removeChild(div1Skocko.nativeElement, lastChild);
+      }
     }
   }
+  
 }
