@@ -6,10 +6,10 @@
      (click)="onSignClick(sign.id, $event)">
   </div>
   
-  <div class="arr1-1"></div>
+  <div class="arr1-1" #arr1></div>
   
   <button id="button-skocko" (click)="onGuess()">Guess</button>
   <button id="clear-button" (click)="onClear()">Clear</button>
   
-  <div *ngFor="let hit of [0, 1, 2, 3, 4, 5]" class="hit"></div>
+  <div *ngFor="let hit of [0, 1, 2, 3, 4, 5]" class="hit" #hit></div>
   

@@ -1,5 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Component, ElementRef, inject, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { catchError, finalize, map, Observable, of, startWith, tap } from 'rxjs';
 import { SymbolMastemindI } from 'src/app/interface/SymbolMastermind-interface';
 import { SymbolMastermindService } from 'src/app/service/symbol-mastermind.service';
 
@@ -11,6 +11,8 @@ import { SymbolMastermindService } from 'src/app/service/symbol-mastermind.servi
 export class SkockoComponent implements OnInit {
   private symbolMastermindService = inject(SymbolMastermindService);
   public symbols$: Observable<SymbolMastemindI[]>=this.symbolMastermindService.getAllSymbols();
+  @ViewChildren('hit') hitElements!: QueryList<ElementRef>;
+  @ViewChild('arr1') arr1Ref!: ElementRef;
 
   ngOnInit(): void {
     this.generateFinalCombination();
@@ -20,23 +22,32 @@ export class SkockoComponent implements OnInit {
   customerResult: number[] = [];
   counter = 0;
 
-  constructor() { }
+  constructor(private renderer: Renderer2) { }
+
 
   private generateFinalCombination(): void {
-    this.symbols$.subscribe(
-      symbols => {
+    this.symbols$.pipe(
+      map(symbols => {
+        const finalCombination = [];
         for (let i = 0; i < 4; i++) {
-          let randomIndex = Math.floor(Math.random() * symbols.length);
-          console.log(randomIndex);
-                  
+          let randomIndex = Math.floor(Math.random() * symbols.length);  
           let final = symbols[randomIndex];
-          this.finalCombination.push(final.id);
-          console.log(this.finalCombination);
-          
+          finalCombination.push(final.id);
         }
-      },
-      error => console.error(error)
-    );
+        return finalCombination;
+      }),
+      catchError(error => {
+        console.error(error);
+        return of([]);
+      }),
+      tap(finalCombination => {
+        this.finalCombination = finalCombination;
+        console.log(this.finalCombination);
+      }),
+      finalize(() => {
+        console.log('Final combination generation completed.');
+      })
+    ).subscribe();
   }
 
   getSafeImage(symbols: SymbolMastemindI): string {
@@ -49,8 +60,11 @@ export class SkockoComponent implements OnInit {
 
   onSignClick(id: number, event: Event): void {
     const img = event.target as HTMLImageElement;
-    let clone = img.cloneNode(true) as HTMLImageElement;
-    document.querySelector('.arr1-1')?.appendChild(clone);
+    let clone = this.renderer.createElement('img');
+    this.renderer.setAttribute(clone, 'src', img.src);
+    this.renderer.addClass(clone, img.className); 
+    const targetElement = this.arr1Ref.nativeElement as HTMLElement;
+    this.renderer.appendChild(targetElement, clone);
     this.customerResult.push(id);
   }
 
@@ -86,24 +100,38 @@ export class SkockoComponent implements OnInit {
     return matcArr;
   }
 
+
   onGuess(): void {
     if (this.customerResult.length === 4) {
       const matcArr = this.validateGuess();
-      let matcArrText = matcArr.map(item => {
-        if (item === 2) return `<h4 class='red-text'>2</h4>`;
-        if (item === 1) return `<h4 class='yellow-text'>1</h4>`;
-        return `<h4 class='black-text'>0</h4>`;
-      }).join("");
+      const targetElement = this.hitElements.toArray()[this.counter].nativeElement;
+      this.renderer.setProperty(targetElement, 'innerHTML', '');
 
-      document.querySelectorAll('.hit')[this.counter].innerHTML = matcArrText;
+      matcArr.forEach(item => {
+        let h4 = this.renderer.createElement('h4');
+        let text = this.renderer.createText(item.toString());
+
+        if (item === 2) {
+          this.renderer.addClass(h4, 'red-text');
+        } else if (item === 1) {
+          this.renderer.addClass(h4, 'yellow-text');
+        } else {
+          this.renderer.addClass(h4, 'black-text');
+        }
+
+        this.renderer.appendChild(h4, text);
+        this.renderer.appendChild(targetElement, h4);
+      });
+
       this.counter++;
       this.customerResult = [];
+
       if (JSON.stringify(matcArr) === JSON.stringify([2, 2, 2, 2])) {
-        alert("Cestitamo, upsesno ste pogodili odgovarajuca mesta");
+        alert("Čestitamo, uspešno ste pogodili odgovarajuća mesta");
         setTimeout(() => location.reload(), 1400);
       }
       if (this.counter === 6) {
-        alert("Zao mi je, niste uspeli da pogodite kombinaciju! Pokusajte ponovo");
+        alert("Žao mi je, niste uspeli da pogodite kombinaciju! Pokušajte ponovo");
         location.reload();
       }
     }
