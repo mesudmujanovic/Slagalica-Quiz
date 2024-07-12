@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, finalize, map, Observable, of, throwError } from 'rxjs';
 import { SymbolMastemindI } from '../interface/SymbolMastermind-interface';
-import { BASE_ULR } from '../const/apiBaseUrl';
+import { BASE_ULR } from '../../enviroments/const/apiBaseUrl';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +41,12 @@ export class SymbolMastermindService {
     return finalCombination;
   }
   
+  public getSafeImage(symbols: SymbolMastemindI): string {
+    if (symbols && symbols.image) {
+      return 'data:image/jpeg;base64,' + symbols.image;
+    } else {
+      return '';
+    }
+  }
 
 }

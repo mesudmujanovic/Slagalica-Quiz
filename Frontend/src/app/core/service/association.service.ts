@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Association } from '../interface/Association-interface';
-import { BASE_ULR } from '../const/apiBaseUrl';
+import { BASE_ULR } from '../../enviroments/const/apiBaseUrl';
 
 @Injectable({
   providedIn: 'root'

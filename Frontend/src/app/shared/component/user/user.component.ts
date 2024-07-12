@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
-import { User } from 'src/app/interface/User-Interface';
-import { ScoreService } from 'src/app/service/score.service';
-import { UserService } from 'src/app/service/user.service';
+import { User } from 'src/app/core/interface/User-Interface';
+import { ScoreService } from 'src/app/core/service/score.service';
+import { UserService } from 'src/app/core/service/user.service';
 
 @Component({
   selector: 'app-user',

@@ -1,6 +1,6 @@
 import { Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NumberStateService } from 'src/app/service/number-state.service';
+import { NumberStateService } from 'src/app/core/service/number-state.service';
 
 @Component({
   selector: 'app-my-number',

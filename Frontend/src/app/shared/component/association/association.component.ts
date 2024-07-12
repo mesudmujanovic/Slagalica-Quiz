@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable} from 'rxjs';
-import { Association } from 'src/app/interface/Association-interface';
-import { AssociationService } from 'src/app/service/association.service';
-import { ScoreService } from 'src/app/service/score.service';
+import { Association } from 'src/app/core/interface/Association-interface';
+import { AssociationService } from 'src/app/core/service/association.service';
+import { ScoreService } from 'src/app/core/service/score.service';
 
 @Component({
   selector: 'app-association',
