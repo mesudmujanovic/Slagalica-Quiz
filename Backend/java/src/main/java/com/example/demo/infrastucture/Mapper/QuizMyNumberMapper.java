@@ -3,9 +3,10 @@ package com.example.demo.infrastucture.Mapper;
 import com.example.demo.Enitity.QuizMyNumberEntity;
 import com.example.demo.Intergration.DtoMapper;
 import com.example.demo.infrastucture.dto.QuizMyNumberDTO;
+import org.springframework.stereotype.Component;
 
-public enum QuizMyNumberMapper implements DtoMapper<QuizMyNumberEntity, QuizMyNumberDTO> {
-    INSTANCE;
+@Component
+public class QuizMyNumberMapper implements DtoMapper<QuizMyNumberEntity, QuizMyNumberDTO> {
 
     @Override
     public QuizMyNumberEntity apply(QuizMyNumberDTO quizDto) {

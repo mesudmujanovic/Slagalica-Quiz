@@ -3,9 +3,10 @@ package com.example.demo.infrastucture.Mapper;
 import com.example.demo.Enitity.SymbolMastermind;
 import com.example.demo.Intergration.DtoMapper;
 import com.example.demo.infrastucture.dto.SymbolMastermindDTO;
+import org.springframework.stereotype.Component;
 
-public enum SymbolMasterMindDTOMapper implements DtoMapper<SymbolMastermindDTO, SymbolMastermind> {
-    INSTANCE;
+@Component
+public class SymbolMasterMindDTOMapper implements DtoMapper<SymbolMastermindDTO, SymbolMastermind> {
 
     @Override
     public SymbolMastermindDTO apply(SymbolMastermind symbolMastermind) {

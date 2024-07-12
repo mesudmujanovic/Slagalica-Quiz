@@ -4,6 +4,7 @@ import com.example.demo.Service.Impl.QuizMyNumberServiceImpl;
 import com.example.demo.infrastucture.Request.QuizMyNumberRequest;
 import com.example.demo.infrastucture.Response.QuizMyNumberResponse;
 import com.example.demo.infrastucture.dto.QuizMyNumberDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,12 +14,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/quiz")
 @CrossOrigin("*")
+@RequiredArgsConstructor
 public class QuizMyNumberController {
     private final QuizMyNumberServiceImpl quizService;
-
-    public QuizMyNumberController(QuizMyNumberServiceImpl quizService) {
-        this.quizService = quizService;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<QuizMyNumberResponse> createQuizWithRandomNumbers(@RequestBody QuizMyNumberRequest quizRequest) {

@@ -1,11 +1,13 @@
+
 package com.example.demo.infrastucture.Mapper;
 
 import com.example.demo.Enitity.AssociationEntity;
 import com.example.demo.Intergration.DtoMapper;
 import com.example.demo.infrastucture.dto.AssociationDto;
+import org.springframework.stereotype.Component;
 
-public enum AssociationMapper implements DtoMapper<AssociationEntity, AssociationDto> {
-    INSTANCE;
+@Component
+public class AssociationMapper implements DtoMapper<AssociationEntity, AssociationDto> {
 
     @Override
     public AssociationEntity apply(AssociationDto associationDto) {

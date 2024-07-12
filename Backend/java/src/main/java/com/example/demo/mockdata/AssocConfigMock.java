@@ -1,23 +1,29 @@
 package com.example.demo.mockdata;
 
+import com.example.demo.Enitity.AssociationEntity;
 import com.example.demo.Service.AssociationService;
 import com.example.demo.infrastucture.Mapper.AssociationDtoMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
+
 @Component
+@RequiredArgsConstructor
 public class AssocConfigMock implements CommandLineRunner {
 
-    public AssocConfigMock(AssociationService associationService) {
-        this.associationService = associationService;
-    }
+    private final AssociationService associationService;
+    private final AssociationDtoMapper associationDtoMapper;
 
-    @Autowired
-    private AssociationService associationService;
     @Override
     public void run(String... args) throws Exception {
-     associationService.saveAssociation(AssociationDtoMapper.INSTANCE.apply(QuestionsAssociation.getMockAssociation()));
-        associationService.saveAssociation(AssociationDtoMapper.INSTANCE.apply(QuestionsAssociation.getMockAssociation2()));
+        Optional<List<AssociationEntity>> associationsOptional = Optional.ofNullable(QuestionsAssociation.getMockAssociation());
 
+        associationsOptional.ifPresentOrElse(
+                associations -> associations.forEach(entity -> associationService.saveAssociation(associationDtoMapper.apply(entity))),
+                () -> System.out.println("No associations loaded from mock data.")
+        );
     }
 }

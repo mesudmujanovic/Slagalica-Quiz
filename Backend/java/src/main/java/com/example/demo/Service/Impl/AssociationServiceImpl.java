@@ -6,9 +6,8 @@ import com.example.demo.Service.AssociationService;
 import com.example.demo.infrastucture.Mapper.AssociationDtoMapper;
 import com.example.demo.infrastucture.Mapper.AssociationMapper;
 import com.example.demo.infrastucture.dto.AssociationDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,20 +15,18 @@ import java.util.stream.Collectors;
 
 @Transactional
 @Service
+@RequiredArgsConstructor
 public class AssociationServiceImpl implements AssociationService {
 
-    @Autowired
-    private AssociationRepo associationRepo;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
+    private final AssociationRepo associationRepo;
+    private final AssociationDtoMapper associationDtoMapper;
+    private final AssociationMapper associationMapper;
 
     @Override
     public AssociationDto saveAssociation(AssociationDto associationDto) {
-        AssociationEntity associationEntity = AssociationMapper.INSTANCE.apply(associationDto);
+        AssociationEntity associationEntity = associationMapper.apply(associationDto);
         AssociationEntity associationEntitySave = associationRepo.save(associationEntity);
-        return AssociationDtoMapper.INSTANCE.apply(associationEntitySave);
+        return associationDtoMapper.apply(associationEntitySave);
     }
 
     @Override
@@ -37,9 +34,7 @@ public class AssociationServiceImpl implements AssociationService {
     public List<AssociationDto> getAll() {
         List<AssociationEntity> associationEntities = associationRepo.findAll();
         return associationEntities.stream()
-                .map(AssociationDtoMapper.INSTANCE::apply)
+                .map(associationDtoMapper::apply)
                 .collect(Collectors.toList());
     }
-
-
 }
