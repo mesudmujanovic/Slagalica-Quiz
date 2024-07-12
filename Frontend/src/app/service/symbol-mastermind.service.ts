@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, finalize, map, Observable, of, throwError } from 'rxjs';
 import { SymbolMastemindI } from '../interface/SymbolMastermind-interface';
 import { BASE_ULR } from '../const/apiBaseUrl';
 
@@ -31,5 +31,15 @@ export class SymbolMastermindService {
       })
     );
   }
+
+  public generateFinalCombination(): number[] {
+    const finalCombination = [];
+    for (let i = 0; i < 4; i++) {
+      let randomNumber = Math.floor(Math.random() * 6) + 1;  
+      finalCombination.push(randomNumber);
+    }
+    return finalCombination;
+  }
+  
 
 }

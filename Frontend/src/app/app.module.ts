@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './component/user/user.component';
 import { AssociationComponent } from './component/association/association.component';
-import { SkockoComponent } from './component/skocko/skocko.component';
 import { CalculatorComponent } from './component/calculator/calculator.component';
+import { SymbolMastermindComponent } from './component/symbol-mastermind/symbol-mastermind.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +16,8 @@ import { CalculatorComponent } from './component/calculator/calculator.component
     MyNumberComponent,
     UserComponent,
     AssociationComponent,
-    SkockoComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    SymbolMastermindComponent
   ],
   imports: [
     BrowserModule,

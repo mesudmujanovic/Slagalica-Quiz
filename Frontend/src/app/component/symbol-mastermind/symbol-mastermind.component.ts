@@ -1,55 +1,27 @@
 import { Component, ElementRef, inject, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { catchError, finalize, from, map, mergeMap, Observable, of, startWith, tap, toArray } from 'rxjs';
+import { from, map, mergeMap, Observable, of, startWith, tap, toArray } from 'rxjs';
 import { SymbolMastemindI } from 'src/app/interface/SymbolMastermind-interface';
 import { SymbolMastermindService } from 'src/app/service/symbol-mastermind.service';
 
 @Component({
-  selector: 'app-skocko',
-  templateUrl: './skocko.component.html',
-  styleUrls: ['./skocko.component.css']
+  selector: 'app-symbol-mastermind',
+  templateUrl: './symbol-mastermind.component.html',
+  styleUrls: ['./symbol-mastermind.component.css']
 })
-export class SkockoComponent implements OnInit {
+export class SymbolMastermindComponent {
   private symbolMastermindService = inject(SymbolMastermindService);
   public symbols$: Observable<SymbolMastemindI[]>=this.symbolMastermindService.getAllSymbols();
   @ViewChildren('hit') hitElements!: QueryList<ElementRef>;
   @ViewChild('arr1') arr1Ref!: ElementRef;
 
-  ngOnInit(): void {
-    this.generateFinalCombination();
-  }  
-
-  finalCombination: number[] = [];
+  finalCombination: number[] = this.symbolMastermindService.generateFinalCombination();
   customerResult: number[] = [];
   counter = 0;
 
   constructor(private renderer: Renderer2) { }
 
-
-  private generateFinalCombination(): void {
-    this.symbols$.pipe(
-      map(symbols => {
-        const finalCombination = [];
-        for (let i = 0; i < 4; i++) {
-          let randomIndex = Math.floor(Math.random() * symbols.length);  
-          let final = symbols[randomIndex];
-          finalCombination.push(final.id);
-        }
-        console.log(finalCombination);
-        
-        return finalCombination;
-      }),
-      catchError(error => {
-        console.error(error);
-        return of([]);
-      }),
-      tap(finalCombination => {
-        this.finalCombination = finalCombination;
-      }),
-      finalize(() => {
-        console.log('Final combination generation completed.');
-      })
-    ).subscribe();
-  }
+  ngOnInit(): void {    
+  };
 
   getSafeImage(symbols: SymbolMastemindI): string {
     if (symbols && symbols.image) {
@@ -79,10 +51,8 @@ export class SkockoComponent implements OnInit {
   }
 
   validateGuess(): number[] {
-    const tempRest = [...this.finalCombination];
-    const secRest = [...this.customerResult];
-    const tempRest$ = from(tempRest).pipe(toArray());
-    const secRest$ = from(secRest).pipe(toArray());
+    const tempRest$ = from(this.finalCombination).pipe(toArray());
+    const secRest$ = from(this.customerResult).pipe(toArray());
     let matchArr: number[] = [];
     
     tempRest$.pipe(
@@ -172,5 +142,4 @@ export class SkockoComponent implements OnInit {
       }
     }
   }
-  
 }
