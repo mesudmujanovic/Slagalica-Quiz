@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, inject, NgZone, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NumberStateService } from 'src/app/core/service/number-state.service';
 
