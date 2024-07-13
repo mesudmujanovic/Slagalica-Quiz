@@ -2,6 +2,8 @@ package com.example.demo.Repo;
 
 import com.example.demo.Enitity.AssociationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AssociationRepo extends JpaRepository<AssociationEntity, Long> {
+@Repository
+public interface JpaAssociationRepo extends JpaRepository<AssociationEntity, Long> {
 }

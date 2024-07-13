@@ -1,7 +1,8 @@
 package com.example.demo.Service.Impl;
 
 import com.example.demo.Enitity.AssociationEntity;
-import com.example.demo.Repo.AssociationRepo;
+import com.example.demo.Repo.AssociationRepository;
+import com.example.demo.Repo.JpaAssociationRepo;
 import com.example.demo.Service.AssociationService;
 import com.example.demo.infrastucture.Mapper.AssociationDtoMapper;
 import com.example.demo.infrastucture.Mapper.AssociationMapper;
@@ -18,21 +19,21 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AssociationServiceImpl implements AssociationService {
 
-    private final AssociationRepo associationRepo;
+    private final AssociationRepository associationRepo;
     private final AssociationDtoMapper associationDtoMapper;
     private final AssociationMapper associationMapper;
 
     @Override
     public AssociationDto saveAssociation(AssociationDto associationDto) {
         AssociationEntity associationEntity = associationMapper.apply(associationDto);
-        AssociationEntity associationEntitySave = associationRepo.save(associationEntity);
+        AssociationEntity associationEntitySave = associationRepo.saveAssociation(associationEntity);
         return associationDtoMapper.apply(associationEntitySave);
     }
 
     @Override
     @Transactional
     public List<AssociationDto> getAll() {
-        List<AssociationEntity> associationEntities = associationRepo.findAll();
+        List<AssociationEntity> associationEntities = associationRepo.getAll();
         return associationEntities.stream()
                 .map(associationDtoMapper::apply)
                 .collect(Collectors.toList());
