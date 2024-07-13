@@ -49,6 +49,7 @@ export class AssociationComponent {
       alert("Try again");
     }
   }
+  
   handleInputChange(column: string): void {
     const solution = this.columnSolution[column];
     const input = this.columnInput[column];

@@ -19,14 +19,17 @@
 
 @keyframes animate2 {
   0% {
-    content: "10";
+    content: "1";
+  }
+  10% {
+    content: "5";
   }
 
-  15% {
-    content: "20";
+  25% {
+    content: "4";
   }
 
-  35% {
+  40% {
     content: "25";
   }
 
