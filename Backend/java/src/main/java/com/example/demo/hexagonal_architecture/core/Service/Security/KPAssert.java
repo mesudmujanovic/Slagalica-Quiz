@@ -1,4 +1,4 @@
-package com.example.demo.hexagonal_architecture.Security;
+package com.example.demo.hexagonal_architecture.core.Service.Security;
 
 public class KPAssert {
 

@@ -1,4 +1,4 @@
-package com.example.demo.hexagonal_architecture.core.Service.impl;
+package com.example.demo.hexagonal_architecture.core.port.in;
 
 import com.example.demo.hexagonal_architecture.adapter.dto.UserAuthDto;
 

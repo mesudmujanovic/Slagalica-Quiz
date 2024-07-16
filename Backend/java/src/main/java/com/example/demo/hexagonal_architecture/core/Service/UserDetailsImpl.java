@@ -1,4 +1,4 @@
-package com.example.demo.hexagonal_architecture.Security.Services;
+package com.example.demo.hexagonal_architecture.core.Service;
 
 import com.example.demo.hexagonal_architecture.core.Enitity.UserAuth;
 import com.fasterxml.jackson.annotation.JsonIgnore;

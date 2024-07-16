@@ -1,4 +1,4 @@
-package com.example.demo.hexagonal_architecture.Security.Jwt;
+package com.example.demo.hexagonal_architecture.core.Service.Security.Jwt;
 
 
 import jakarta.servlet.ServletException;
