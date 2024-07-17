@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.adapter.dto;
 
-import com.example.demo.hexagonal_architecture.adapter.Request.SignupRequest;
+import com.example.demo.hexagonal_architecture.adapter.request.SignupRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

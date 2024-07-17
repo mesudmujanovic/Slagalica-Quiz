@@ -1,7 +1,7 @@
 package com.example.demo.hexagonal_architecture.adapter.out.repository;
 
 
-import com.example.demo.hexagonal_architecture.core.Enitity.SymbolMastermind;
+import com.example.demo.hexagonal_architecture.core.enitity.SymbolMastermind;
 import com.example.demo.hexagonal_architecture.core.port.out.SymbolMastermindRepository;
 import com.example.demo.hexagonal_architecture.core.port.out.persistence.JpaSymbolMastermind;
 import org.springframework.stereotype.Repository;

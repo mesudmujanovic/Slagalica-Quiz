@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.adapter.dto;
-import com.example.demo.hexagonal_architecture.adapter.Request.SymbolMastermindRequest;
-import com.example.demo.hexagonal_architecture.adapter.Response.SymbolMastermindResponse;
+import com.example.demo.hexagonal_architecture.adapter.request.SymbolMastermindRequest;
+import com.example.demo.hexagonal_architecture.adapter.response.SymbolMastermindResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package com.example.demo.hexagonal_architecture.adapter.dto;
 
-import com.example.demo.hexagonal_architecture.adapter.Request.UserRequest;
-import com.example.demo.hexagonal_architecture.adapter.Response.UserResponse;
+import com.example.demo.hexagonal_architecture.adapter.request.UserRequest;
+import com.example.demo.hexagonal_architecture.adapter.response.UserResponse;
 import lombok.Data;
 
 @Data

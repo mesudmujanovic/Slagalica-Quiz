@@ -1,7 +1,7 @@
 package com.example.demo.hexagonal_architecture.adapter.dto;
 
-import com.example.demo.hexagonal_architecture.adapter.Request.AssociationRequest;
-import com.example.demo.hexagonal_architecture.adapter.Response.AssociationResponse;
+import com.example.demo.hexagonal_architecture.adapter.request.AssociationRequest;
+import com.example.demo.hexagonal_architecture.adapter.response.AssociationResponse;
 import lombok.Data;
 
 import java.util.ArrayList;

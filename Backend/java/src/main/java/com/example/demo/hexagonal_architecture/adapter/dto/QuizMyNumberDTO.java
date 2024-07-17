@@ -1,7 +1,7 @@
 package com.example.demo.hexagonal_architecture.adapter.dto;
 
-import com.example.demo.hexagonal_architecture.adapter.Request.QuizMyNumberRequest;
-import com.example.demo.hexagonal_architecture.adapter.Response.QuizMyNumberResponse;
+import com.example.demo.hexagonal_architecture.adapter.request.QuizMyNumberRequest;
+import com.example.demo.hexagonal_architecture.adapter.response.QuizMyNumberResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

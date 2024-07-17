@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.adapter.out.repository;
 
-import com.example.demo.hexagonal_architecture.core.Enitity.QuizMyNumberEntity;
+import com.example.demo.hexagonal_architecture.core.enitity.QuizMyNumberEntity;
 import com.example.demo.hexagonal_architecture.core.port.out.QuizMyNumberRepository;
 import com.example.demo.hexagonal_architecture.core.port.out.persistence.JpaQuizMyNumber;
 import org.springframework.stereotype.Repository;

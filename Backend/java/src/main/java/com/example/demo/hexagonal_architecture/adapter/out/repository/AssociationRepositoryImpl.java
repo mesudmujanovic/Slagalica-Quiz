@@ -1,7 +1,7 @@
 package com.example.demo.hexagonal_architecture.adapter.out.repository;
 
 import com.example.demo.hexagonal_architecture.core.port.out.AssociationRepository;
-import com.example.demo.hexagonal_architecture.core.Enitity.AssociationEntity;
+import com.example.demo.hexagonal_architecture.core.enitity.AssociationEntity;
 import com.example.demo.hexagonal_architecture.core.port.out.persistence.JpaAssociationRepo;
 import org.springframework.stereotype.Repository;
 

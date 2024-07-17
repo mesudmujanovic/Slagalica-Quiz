@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.port.out;
 
-import com.example.demo.hexagonal_architecture.core.Enitity.SymbolMastermind;
+import com.example.demo.hexagonal_architecture.core.enitity.SymbolMastermind;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

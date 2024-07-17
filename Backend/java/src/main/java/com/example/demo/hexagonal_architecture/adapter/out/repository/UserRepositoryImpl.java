@@ -1,6 +1,5 @@
 package com.example.demo.hexagonal_architecture.adapter.out.repository;
-
-import com.example.demo.hexagonal_architecture.core.Enitity.UserEntity;
+import com.example.demo.hexagonal_architecture.core.enitity.UserEntity;
 import com.example.demo.hexagonal_architecture.core.port.out.UserRepository;
 import com.example.demo.hexagonal_architecture.core.port.out.persistence.JpaUser;
 import org.springframework.stereotype.Repository;
