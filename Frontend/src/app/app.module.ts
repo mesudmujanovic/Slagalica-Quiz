@@ -12,6 +12,7 @@ import { SymbolMastermindComponent } from './shared/component/symbol-mastermind/
 import { NumberStateService } from './core/service/number-state.service';
 import { NumSpinDirective } from './num-spin.directive';
 import { AddNumToDivsDirective } from './core/directive/add-num-to-divs.directive';
+import { MultiplayerComponent } from './shared/component/multiplayer/multiplayer.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AddNumToDivsDirective } from './core/directive/add-num-to-divs.directiv
     SymbolMastermindComponent,
     NumSpinDirective,
     AddNumToDivsDirective,
+    MultiplayerComponent,
   ],
   imports: [
     BrowserModule,
