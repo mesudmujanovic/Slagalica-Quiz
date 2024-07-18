@@ -1,6 +1,7 @@
 package com.example.demo.hexagonal_architecture.mockdata;
 
 import com.example.demo.hexagonal_architecture.core.enitity.AssociationEntity;
+import com.example.demo.hexagonal_architecture.core.enitity.UserAuth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;

@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.adapter.in.web.controller;
 
-import com.example.demo.hexagonal_architecture.core.port.in.AssociationService;
+import com.example.demo.hexagonal_architecture.core.port.out.in.AssociationService;
 import com.example.demo.hexagonal_architecture.adapter.request.AssociationRequest;
 import com.example.demo.hexagonal_architecture.adapter.response.AssociationResponse;
 import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDto;

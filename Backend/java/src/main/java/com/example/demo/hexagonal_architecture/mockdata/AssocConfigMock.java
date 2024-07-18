@@ -1,7 +1,7 @@
 package com.example.demo.hexagonal_architecture.mockdata;
 
 import com.example.demo.hexagonal_architecture.core.enitity.AssociationEntity;
-import com.example.demo.hexagonal_architecture.core.port.in.AssociationService;
+import com.example.demo.hexagonal_architecture.core.port.out.in.AssociationService;
 import com.example.demo.hexagonal_architecture.adapter.mapperDto.AssociationDtoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;

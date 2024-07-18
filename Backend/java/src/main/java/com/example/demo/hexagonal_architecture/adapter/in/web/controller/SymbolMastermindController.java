@@ -1,5 +1,5 @@
 package com.example.demo.hexagonal_architecture.adapter.in.web.controller;
-import com.example.demo.hexagonal_architecture.core.port.in.SymbolMastermindService;
+import com.example.demo.hexagonal_architecture.core.port.out.in.SymbolMastermindService;
 import com.example.demo.hexagonal_architecture.adapter.request.SymbolMastermindRequest;
 import com.example.demo.hexagonal_architecture.adapter.response.SymbolMastermindResponse;
 import com.example.demo.hexagonal_architecture.adapter.dto.SymbolMastermindDTO;

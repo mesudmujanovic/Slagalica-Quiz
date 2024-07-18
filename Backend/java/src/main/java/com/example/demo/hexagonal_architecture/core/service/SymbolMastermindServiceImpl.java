@@ -1,5 +1,5 @@
 package com.example.demo.hexagonal_architecture.core.service;
-import com.example.demo.hexagonal_architecture.core.port.in.SymbolMastermindService;
+import com.example.demo.hexagonal_architecture.core.port.out.in.SymbolMastermindService;
 import com.example.demo.hexagonal_architecture.core.enitity.SymbolMastermind;
 import com.example.demo.hexagonal_architecture.core.port.out.SymbolMastermindRepository;
 import com.example.demo.hexagonal_architecture.adapter.mapperDto.SymbolMasterMindDTOMapper;

@@ -3,7 +3,7 @@ package com.example.demo.hexagonal_architecture.adapter.in.web.controller;
 import com.example.demo.hexagonal_architecture.adapter.request.QuizMyNumberRequest;
 import com.example.demo.hexagonal_architecture.adapter.response.QuizMyNumberResponse;
 import com.example.demo.hexagonal_architecture.adapter.dto.QuizMyNumberDTO;
-import com.example.demo.hexagonal_architecture.core.port.in.QuizMyNumberService;
+import com.example.demo.hexagonal_architecture.core.port.out.in.QuizMyNumberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.example.demo.hexagonal_architecture.core.service;
 
 import com.example.demo.hexagonal_architecture.core.enitity.QuizMyNumberEntity;
-import com.example.demo.hexagonal_architecture.core.port.in.QuizMyNumberService;
+import com.example.demo.hexagonal_architecture.core.port.out.in.QuizMyNumberService;
 import com.example.demo.hexagonal_architecture.adapter.mapperDto.QuizMyNumberDtoMapper;
 import com.example.demo.hexagonal_architecture.adapter.mapper.QuizMyNumberMapper;
 import com.example.demo.hexagonal_architecture.adapter.dto.QuizMyNumberDTO;

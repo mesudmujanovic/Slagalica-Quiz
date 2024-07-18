@@ -2,7 +2,7 @@ package com.example.demo.hexagonal_architecture.core.service;
 
 import com.example.demo.hexagonal_architecture.core.enitity.AssociationEntity;
 import com.example.demo.hexagonal_architecture.core.port.out.AssociationRepository;
-import com.example.demo.hexagonal_architecture.core.port.in.AssociationService;
+import com.example.demo.hexagonal_architecture.core.port.out.in.AssociationService;
 import com.example.demo.hexagonal_architecture.adapter.mapperDto.AssociationDtoMapper;
 import com.example.demo.hexagonal_architecture.adapter.mapper.AssociationMapper;
 import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDto;
