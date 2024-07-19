@@ -15,7 +15,6 @@ public class QuizMyNumberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private int number1;
     private int number2;
     private int number3;

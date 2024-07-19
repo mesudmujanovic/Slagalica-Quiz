@@ -10,8 +10,7 @@ import java.util.List;
 @Repository
 public class QuizMyNymberRepositoryImpl implements QuizMyNumberRepository {
 
-     private final JpaQuizMyNumber jpaQuizMyNumber;
-
+    private final JpaQuizMyNumber jpaQuizMyNumber;
     public QuizMyNymberRepositoryImpl(JpaQuizMyNumber jpaQuizMyNumber) {
         this.jpaQuizMyNumber = jpaQuizMyNumber;
     }

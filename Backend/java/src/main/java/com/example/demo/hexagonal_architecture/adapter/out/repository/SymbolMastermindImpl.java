@@ -11,9 +11,7 @@ import java.util.List;
 
 @Repository
 public class SymbolMastermindImpl implements SymbolMastermindRepository {
-
     private final JpaSymbolMastermind jpaSymbolMastermind;
-
     public SymbolMastermindImpl(JpaSymbolMastermind jpaSymbolMastermind) {
         this.jpaSymbolMastermind = jpaSymbolMastermind;
     }

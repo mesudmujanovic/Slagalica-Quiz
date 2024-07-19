@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SymbolMastermindRequest {
+    
     private Long id;
     private String name;
     private MultipartFile image;

@@ -12,10 +12,12 @@ import jakarta.persistence.*;
 @Builder
 @Table(name = "symbolMastermind")
 public class SymbolMastermind {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @Lob
     @Column(length = 1000000)
     private byte[] image;

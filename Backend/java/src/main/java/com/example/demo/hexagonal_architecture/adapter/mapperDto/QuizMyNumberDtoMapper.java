@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class QuizMyNumberDtoMapper implements DtoMapper<QuizMyNumberDTO, QuizMyNumberEntity> {
-
     @Override
     public QuizMyNumberDTO apply(QuizMyNumberEntity quizEntity) {
         QuizMyNumberDTO quizDTO = new QuizMyNumberDTO();

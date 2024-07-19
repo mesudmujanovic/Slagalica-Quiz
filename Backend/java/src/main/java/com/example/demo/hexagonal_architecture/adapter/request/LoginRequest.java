@@ -1,18 +1,12 @@
 package com.example.demo.hexagonal_architecture.adapter.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginRequest {
 
     private String username;
-
-
     private String password;
 }

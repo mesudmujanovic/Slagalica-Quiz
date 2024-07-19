@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.service.Security.Jwt;
 
-import com.example.demo.hexagonal_architecture.core.service.UserDetailsImpl;
+import com.example.demo.hexagonal_architecture.core.service.authService.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

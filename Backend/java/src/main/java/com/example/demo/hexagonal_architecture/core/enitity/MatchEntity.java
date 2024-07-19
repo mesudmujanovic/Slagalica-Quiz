@@ -13,10 +13,9 @@ import java.util.Optional;
 @Setter
 public class MatchEntity {
     public static List<MatchEntity> matches;
-
-    private List<Player> players;
+    private List<PlayerEntity> playerEntities;
     private String roomId;
-    private Optional<Player> winner;
+    private Optional<PlayerEntity> winner;
     private int currentGameIndex;
     private LocalDateTime createdAt;
     private LocalDateTime completedAt;
@@ -34,8 +33,8 @@ public class MatchEntity {
 
     public Optional<MatchEntity> findActiveByPlayerId(Long playerId) {
         return matches.stream()
-                .filter(match -> match.getPlayers().stream()
-                        .anyMatch(player -> player.getId().equals(playerId)))
+                .filter(match -> match.getPlayerEntities().stream()
+                        .anyMatch(playerEntity -> playerEntity.getId().equals(playerId)))
                 .findFirst();
     }
 }

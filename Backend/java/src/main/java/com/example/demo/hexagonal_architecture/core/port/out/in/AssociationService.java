@@ -1,12 +1,11 @@
 package com.example.demo.hexagonal_architecture.core.port.out.in;
 
-import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDto;
+import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDTO;
 
 import java.util.List;
 
 public interface AssociationService {
 
-    AssociationDto saveAssociation(AssociationDto associationDto);
-
-    List<AssociationDto> getAll();
+    AssociationDTO saveAssociation(AssociationDTO associationDto);
+    List<AssociationDTO> getAll();
 }

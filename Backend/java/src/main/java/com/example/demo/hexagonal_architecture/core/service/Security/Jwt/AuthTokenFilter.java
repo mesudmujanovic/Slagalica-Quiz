@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.service.Security.Jwt;
 
-import com.example.demo.hexagonal_architecture.core.service.UserDetailsServiceImpl;
+import com.example.demo.hexagonal_architecture.core.service.authService.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
