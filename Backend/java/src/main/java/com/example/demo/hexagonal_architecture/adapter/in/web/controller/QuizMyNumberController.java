@@ -20,13 +20,17 @@ public class QuizMyNumberController {
     @PostMapping("/create")
     public ResponseEntity<QuizMyNumberResponse> createQuizWithRandomNumbers(@RequestBody QuizMyNumberRequest quizRequest) {
         QuizMyNumberDTO quizDTO = QuizMyNumberDTO.fromRequestToDto(quizRequest);
-        QuizMyNumberDTO saveQuizDTO = quizMyNumberService.createQuizWithRandomNumbers();
-        return ResponseEntity.ok(saveQuizDTO.fromDtoToResponse());
+        QuizMyNumberResponse quizMyNumberResponse = quizMyNumberService.createQuizWithRandomNumbers().fromDtoToResponse();
+        return ResponseEntity.ok(quizMyNumberResponse);
     }
 
     @GetMapping("getAllQuiz")
     public ResponseEntity<List<QuizMyNumberResponse>> getAllQuiz(){
         List<QuizMyNumberDTO> quizDTOS = quizMyNumberService.getAllQuiz();
-        return ResponseEntity.ok(quizDTOS.stream().map(QuizMyNumberDTO::fromDtoToResponse).collect(Collectors.toList()));
+        List<QuizMyNumberResponse> quizMyNumberResponses = quizDTOS
+            .stream()
+            .map(QuizMyNumberDTO::fromDtoToResponse)
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(quizMyNumberResponses);
     }
 }

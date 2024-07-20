@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SymbolMasterMindDTOMapper implements DtoMapper<SymbolMastermindDTO, SymbolMastermind> {
+
     @Override
     public SymbolMastermindDTO apply(SymbolMastermind symbolMastermind) {
         SymbolMastermindDTO symbolMastermindDTO = new SymbolMastermindDTO();

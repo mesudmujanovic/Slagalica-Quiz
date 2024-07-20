@@ -26,12 +26,10 @@ public class AssociationDTO {
         associationDto.setColumnB(associationRequest.getColumnB());
         associationDto.setColumnC(associationRequest.getColumnC());
         associationDto.setColumnD(associationRequest.getColumnD());
-
         Map<String, String> solutionsMap = new HashMap<>();
         for (String solution : associationRequest.getSolutions()) {
             solutionsMap.put("custom_key_" + solutionsMap.size(), solution);
         }
-
         associationDto.setSolutions(solutionsMap);
         associationDto.setFinallSolutions(associationRequest.getFinallSolutions());
         return associationDto;

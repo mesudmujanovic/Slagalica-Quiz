@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PlayerDTOMapper implements DtoMapper<PlayerDTO, PlayerEntity> {
+
     @Override
     public PlayerDTO apply(PlayerEntity playerEntity) {
         PlayerDTO playerDTO = new PlayerDTO();

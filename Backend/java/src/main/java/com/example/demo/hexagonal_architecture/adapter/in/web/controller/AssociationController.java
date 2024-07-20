@@ -21,14 +21,16 @@ public class AssociationController {
     public ResponseEntity<AssociationResponse> saveAssociation(@RequestBody AssociationRequest associationRequest) {
         AssociationDTO associationDto = AssociationDTO.fromRequestToDto(associationRequest);
         AssociationDTO associationDTOSave = associationService.saveAssociation(associationDto);
-        return ResponseEntity.ok(associationDTOSave.fromDtoToAssociationResponse());
+        AssociationResponse associationResponse = associationDTOSave.fromDtoToAssociationResponse();
+        return ResponseEntity.ok(associationResponse);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<AssociationResponse>> getAll() {
         List<AssociationDTO> associationDTOS = associationService.getAll();
-        return ResponseEntity.ok(associationDTOS.stream()
+        List<AssociationResponse> associationResponse = associationDTOS.stream()
                 .map(AssociationDTO::fromDtoToAssociationResponse)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(associationResponse);
     }
 }

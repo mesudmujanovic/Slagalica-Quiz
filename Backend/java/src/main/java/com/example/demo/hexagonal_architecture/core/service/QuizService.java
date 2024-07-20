@@ -4,7 +4,6 @@ import com.example.demo.hexagonal_architecture.core.enitity.PlayerEntity;
 import com.example.demo.hexagonal_architecture.core.enitity.QuizEntity;
 import com.example.demo.hexagonal_architecture.core.port.out.PlayerRepository;
 import com.example.demo.hexagonal_architecture.core.port.out.persistence.QuizRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

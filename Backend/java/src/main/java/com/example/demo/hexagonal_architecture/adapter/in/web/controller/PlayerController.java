@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.*;
 public class PlayerController {
 
   private final PlayerService playerService;
-
-  private final PlayerServiceImpl playerServiceImpl;
-
     @PostMapping("/savePlayer")
     public ResponseEntity<PlayerResponse> savePlayer(@RequestBody PlayerRequest playerRequest) {
         PlayerDTO playerDTO = PlayerDTO.fromRequestToDto(playerRequest);
@@ -28,15 +25,10 @@ public class PlayerController {
         return ResponseEntity.ok(playerResponse);
     }
     @PutMapping("/{playerId}/finalScore")
-    public ResponseEntity<PlayerResponse> updateFinalScore(
-            @PathVariable Long playerId,
-            @RequestParam int finalScore) {
-        PlayerDTO updatedPlayerDTO = playerService.updateFinalScore(playerId, finalScore);
-        if (updatedPlayerDTO != null) {
-            PlayerResponse playerResponse = PlayerDTO.fromDtoToResponse(updatedPlayerDTO);
-            return ResponseEntity.ok(playerResponse);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<PlayerResponse> updateFinalScore(@PathVariable Long playerId,
+                                                           @RequestBody PlayerRequest playerRequest) {
+        PlayerDTO updatedPlayerDTO = playerService.updateFinalScore(playerId, playerRequest.getTotalScore());
+        PlayerResponse playerResponse = PlayerDTO.fromDtoToResponse(updatedPlayerDTO);
+        return ResponseEntity.ok(playerResponse);
     }
 }

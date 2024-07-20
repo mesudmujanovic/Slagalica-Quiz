@@ -1,7 +1,6 @@
 package com.example.demo.hexagonal_architecture.adapter.in.web.controller;
 
 import com.example.demo.hexagonal_architecture.core.enitity.UserAuth;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,14 +24,17 @@ import java.util.Optional;
 @RequestMapping("api/auth/")
 public class UserAuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
 
-    @Autowired
-    private JwtUtils jwtUtils;
+    private final UserAuthService userService;
 
-    @Autowired
-    private UserAuthService userService;
+    public UserAuthController(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserAuthService userService) {
+        this.authenticationManager = authenticationManager;
+        this.jwtUtils = jwtUtils;
+        this.userService = userService;
+    }
+
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
         try {
@@ -55,7 +57,6 @@ public class UserAuthController {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
             return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername()));
         } catch (Exception e) {
-            // Log the error
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }

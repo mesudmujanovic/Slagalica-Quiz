@@ -18,8 +18,9 @@ public class SymbolMastermindController {
     private final SymbolMastermindService symbolMastermindService;
 
     @PostMapping("/saveimg")
-    public ResponseEntity<SymbolMastermindResponse> createSymbolMastermind(@ModelAttribute SymbolMastermindRequest symbolMastermindRequest,
-                                                                           @RequestParam("image") MultipartFile multipartFile) {
+    public ResponseEntity<SymbolMastermindResponse> createSymbolMastermind (
+             @ModelAttribute SymbolMastermindRequest symbolMastermindRequest,
+             @RequestParam("image") MultipartFile multipartFile) {
         SymbolMastermindDTO symbolMastermindDTO = SymbolMastermindDTO.toDto(symbolMastermindRequest);
         SymbolMastermindDTO symbolMastermindDTO1 = symbolMastermindService.createSymbolMastermind(symbolMastermindDTO, multipartFile);
         SymbolMastermindResponse symbolMastermindResponse = SymbolMastermindDTO.toResponse(symbolMastermindDTO1);
@@ -29,8 +30,10 @@ public class SymbolMastermindController {
     @GetMapping("/symbols")
     public ResponseEntity<List<SymbolMastermindResponse>> getAllSymbolMastermind() {
         List<SymbolMastermindDTO> symbols = symbolMastermindService.getAllSymbolMastermind();
-        return ResponseEntity.ok(symbols.stream()
-                .map(symb -> SymbolMastermindDTO.toResponse(symb))
-                .collect(Collectors.toList()));
+        List<SymbolMastermindResponse> symbolMastermindResponses = symbols
+               .stream()
+               .map(symbol -> SymbolMastermindDTO.toResponse(symbol))
+               .collect(Collectors.toList());
+        return ResponseEntity.ok(symbolMastermindResponses);
     }
 }

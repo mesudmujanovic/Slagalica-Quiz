@@ -32,15 +32,8 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public PlayerDTO updateTotalScore(Long playerId, int newScore) {
-        return null;
-    }
-
-    @Override
     public PlayerDTO updateFinalScore(Long playerId, int finalScore) {
         PlayerEntity updatedPlayer = playerRepository.updateFinalScore(playerId, finalScore);
         return playerDTOMapper.apply(updatedPlayer);
     }
-
-
 }

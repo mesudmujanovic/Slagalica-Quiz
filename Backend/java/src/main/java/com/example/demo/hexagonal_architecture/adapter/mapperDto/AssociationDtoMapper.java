@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AssociationDtoMapper implements DtoMapper<AssociationDTO, AssociationEntity> {
+
     @Override
     public AssociationDTO apply(AssociationEntity associationEntity) {
         AssociationDTO associationDto = new AssociationDTO();
