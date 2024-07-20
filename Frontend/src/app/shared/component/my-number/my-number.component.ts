@@ -19,9 +19,47 @@ export class MyNumberComponent {
   public counterButton: number = 0;
   numbers: (number | undefined)[] = [undefined, undefined, undefined, undefined, undefined, undefined];
   result$: Observable<number | undefined>;
-  
+  currentPlayer: number = 1; 
+  playerResults: number[] = [0, 0]; 
+
   constructor() {
     this.result$ = this.numberStateService.getResult();
   }
+
+  nextPlayer() {
+    this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
   }
+
+  parseValue(value: string): number {
+    return parseInt(value, 10);
+  }
+
+
+  checkResult(playerResult: number) {
+    this.playerResults[this.currentPlayer - 1] = playerResult;
+    if (this.currentPlayer === 2) {
+      this.compareResults();
+    } else {
+      this.nextPlayer();
+    }
+  }
+ 
+  compareResults() {
+    this.result$.subscribe(result => {
+      if (result !== undefined) {
+        const player1Difference = Math.abs(this.playerResults[0] - result);
+        const player2Difference = Math.abs(this.playerResults[1] - result);
+
+        if (player1Difference < player2Difference) {
+          alert('Igrač 1 je pobednik!');
+        } else if (player2Difference < player1Difference) {
+          alert('Igrač 2 je pobednik!');
+        } else {
+          alert('Nerešeno!');
+        }
+      }
+    });
+  }
+  }
+  
 

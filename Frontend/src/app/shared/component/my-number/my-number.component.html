@@ -16,4 +16,11 @@
       {{ result$ | async }}
     </div>
     <app-calculator></app-calculator>
+    <div class="current-player">
+      Trenutni igrač: {{ currentPlayer }}
+    </div>
+    <div class="result-input">
+      <input #playerResultInput type="number" placeholder="Unesite rezultat" />
+      <button (click)="checkResult(parseValue(playerResultInput.value))">Unesi rezultat</button>
+    </div>
   </div>
