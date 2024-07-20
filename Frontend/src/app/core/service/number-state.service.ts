@@ -26,7 +26,7 @@ export class NumberStateService implements OnDestroy {
       numbers => {
         if (numbers.length > 0) {
           const randIndex = Math.floor(Math.random() * numbers.length);
-          this.numbers = numbers[randIndex];    
+          this.numbers = numbers[randIndex];
           this.resultSubject.next(this.numbers.result);
         }
       },
@@ -39,7 +39,7 @@ export class NumberStateService implements OnDestroy {
   getNumbers(): (number | undefined)[] {
     return [this.numbers?.number1, this.numbers?.number2, this.numbers?.number3, this.numbers?.number4, this.numbers?.number5, this.numbers?.number6, this.numbers?.result];
   }
-  
+
   getResult(): Observable<number | undefined> {
     return this.result$;
   }

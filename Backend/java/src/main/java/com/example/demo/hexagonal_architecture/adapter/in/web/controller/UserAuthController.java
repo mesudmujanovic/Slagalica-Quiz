@@ -9,12 +9,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.hexagonal_architecture.core.service.Security.Jwt.JwtUtils;
-import com.example.demo.hexagonal_architecture.core.service.UserDetailsImpl;
+import com.example.demo.hexagonal_architecture.core.service.authService.UserDetailsImpl;
 import com.example.demo.hexagonal_architecture.adapter.request.LoginRequest;
 import com.example.demo.hexagonal_architecture.adapter.request.SignupRequest;
 import com.example.demo.hexagonal_architecture.adapter.response.JwtResponse;
 import com.example.demo.hexagonal_architecture.adapter.response.MessageResponse;
-import com.example.demo.hexagonal_architecture.adapter.dto.UserAuthDto;
+import com.example.demo.hexagonal_architecture.adapter.dto.UserAuthDTO;
 import com.example.demo.hexagonal_architecture.core.port.out.in.UserAuthService;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ import org.springframework.http.HttpStatus;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("api/auth/")
 public class UserAuthController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class UserAuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
         try {
-            UserAuthDto userDto = UserAuthDto.fromRequest(signUpRequest);
+            UserAuthDTO userDto = UserAuthDTO.fromRequest(signUpRequest);
             userService.register(userDto);
             return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
         } catch (DuplicateKeyException e) {

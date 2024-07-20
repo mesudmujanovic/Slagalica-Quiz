@@ -3,7 +3,7 @@ package com.example.demo.hexagonal_architecture.adapter.in.web.controller;
 import com.example.demo.hexagonal_architecture.core.port.out.in.AssociationService;
 import com.example.demo.hexagonal_architecture.adapter.request.AssociationRequest;
 import com.example.demo.hexagonal_architecture.adapter.response.AssociationResponse;
-import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDto;
+import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/assoc")
-@CrossOrigin("*")
 @RequiredArgsConstructor
 public class AssociationController {
 
@@ -20,16 +19,16 @@ public class AssociationController {
 
     @PostMapping("/save")
     public ResponseEntity<AssociationResponse> saveAssociation(@RequestBody AssociationRequest associationRequest) {
-        AssociationDto associationDto = AssociationDto.fromRequestToDto(associationRequest);
-        AssociationDto associationDtoSave = associationService.saveAssociation(associationDto);
-        return ResponseEntity.ok(associationDtoSave.fromDtoToAssociationResponse());
+        AssociationDTO associationDto = AssociationDTO.fromRequestToDto(associationRequest);
+        AssociationDTO associationDTOSave = associationService.saveAssociation(associationDto);
+        return ResponseEntity.ok(associationDTOSave.fromDtoToAssociationResponse());
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<AssociationResponse>> getAll() {
-        List<AssociationDto> associationDtos = associationService.getAll();
-        return ResponseEntity.ok(associationDtos.stream()
-                .map(AssociationDto::fromDtoToAssociationResponse)
+        List<AssociationDTO> associationDTOS = associationService.getAll();
+        return ResponseEntity.ok(associationDTOS.stream()
+                .map(AssociationDTO::fromDtoToAssociationResponse)
                 .collect(Collectors.toList()));
     }
 }

@@ -5,7 +5,7 @@ import com.example.demo.hexagonal_architecture.core.port.out.AssociationReposito
 import com.example.demo.hexagonal_architecture.core.port.out.in.AssociationService;
 import com.example.demo.hexagonal_architecture.adapter.mapperDto.AssociationDtoMapper;
 import com.example.demo.hexagonal_architecture.adapter.mapper.AssociationMapper;
-import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDto;
+import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class AssociationServiceImpl implements AssociationService {
     private final AssociationMapper associationMapper;
 
     @Override
-    public AssociationDto saveAssociation(AssociationDto associationDto) {
+    public AssociationDTO saveAssociation(AssociationDTO associationDto) {
         AssociationEntity associationEntity = associationMapper.apply(associationDto);
         AssociationEntity associationEntitySave = associationRepo.saveAssociation(associationEntity);
         return associationDtoMapper.apply(associationEntitySave);
@@ -31,7 +31,7 @@ public class AssociationServiceImpl implements AssociationService {
 
     @Override
     @Transactional
-    public List<AssociationDto> getAll() {
+    public List<AssociationDTO> getAll() {
         List<AssociationEntity> associationEntities = associationRepo.getAll();
         return associationEntities.stream()
                 .map(associationDtoMapper::apply)

@@ -11,8 +11,8 @@ import { CalculatorComponent } from './shared/component/calculator/calculator.co
 import { SymbolMastermindComponent } from './shared/component/symbol-mastermind/symbol-mastermind.component';
 import { NumberStateService } from './core/service/number-state.service';
 import { NumSpinDirective } from './num-spin.directive';
-import { AddNumToDivsDirective } from './core/directive/add-num-to-divs.directive';
 import { MultiplayerComponent } from './shared/component/multiplayer/multiplayer.component';
+import { AddNumToDivsDirective } from './shared/directive/add-num-to-divs.directive';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { MultiplayerComponent } from './shared/component/multiplayer/multiplayer
   ],
   providers: [
     NumberStateService
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

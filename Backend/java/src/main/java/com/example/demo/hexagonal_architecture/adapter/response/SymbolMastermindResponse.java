@@ -14,6 +14,7 @@ public class SymbolMastermindResponse {
 
     private Long id;
     private String name;
+
     @Lob
     @Column(length = 1000000)
     private byte[] image;

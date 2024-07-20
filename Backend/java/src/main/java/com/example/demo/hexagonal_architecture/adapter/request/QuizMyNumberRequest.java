@@ -6,6 +6,4 @@ import lombok.Data;
 public class QuizMyNumberRequest {
 
    private int result;
-
-
 }

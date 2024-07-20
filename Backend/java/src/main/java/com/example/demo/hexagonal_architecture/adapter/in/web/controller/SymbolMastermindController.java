@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/assoc")
-@CrossOrigin("*")
 @RequiredArgsConstructor
 public class SymbolMastermindController {
     private final SymbolMastermindService symbolMastermindService;

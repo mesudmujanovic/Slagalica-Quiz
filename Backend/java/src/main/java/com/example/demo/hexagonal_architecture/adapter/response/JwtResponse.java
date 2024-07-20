@@ -18,5 +18,4 @@ public class JwtResponse {
         this.id = id;
         this.username = username;
     }
-
 }
