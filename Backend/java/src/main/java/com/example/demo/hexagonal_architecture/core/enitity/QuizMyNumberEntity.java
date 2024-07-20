@@ -9,7 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "quiz")
+@Table(name = "myNumber")
 @Entity
 @Data
 public class QuizMyNumberEntity {

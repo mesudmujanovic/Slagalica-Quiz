@@ -17,6 +17,7 @@ public class PlayerDTO {
 
     public static PlayerDTO fromRequestToDto(PlayerRequest playerRequest) {
         PlayerDTO playerDTO = new PlayerDTO();
+        playerDTO.setId(playerRequest.getId());
         playerDTO.setTotalScore(playerRequest.getTotalScore());
         playerDTO.setUserAuthId(playerRequest.getUserAuthId());
         return  playerDTO;

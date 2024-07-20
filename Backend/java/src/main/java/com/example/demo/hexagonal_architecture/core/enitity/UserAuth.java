@@ -10,6 +10,7 @@ import lombok.*;
 @Setter
 @Data
 @Builder
+@Table(name = "userAuth")
 public class UserAuth {
 
     @Id

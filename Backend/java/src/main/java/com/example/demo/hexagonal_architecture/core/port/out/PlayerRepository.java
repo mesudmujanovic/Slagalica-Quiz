@@ -4,4 +4,7 @@ import com.example.demo.hexagonal_architecture.core.enitity.PlayerEntity;
 public interface PlayerRepository {
 
     PlayerEntity savePlayer(PlayerEntity playerEntity);
+    PlayerEntity findById(Long id);
+    PlayerEntity updateFinalScore(Long id, int finalScore);
+
 }

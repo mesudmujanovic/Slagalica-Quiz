@@ -8,6 +8,7 @@ import com.example.demo.hexagonal_architecture.core.enitity.UserAuth;
 import com.example.demo.hexagonal_architecture.core.port.out.PlayerRepository;
 import com.example.demo.hexagonal_architecture.core.port.out.in.PlayerService;
 import com.example.demo.hexagonal_architecture.core.port.out.in.UserAuthService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +30,17 @@ public class PlayerServiceImpl implements PlayerService {
         PlayerEntity savedEntity = playerRepository.savePlayer(playerEntity);
        return playerDTOMapper.apply(savedEntity);
     }
+
+    @Override
+    public PlayerDTO updateTotalScore(Long playerId, int newScore) {
+        return null;
+    }
+
+    @Override
+    public PlayerDTO updateFinalScore(Long playerId, int finalScore) {
+        PlayerEntity updatedPlayer = playerRepository.updateFinalScore(playerId, finalScore);
+        return playerDTOMapper.apply(updatedPlayer);
+    }
+
+
 }
