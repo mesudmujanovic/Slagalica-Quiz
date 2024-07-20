@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "quiz")
@@ -23,4 +25,7 @@ public class QuizMyNumberEntity {
     private int number5;
     private int number6;
     private int result;
+
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Player> players;
 }

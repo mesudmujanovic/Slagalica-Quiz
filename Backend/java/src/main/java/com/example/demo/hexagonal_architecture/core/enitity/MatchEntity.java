@@ -1,19 +1,16 @@
 package com.example.demo.hexagonal_architecture.core.enitity;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-@Getter
+@Data
 @Builder
-@Setter
 public class MatchEntity {
     public static List<MatchEntity> matches;
-
     private List<Player> players;
     private String roomId;
     private Optional<Player> winner;
@@ -28,7 +25,7 @@ public class MatchEntity {
     public Optional<MatchEntity> findByRoomId(String roomId) {
         return MatchEntity.matches
                 .stream()
-                .filter(a -> a.getRoomId() == roomId)
+                .filter(match -> match.getRoomId() == roomId)
                 .findAny();
     }
 

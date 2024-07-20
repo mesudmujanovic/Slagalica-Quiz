@@ -6,8 +6,7 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 public class Player {
     @Id
@@ -17,9 +16,6 @@ public class Player {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserAuth user;
-
-    @Column(nullable = false)
-    private int score;
 
     @Column(nullable = false)
     private int totalScore;

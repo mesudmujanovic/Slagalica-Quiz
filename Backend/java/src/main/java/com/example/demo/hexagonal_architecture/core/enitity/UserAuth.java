@@ -20,5 +20,4 @@ public class UserAuth {
 
     @Column(nullable = false, unique = false)
     private String password;
-
 }
