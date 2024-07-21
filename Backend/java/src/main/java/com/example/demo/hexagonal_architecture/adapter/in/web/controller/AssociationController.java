@@ -19,16 +19,9 @@ public class AssociationController {
 
     @PostMapping("/association")
     public ResponseEntity<AssociationResponse> saveAssociation(@RequestBody AssociationRequest associationRequest) {
-        // Pretvaranje AssociationRequest u AssociationDTO
         AssociationDTO associationDto = AssociationDTO.fromRequestToDto(associationRequest);
-
-        // Čuvanje AssociationDTO i vraćanje sačuvanog DTO-a
         AssociationDTO savedAssociationDto = associationService.saveAssociation(associationDto);
-
-        // Pretvaranje AssociationDTO u AssociationResponse
         AssociationResponse associationResponse = AssociationDTO.fromDtoToAssociationResponse(savedAssociationDto);
-
-        // Vraćanje ResponseEntity sa AssociationResponse
         return ResponseEntity.ok(associationResponse);
     }
 

@@ -1,6 +1,9 @@
 package com.example.demo.hexagonal_architecture.core.service;
 
+import com.example.demo.hexagonal_architecture.adapter.dto.FieldDTO;
+import com.example.demo.hexagonal_architecture.adapter.mapperDto.FieldDTOMapper;
 import com.example.demo.hexagonal_architecture.core.enitity.AssociationEntity;
+import com.example.demo.hexagonal_architecture.core.enitity.Field;
 import com.example.demo.hexagonal_architecture.core.port.out.AssociationRepository;
 import com.example.demo.hexagonal_architecture.core.port.out.in.AssociationService;
 import com.example.demo.hexagonal_architecture.adapter.mapperDto.AssociationDtoMapper;
@@ -11,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -21,6 +25,7 @@ public class AssociationServiceImpl implements AssociationService {
     private final AssociationRepository associationRepo;
     private final AssociationDtoMapper associationDtoMapper;
     private final AssociationMapper associationMapper;
+    private final FieldDTOMapper fieldDTOMapper;
 
     @Override
     public AssociationDTO saveAssociation(AssociationDTO associationDto) {
@@ -35,5 +40,11 @@ public class AssociationServiceImpl implements AssociationService {
         return associationEntities.stream()
                 .map(associationDtoMapper::apply)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<FieldDTO> getFieldByPosition(String position) {
+        Optional<Field> fieldOptional = associationRepo.getFieldByPosition(position);
+        return fieldOptional.map(fieldDTOMapper::apply);
     }
 }
