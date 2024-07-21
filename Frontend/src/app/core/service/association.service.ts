@@ -12,13 +12,13 @@ export class AssociationService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Association[]>{
-    return this.http.get<Association[]>(`${BASE_ULR}/assoc/all`);
+    return this.http.get<Association[]>(`${BASE_ULR}/associations-game/associations`);
   }
 
   getRandomAssociation(): Observable<Association> {
     return this.getAll().pipe(
       map(allRes => {
-        const random = Math.floor(Math.random() * allRes.length);
+        const random = Math.floor(Math.random() * allRes.length);        
         return allRes[random];
       })
     );

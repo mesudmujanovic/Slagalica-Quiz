@@ -29,6 +29,8 @@ export class AssociationComponent {
       C: ["C1", "C2", "C3", "C4"],
       D: ["D1", "D2", "D3", "D4"]
     };
+    console.log(this.allAssoc$);
+    
   }
   
   showText(item: string, column: string, index: number): void {
@@ -65,6 +67,7 @@ export class AssociationComponent {
   ngOnInit(): void {
     this.assocService.getRandomAssociation().subscribe(randAssoc => {
       this.randIndexAssoc = randAssoc;
+      console.log(this.randIndexAssoc);
       this.columnSolution['A'] = this.assocService.getColumnSolution(randAssoc, 'columnA');
       this.columnSolution['B'] = this.assocService.getColumnSolution(randAssoc, 'columnB');
       this.columnSolution['C'] = this.assocService.getColumnSolution(randAssoc, 'columnC');
