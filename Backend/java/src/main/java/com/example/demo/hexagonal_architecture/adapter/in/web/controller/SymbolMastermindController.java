@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/assoc")
+@RequestMapping("/symbol-game")
 @RequiredArgsConstructor
 public class SymbolMastermindController {
     private final SymbolMastermindService symbolMastermindService;
 
-    @PostMapping("/saveimg")
+    @PostMapping("/symbol")
     public ResponseEntity<SymbolMastermindResponse> createSymbolMastermind (
              @ModelAttribute SymbolMastermindRequest symbolMastermindRequest,
              @RequestParam("image") MultipartFile multipartFile) {

@@ -1,5 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.enitity;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,37 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Entity
+@Table(name = "association")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Builder
-@Table(name = "association")
 public class AssociationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "column_a", joinColumns = @JoinColumn(name = "association_id"))
-    @Column(name = "value")
-    private List<String> columnA = new ArrayList<>();
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "column_b", joinColumns = @JoinColumn(name = "association_id"))
-    @Column(name = "value")
-    private List<String> columnB = new ArrayList<>();
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "column_c", joinColumns = @JoinColumn(name = "association_id"))
-    @Column(name = "value")
-    private List<String> columnC = new ArrayList<>();
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "column_d", joinColumns = @JoinColumn(name = "association_id"))
-    @Column(name = "value")
-    private List<String> columnD = new ArrayList<>();
-
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "association")
+    private List<Field> fields = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "final_solutions", joinColumns = @JoinColumn(name = "association_id"))

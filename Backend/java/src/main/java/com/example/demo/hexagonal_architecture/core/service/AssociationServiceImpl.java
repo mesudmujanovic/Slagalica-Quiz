@@ -25,12 +25,11 @@ public class AssociationServiceImpl implements AssociationService {
     @Override
     public AssociationDTO saveAssociation(AssociationDTO associationDto) {
         AssociationEntity associationEntity = associationMapper.apply(associationDto);
-        AssociationEntity associationEntitySave = associationRepo.saveAssociation(associationEntity);
-        return associationDtoMapper.apply(associationEntitySave);
+        AssociationEntity savedAssociationEntity = associationRepo.saveAssociation(associationEntity);
+        return associationDtoMapper.apply(savedAssociationEntity);
     }
 
     @Override
-    @Transactional
     public List<AssociationDTO> getAll() {
         List<AssociationEntity> associationEntities = associationRepo.getAll();
         return associationEntities.stream()

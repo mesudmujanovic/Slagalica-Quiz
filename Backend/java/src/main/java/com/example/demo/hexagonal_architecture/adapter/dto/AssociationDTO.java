@@ -11,45 +11,26 @@ import java.util.Map;
 
 @Data
 public class AssociationDTO {
-
     private Long id;
-    private List<String> columnA;
-    private List<String> columnB;
-    private List<String> columnC;
-    private List<String> columnD;
+    private List<FieldDTO> fields;
+    private List<String> finalSolutions;
     private Map<String, String> solutions;
-    private List<String> finallSolutions;
 
-    public static AssociationDTO fromRequestToDto(AssociationRequest associationRequest){
+    public static AssociationDTO fromRequestToDto(AssociationRequest associationRequest) {
         AssociationDTO associationDto = new AssociationDTO();
-        associationDto.setColumnA(associationRequest.getColumnA());
-        associationDto.setColumnB(associationRequest.getColumnB());
-        associationDto.setColumnC(associationRequest.getColumnC());
-        associationDto.setColumnD(associationRequest.getColumnD());
-        Map<String, String> solutionsMap = new HashMap<>();
-        for (String solution : associationRequest.getSolutions()) {
-            solutionsMap.put("custom_key_" + solutionsMap.size(), solution);
-        }
-        associationDto.setSolutions(solutionsMap);
-        associationDto.setFinallSolutions(associationRequest.getFinallSolutions());
+        associationDto.setFields(associationRequest.getFields());
+        associationDto.setFinalSolutions(associationRequest.getFinalSolutions());
+        associationDto.setSolutions(associationRequest.getSolutions());
         return associationDto;
     }
 
-    public AssociationResponse fromDtoToAssociationResponse(){
+    public static AssociationResponse fromDtoToAssociationResponse(AssociationDTO associationDTO) {
         AssociationResponse associationResponse = new AssociationResponse();
-        associationResponse.setId(this.getId());
-        associationResponse.setColumnA(this.getColumnA());
-        associationResponse.setColumnB(this.getColumnB());
-        associationResponse.setColumnC(this.getColumnC());
-        associationResponse.setColumnD(this.getColumnD());
-        List<String> solutionsList = convertMapToList(this.getSolutions());
-        associationResponse.setSolutions(solutionsList);
-        associationResponse.setFinallSolutions(this.getFinallSolutions());
+        associationResponse.setId(associationDTO.getId());
+        associationResponse.setFields(associationDTO.getFields());
+        associationResponse.setFinalSolutions(associationDTO.getFinalSolutions());
+        associationResponse.setSolutions(associationDTO.getSolutions());
         return associationResponse;
     }
-    private List<String> convertMapToList(Map<String, String> solutionsMap) {
-        List<String> solutionsList = new ArrayList<>();
-        solutionsMap.forEach((key, value) -> solutionsList.add(key + ": " + value));
-        return solutionsList;
-    }
+
 }

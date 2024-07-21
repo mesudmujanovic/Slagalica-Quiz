@@ -12,19 +12,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/quiz")
+@RequestMapping("/number-game")
 @RequiredArgsConstructor
 public class QuizMyNumberController {
     private final QuizMyNumberService quizMyNumberService;
 
-    @PostMapping("/create")
+    @PostMapping("/my-number")
     public ResponseEntity<QuizMyNumberResponse> createQuizWithRandomNumbers(@RequestBody QuizMyNumberRequest quizRequest) {
         QuizMyNumberDTO quizDTO = QuizMyNumberDTO.fromRequestToDto(quizRequest);
         QuizMyNumberResponse quizMyNumberResponse = quizMyNumberService.createQuizWithRandomNumbers().fromDtoToResponse();
         return ResponseEntity.ok(quizMyNumberResponse);
     }
 
-    @GetMapping("getAllQuiz")
+    @GetMapping("/my-numbers")
     public ResponseEntity<List<QuizMyNumberResponse>> getAllQuiz(){
         List<QuizMyNumberDTO> quizDTOS = quizMyNumberService.getAllQuiz();
         List<QuizMyNumberResponse> quizMyNumberResponses = quizDTOS

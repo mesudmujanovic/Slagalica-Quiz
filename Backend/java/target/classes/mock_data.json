@@ -1,28 +1,94 @@
-[
-  {
-    "columnA": ["vatra", "cigarete", "gust", "signal"],
-    "columnB": ["maska", "metal", "staro", "krv"],
-    "columnC": ["djakuzi", "kupka", "malter", "korito"],
-    "columnD": ["snizavanje", "pritisak", "rampa", "tobogan"],
-    "solutions": {
-      "columnA": "dim",
-      "columnB": "gvozdje",
-      "columnC": "kada",
-      "columnD": "spustanje"
+{
+  "id": 1,
+  "fields": [
+    {
+      "id": 1,
+      "text": "vatra",
+      "position": "A1"
     },
-    "finalSolutions": ["zavesa"]
-  },
-  {
-    "columnA": ["festival", "fotro-aparat", "horor", "televizor"],
-    "columnB": ["odelo", "navika", "naporan", "honorar"],
-    "columnC": ["odgovor", "alergija", "akcija", "hemija"],
-    "columnD": ["pesak", "fifa", "uefa", "stadion"],
-    "solutions": {
-      "columnA": "film",
-      "columnB": "rad",
-      "columnC": "reakcija",
-      "columnD": "fudbal"
+    {
+      "id": 2,
+      "text": "cigarete",
+      "position": "A2"
     },
-    "finalSolutions": ["akcija"]
+    {
+      "id": 3,
+      "text": "gust",
+      "position": "A3"
+    },
+    {
+      "id": 4,
+      "text": "signal",
+      "position": "A4"
+    },
+    {
+      "id": 5,
+      "text": "maska",
+      "position": "B1"
+    },
+    {
+      "id": 6,
+      "text": "metal",
+      "position": "B2"
+    },
+    {
+      "id": 7,
+      "text": "staro",
+      "position": "B3"
+    },
+    {
+      "id": 8,
+      "text": "krv",
+      "position": "B4"
+    },
+    {
+      "id": 9,
+      "text": "djakuzi",
+      "position": "C1"
+    },
+    {
+      "id": 10,
+      "text": "kupka",
+      "position": "C2"
+    },
+    {
+      "id": 11,
+      "text": "malter",
+      "position": "C3"
+    },
+    {
+      "id": 12,
+      "text": "korito",
+      "position": "C4"
+    },
+    {
+      "id": 13,
+      "text": "snizavanje",
+      "position": "D1"
+    },
+    {
+      "id": 14,
+      "text": "pritisak",
+      "position": "D2"
+    },
+    {
+      "id": 15,
+      "text": "rampa",
+      "position": "D3"
+    },
+    {
+      "id": 16,
+      "text": "tobogan",
+      "position": "D4"
+    }
+  ],
+  "finalSolutions": [
+    "zavesa"
+  ],
+  "solutions": {
+    "columnA": "dim",
+    "columnB": "gvozdje",
+    "columnC": "kada",
+    "columnD": "spustanje"
   }
-]
+}
