@@ -1,5 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.enitity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,7 @@ public class AssociationEntity {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "association")
+    @JsonManagedReference
     private List<Field> fields = new ArrayList<>();
 
     @ElementCollection(fetch = FetchType.LAZY)
