@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MyNumberComponent } from './shared/component/my-number/my-number.component';
-import { UserComponent } from './shared/component/user/user.component';
-import { AssociationComponent } from './shared/component/association/association.component';
+import { UserComponent } from './shared/components/user/user.component';
+import { MyNumberComponent } from './shared/components/my-number/my-number.component';
+import { AssociationComponent } from './shared/components/association/association.component';
 
 const routes: Routes = [
   {path:'', component: MyNumberComponent },

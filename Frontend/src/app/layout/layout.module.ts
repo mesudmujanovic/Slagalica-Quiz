@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { SooterComponent } from './sooter/sooter.component';
-
-
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -12,9 +10,10 @@ import { SooterComponent } from './sooter/sooter.component';
     FooterComponent
     ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
-  export: [
+  exports: [
   HeaderComponent,
   FooterComponent
   ]
