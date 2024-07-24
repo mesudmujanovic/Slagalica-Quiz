@@ -1,9 +1,14 @@
-export interface Association{
+export interface Association {
     id: number;
-    columnA: string[];
-    columnB: string[];
-    columnC: string[];
-    columnD: string[];
-    finallSolutions: string;
-    solutions: string[];
+    fields: {
+        text: string;
+        position: string;
+    }[];
+    finalSolutions: string[];
+    solutions: {
+        "Column A": string;
+        "Column B": string;
+        "Column C": string;
+        "Column D": string;
+    };
 }

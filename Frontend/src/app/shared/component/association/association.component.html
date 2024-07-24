@@ -1,34 +1,31 @@
 <div class="flex-container" *ngIf="randIndexAssoc">
   <div class="column columnA">
-    <div *ngFor="let item of randIndexAssoc.columnA; let i = index" (click)="showText(item, 'A', i)" class="item">
-      <div class="text" *ngIf="!itemText['A'][i]">Kliknite da otkrijete</div>
+    <div *ngFor="let item of itemText['A']; let i = index" (click)="showText(item, 'A', i)" class="item">
       <div class="text" *ngIf="itemText['A'][i]">{{itemText['A'][i]}}</div>
     </div>
-    <input type="text"
-    [(ngModel)]="columnInput['A']"
-    placeholder="Column A" 
-    [disabled]="isColumnGuessed['A']"
-    (change)="handleInputChange('A')">
+    <input type="text" [(ngModel)]="columnInput['A']" placeholder="Column A" [disabled]="isColumnGuessed['A']"
+      (change)="handleInputChange('A')">
   </div>
 
   <div class="column" *ngIf="randIndexAssoc">
-    <div *ngFor="let item of randIndexAssoc.columnB; let i = index" (click)="showText(item, 'B', i)" class="item">
+    <div *ngFor="let item of itemText['B']; let i = index" (click)="showText(item, 'B', i)" class="item">
       <div class="text" *ngIf="!itemText['B'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['B'][i]">{{itemText['B'][i]}}</div>
     </div>
-    <input type="text" [(ngModel)]="columnInput['B']" [disabled]="isColumnGuessed['B']" (change)="handleInputChange('B')"
-      placeholder="Column B">
+    <input type="text" [(ngModel)]="columnInput['B']" [disabled]="isColumnGuessed['B']"
+      (change)="handleInputChange('B')" placeholder="Column B">
   </div>
 </div>
 
-<div class="finall">
-  <input type="text" placeholder="Finall Solution" [disabled]="isColumnGuessed['D']" [(ngModel)]="finallResult"
+<!-- Finalna Rešenja -->
+<!-- <div class="finall">
+  <input type="text" placeholder="Final Solution" [disabled]="isColumnGuessed['D']" [(ngModel)]="finallResult"
     (change)="finallColumn()">
-</div>
+</div> -->
 
 <div class="flex-container flex" *ngIf="randIndexAssoc">
   <div class="column">
-    <div *ngFor="let item of randIndexAssoc.columnC; let i = index" (click)="showText(item, 'C', i)" class="item">
+    <div *ngFor="let item of itemText['C']; let i = index" (click)="showText(item, 'C', i)" class="item">
       <div class="text" *ngIf="!itemText['C'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['C'][i]">{{itemText['C'][i]}}</div>
     </div>
@@ -37,12 +34,11 @@
   </div>
 
   <div class="column" *ngIf="randIndexAssoc">
-    <div *ngFor="let item of randIndexAssoc.columnD; let i = index" (click)="showText(item, 'D', i)" class="item">
+    <div *ngFor="let item of itemText['D']; let i = index" (click)="showText(item, 'D', i)" class="item">
       <div class="text" *ngIf="!itemText['D'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['D'][i]">{{itemText['D'][i]}}</div>
     </div>
     <input placeholder="Column D" type="text" [(ngModel)]="columnInput['D']" [disabled]="isColumnGuessed['D']"
       (change)="handleInputChange('D')">
-
   </div>
 </div>
