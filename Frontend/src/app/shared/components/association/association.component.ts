@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { Association } from 'src/app/core/interface/Association-interface';
 import { Field } from 'src/app/core/interface/Field-interface';
@@ -12,6 +11,8 @@ import { ScoreService } from 'src/app/core/service/score.service';
   styleUrls: ['./association.component.css']
 })
 export class AssociationComponent {
+  private assocService = inject(AssociationService);
+  private scoreService = inject(ScoreService);
 
   allAssoc$: Observable<Association[]> = this.assocService.getAll();
   randIndexAssoc: Association;
@@ -22,9 +23,7 @@ export class AssociationComponent {
   isColumnGuessed: { [key: string]: boolean } = { A: false, B: false, C: false, D: false, F: false };
   itemClicked: { A: boolean[]; B: boolean[]; C: boolean[]; D: boolean[]; };
 
-  constructor(private assocService: AssociationService,
-    private scoreService: ScoreService,
-    private router: Router) {
+  constructor() {
     this.itemText = {
       A: ["A1", "A2", "A3", "A4"],
       B: ["B1", "B2", "B3", "B4"],
@@ -33,6 +32,18 @@ export class AssociationComponent {
     };
   }
 
+  ngOnInit(): void {
+    this.assocService.getRandomAssociation().subscribe(randAssoc => {
+      this.randIndexAssoc = randAssoc;
+      console.log(this.randIndexAssoc);
+      this.columnSolution = {
+        A: this.randIndexAssoc.solutions["Column A"],
+        B: this.randIndexAssoc.solutions["Column B"],
+        C: this.randIndexAssoc.solutions["Column C"],
+        D: this.randIndexAssoc.solutions["Column D"]
+      };
+    });
+  }
 
   showText(item: string, column: string, index: number): void {
     this.assocService.getPosition(item).pipe(
@@ -79,16 +90,4 @@ export class AssociationComponent {
     }
   }
 
-  ngOnInit(): void {
-    this.assocService.getRandomAssociation().subscribe(randAssoc => {
-      this.randIndexAssoc = randAssoc;
-      console.log(this.randIndexAssoc);
-      this.columnSolution = {
-        A: this.randIndexAssoc.solutions["Column A"],
-        B: this.randIndexAssoc.solutions["Column B"],
-        C: this.randIndexAssoc.solutions["Column C"],
-        D: this.randIndexAssoc.solutions["Column D"]
-      };
-    });
-  }
 }

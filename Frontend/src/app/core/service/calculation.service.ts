@@ -6,12 +6,21 @@ import { MyNumber } from '../interface/MyNumber-Interface';
   providedIn: 'root'
 })
 export class CalculationService {
-  public toShow: string = '0'; 
+  private _toShow: string = '0'; 
 
+  public get toShow(): string {
+    return this._toShow;
+  }
+
+  public set toShow(value: string) {
+    this._toShow = value;
+  }
+
+  
   equals( { number1, number2, number3, number4, number5, number6, result }: MyNumber) {
 
     const allNumbers = [number1, number2, number3, number4, number5, number6].map(num => num?.toString());
-    const numbersInShow = this.toShow.match(/\d+/g) || [];
+    const numbersInShow = this._toShow.match(/\d+/g) || [];
     
     const numbersObservable = from(numbersInShow).pipe(
       map(num => parseInt(num)),
@@ -57,14 +66,14 @@ export class CalculationService {
   }
   
   writeToInput(value: string) {
-    this.toShow += value;          
+    this._toShow += value;          
   }
 
   clear() {
-    this.toShow = '0';
+    this._toShow = '0';
   }
 
   back() {
-    this.toShow = this.toShow.slice(0, -1);
+    this._toShow = this._toShow.slice(0, -1);
   }
 }

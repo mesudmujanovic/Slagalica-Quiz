@@ -26,7 +26,9 @@ export class MyNumberComponent {
     this.result$ = this.numberStateService.getResult();
   }
 
-  nextPlayer() {
+  ngOnInit(): void {}
+
+  nextPlayer(): void {
     this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
   }
 
@@ -34,11 +36,10 @@ export class MyNumberComponent {
     return parseInt(value, 10);
   }
 
-
   checkResult(playerResult: number) {
     this.playerResults[this.currentPlayer - 1] = playerResult;
     if (this.currentPlayer === 2) {
-      this.compareResults();
+     this.compareResults();
     } else {
       this.nextPlayer();
     }
@@ -60,6 +61,6 @@ export class MyNumberComponent {
       }
     });
   }
-  }
+}
   
 

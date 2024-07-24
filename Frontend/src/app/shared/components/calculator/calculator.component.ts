@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CalculationService } from '../../../core/service/calculation.service';
 import { NumberStateService } from '../../../core/service/number-state.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-calculator',
@@ -8,10 +9,21 @@ import { NumberStateService } from '../../../core/service/number-state.service';
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent {
+  private calculationService = inject(CalculationService);
+  private numberStateService = inject(NumberStateService);
+  constructor(){}
+ 
+  ngOnInit() {
+    this.numberStateService.fetchNumbers();
+  } 
+  
+  get toShow(): string {
+    return this.calculationService.toShow;
+  }
 
-  constructor(public calculationService: CalculationService,
-              public numberStateService: NumberStateService){}
-
+  set toShow(value: string) {
+    this.calculationService.toShow = value;
+  }
   equals() {    
       const [number1, number2, number3, number4, number5, number6, result] = this.numberStateService.getNumbers();
       this.calculationService.equals({ number1, number2, number3, number4, number5, number6, result: result });
@@ -28,8 +40,4 @@ export class CalculatorComponent {
   back() {
     this.calculationService.back();
   }
- 
-  ngOnInit() {
-    this.numberStateService.fetchNumbers();
-  } 
 }

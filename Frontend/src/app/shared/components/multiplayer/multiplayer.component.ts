@@ -16,6 +16,6 @@ export class MultiplayerComponent {
 
   sendMessage() {
     this.socketService.sendMessageToUser(this.recipient, this.messageToSend);
-    this.messageToSend = ''; // Resetovanje polja za unos poruke
+    this.messageToSend = ''; 
   }
 }

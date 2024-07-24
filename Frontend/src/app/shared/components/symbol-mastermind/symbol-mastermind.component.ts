@@ -10,7 +10,7 @@ import { SymbolMastermindService } from 'src/app/core/service/symbol-mastermind.
 })
 export class SymbolMastermindComponent {
   private symbolMastermindService = inject(SymbolMastermindService);
-  public symbols$: Observable<SymbolMastemindI[]>=this.symbolMastermindService.getAllSymbols();
+  public symbols$: Observable<SymbolMastemindI[]> = this.symbolMastermindService.getAllSymbols();
   finalCombination: number[] = this.symbolMastermindService.generateFinalCombination();
   private destroy$ = new Subject<void>();
 
@@ -23,9 +23,7 @@ export class SymbolMastermindComponent {
   constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
-
     console.log(this.finalCombination);
-    
   };
 
   getSafeImage(symbols: SymbolMastemindI): string {
@@ -133,7 +131,6 @@ export class SymbolMastermindComponent {
     }
   }
   
-
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
