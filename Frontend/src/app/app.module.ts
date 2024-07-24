@@ -13,6 +13,7 @@ import { NumberStateService } from './core/service/number-state.service';
 import { NumSpinDirective } from './num-spin.directive';
 import { MultiplayerComponent } from './shared/component/multiplayer/multiplayer.component';
 import { AddNumToDivsDirective } from './shared/directive/add-num-to-divs.directive';
+import { LayoutsModule } from './LayoutsModule';
 
 @NgModule({
   declarations: [
@@ -25,13 +26,15 @@ import { AddNumToDivsDirective } from './shared/directive/add-num-to-divs.direct
     NumSpinDirective,
     AddNumToDivsDirective,
     MultiplayerComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutsModule
   ],
   providers: [
     NumberStateService
