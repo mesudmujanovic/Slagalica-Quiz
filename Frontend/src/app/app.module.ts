@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NumberStateService } from './core/service/number-state.service';
-import { NumSpinDirective } from './num-spin.directive';
 import { MyNumberComponent } from './shared/components/my-number/my-number.component';
 import { UserComponent } from './shared/components/user/user.component';
 import { AssociationComponent } from './shared/components/association/association.component';
@@ -23,9 +22,8 @@ import { LayoutModule } from './layout/layout.module';
     AssociationComponent,
     CalculatorComponent,
     SymbolMastermindComponent,
-    NumSpinDirective,
     AddNumToDivsDirective,
-    MultiplayerComponent,
+    MultiplayerComponent
   ],
   imports: [
     BrowserModule,

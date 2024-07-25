@@ -1,20 +1,27 @@
 package com.example.demo.hexagonal_architecture.adapter.in.web.controller;
 
+import com.example.demo.hexagonal_architecture.adapter.response.MessageResponse;
+import com.example.demo.hexagonal_architecture.core.exception.CorrectSolutionException;
+import com.example.demo.hexagonal_architecture.core.exception.IncorrectSolutionException;
+import com.example.demo.hexagonal_architecture.core.exception.SolutionException;
+import com.example.demo.hexagonal_architecture.core.exception.UnexpectedErrorException;
 import com.example.demo.hexagonal_architecture.core.port.out.in.AssociationService;
 import com.example.demo.hexagonal_architecture.adapter.request.AssociationRequest;
 import com.example.demo.hexagonal_architecture.adapter.response.AssociationResponse;
 import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDTO;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/associations-game")
 @RequiredArgsConstructor
 public class AssociationController {
-
     private final AssociationService associationService;
 
     @PostMapping("/association")
@@ -32,5 +39,17 @@ public class AssociationController {
                 .map(AssociationDTO::fromDtoToAssociationResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(associationResponses);
+    }
+    @GetMapping("/checkSolution/{associationId}/{column}/{userInput}")
+    public ResponseEntity<MessageResponse> checkSolution(
+            @PathVariable Long associationId,
+            @PathVariable String column,
+            @PathVariable String userInput) {
+        boolean isSolutionCorrect = associationService.checkSolution(associationId, column, userInput);
+        if (isSolutionCorrect) {
+            throw new CorrectSolutionException();
+        } else {
+            throw new IncorrectSolutionException();
+        }
     }
 }

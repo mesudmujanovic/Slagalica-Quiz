@@ -14,7 +14,6 @@ public class FieldService {
     @Autowired
     private FieldRepository fieldRepository;
 
-
     public Optional<Field> findFieldByPositionOptional(Position position) {
         return fieldRepository.findByPosition(position);
     }

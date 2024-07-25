@@ -25,7 +25,7 @@ public class AssociationRepositoryImpl implements AssociationRepository {
     }
 
     @Override
-    public Optional<Field> getFieldByPosition(String position) {
-        return jpaAssociation.findFieldByPosition(position);
+    public Optional<AssociationEntity> findById(Long id) {
+        return jpaAssociation.findById(id);
     }
 }

@@ -37,10 +37,10 @@ export class AssociationComponent {
       this.randIndexAssoc = randAssoc;
       console.log(this.randIndexAssoc);
       this.columnSolution = {
-        A: this.randIndexAssoc.solutions["Column A"],
-        B: this.randIndexAssoc.solutions["Column B"],
-        C: this.randIndexAssoc.solutions["Column C"],
-        D: this.randIndexAssoc.solutions["Column D"]
+        A: this.randIndexAssoc.solutions["columnA"],
+        B: this.randIndexAssoc.solutions["columnB"],
+        C: this.randIndexAssoc.solutions["columnC"],
+        D: this.randIndexAssoc.solutions["columnD"]
       };
     });
   }
@@ -76,18 +76,22 @@ export class AssociationComponent {
   // }
 
   handleInputChange(column: string): void {
-    const solution = this.columnSolution[column];
+    
+    const solution = this.columnSolution['A'];
     const input = this.columnInput[column];
+    console.log(solution);
+    console.log(input);
     if (input === solution) {
       console.log(column);
 
-      this.itemText[column] = this.randIndexAssoc.solutions['column ' + column];
+      this.itemText[column] = this.randIndexAssoc.fields
+        .filter(field => field.position.startsWith(column))
+        .map(field => field.text);
       console.log(this.itemText[column]);
       this.isColumnGuessed[column.toUpperCase()] = true;
       this.scoreService.addToScore(5);
     } else {
-      this['column' + column.toUpperCase() + 'Input'] = '';
+      this.columnInput[column] = '';
     }
   }
-
 }
