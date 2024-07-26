@@ -7,6 +7,7 @@
       (change)="handleInputChange('A')">
   </div>
 
+
   <div class="column" *ngIf="randIndexAssoc">
     <div *ngFor="let item of itemText['B']; let i = index" (click)="showText(item, 'B', i)" class="item">
       <div class="text" *ngIf="!itemText['B'][i]">Kliknite da otkrijete</div>

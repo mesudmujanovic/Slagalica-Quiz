@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/two-players")
 @RequiredArgsConstructor
 public class QuizController {
-
     private final QuizService quizService;
     @PostMapping("/players/{player1Id}/{player2Id}")
     public ResponseEntity<QuizEntity> createQuiz(@PathVariable Long player1Id,

@@ -1,0 +1,9 @@
+package com.example.demo.hexagonal_architecture.adapter.response;
+
+import lombok.Data;
+
+@Data
+public class FieldResponse {
+    private String text;
+    private String position;
+}

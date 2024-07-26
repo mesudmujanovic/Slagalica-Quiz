@@ -5,7 +5,6 @@ import com.example.demo.hexagonal_architecture.adapter.intergration.DtoMapper;
 import com.example.demo.hexagonal_architecture.core.enitity.Field;
 import com.example.demo.hexagonal_architecture.core.enitity.Position;
 import org.springframework.stereotype.Component;
-
 import java.util.Optional;
 
 @Component
@@ -20,5 +19,4 @@ public class FieldDTOMapper implements DtoMapper<FieldDTOMapper, Field> {
                 .ifPresent(fieldDTO::setPosition);
         return fieldDTO;
     }
-
 }

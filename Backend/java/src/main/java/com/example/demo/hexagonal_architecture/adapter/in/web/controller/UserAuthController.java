@@ -17,7 +17,6 @@ import com.example.demo.hexagonal_architecture.adapter.dto.UserAuthDTO;
 import com.example.demo.hexagonal_architecture.core.port.out.in.UserAuthService;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
-
 import java.util.Optional;
 
 @RestController
