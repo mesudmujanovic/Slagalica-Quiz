@@ -2,18 +2,15 @@ package com.example.demo.hexagonal_architecture.adapter.in.web.controller;
 
 import com.example.demo.hexagonal_architecture.adapter.dto.FieldDTO;
 import com.example.demo.hexagonal_architecture.adapter.response.FieldResponse;
-import com.example.demo.hexagonal_architecture.core.enitity.Field;
 import com.example.demo.hexagonal_architecture.core.enitity.Position;
 import com.example.demo.hexagonal_architecture.core.service.FieldServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/fields")
@@ -30,7 +27,6 @@ public class FieldController {
                 .map(fieldDTO -> ResponseEntity.ok(FieldDTO.fromDtoToResponse(fieldDTO)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
 
     @GetMapping("/association/{associationId}/column/{columnPosition}")
     public ResponseEntity<List<FieldResponse>> getFieldByAssociationIdAndColumnPosition(

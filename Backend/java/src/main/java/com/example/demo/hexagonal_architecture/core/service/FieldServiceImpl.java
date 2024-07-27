@@ -35,5 +35,4 @@ public class FieldServiceImpl implements FieldService {
                 .map(fieldDTOMapper::apply)
                 .collect(Collectors.toList());
     }
-
 }
