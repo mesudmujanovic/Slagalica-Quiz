@@ -12,7 +12,7 @@
       <div class="text" *ngIf="!itemText['B'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['B'][i]">{{itemText['B'][i]}}</div>
     </div>
-    <input type="text" [(ngModel)]="columnInput['columnB']" [disabled]="isColumnGuessed['B']"
+    <input type="text" [(ngModel)]="columnInput['B']" [disabled]="isColumnGuessed['B']"
       (change)="handleInputChange('B')" placeholder="Column B">
   </div>
 </div>
@@ -29,7 +29,7 @@
       <div class="text" *ngIf="!itemText['C'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['C'][i]">{{itemText['C'][i]}}</div>
     </div>
-    <input type="text" placeholder="Column C" [(ngModel)]="columnInput['columnC']" [disabled]="isColumnGuessed['C']"
+    <input type="text" placeholder="Column C" [(ngModel)]="columnInput['C']" [disabled]="isColumnGuessed['C']"
       (change)="handleInputChange('C')">
   </div>
 
@@ -38,7 +38,7 @@
       <div class="text" *ngIf="!itemText['D'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['D'][i]">{{itemText['D'][i]}}</div>
     </div>
-    <input placeholder="Column D" type="text" [(ngModel)]="columnInput['columnD']" [disabled]="isColumnGuessed['D']"
+    <input placeholder="Column D" type="text" [(ngModel)]="columnInput['D']" [disabled]="isColumnGuessed['D']"
       (change)="handleInputChange('D')">
   </div>
 </div>

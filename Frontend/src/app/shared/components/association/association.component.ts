@@ -17,7 +17,7 @@ export class AssociationComponent {
   randIndexAssoc: Association;
   finallResult: string;
   itemText: { [key: string]: string[] };
-  columnInput: { [key: string]: string } = { columnA: '', columnB: '', columnC: '', columnD: '' };
+  columnInput: { [key: string]: string } = { A: '', B: '', C: '', D: '' };
   columnSolution: { [key: string]: string } = { A: '', B: '', C: '', D: '' };
   isColumnGuessed: { [key: string]: boolean } = { A: false, B: false, C: false, D: false, F: false };
   itemClicked: { A: boolean[]; B: boolean[]; C: boolean[]; D: boolean[]; };
@@ -66,9 +66,7 @@ export class AssociationComponent {
 
   handleInputChange(column: string): void {    
     const number: number = 1;
-    const input = this.columnInput['A']; 
-console.log(column);
-
+    const input = this.columnInput[column]; 
     this.assocService.checkColumnSolution(number, column, input).subscribe(
       a => console.log(a)
     );
