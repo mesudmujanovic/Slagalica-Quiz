@@ -14,6 +14,7 @@ public class FieldDTOMapper implements DtoMapper<FieldDTOMapper, Field> {
     public FieldDTO apply(Field fieldEntity) {
         FieldDTO fieldDTO = new FieldDTO();
         fieldDTO.setText(fieldEntity.getText());
+        fieldDTO.setColumnPosition(fieldEntity.getColumnPosition());
         Optional.ofNullable(fieldEntity.getPosition())
                 .map(Position::name)
                 .ifPresent(fieldDTO::setPosition);

@@ -11,6 +11,7 @@ public class FieldMapper {
       public static Field mapToFieldEntity(FieldDTO fieldDTO, AssociationEntity associationEntity) {
         Field fieldEntity = new Field();
         fieldEntity.setText(fieldDTO.getText());
+        fieldEntity.setColumnPosition(fieldDTO.getColumnPosition());
         Optional.ofNullable(fieldDTO.getPosition())
                 .map(Position::valueOf)
                 .ifPresentOrElse(

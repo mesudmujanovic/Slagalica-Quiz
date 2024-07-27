@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { Association } from 'src/app/core/interface/Association-interface';
 import { Field } from 'src/app/core/interface/Field-interface';
 import { AssociationService } from 'src/app/core/service/association.service';
@@ -12,7 +12,6 @@ import { ScoreService } from 'src/app/core/service/score.service';
 })
 export class AssociationComponent {
   private assocService = inject(AssociationService);
-  private scoreService = inject(ScoreService);
 
   allAssoc$: Observable<Association[]> = this.assocService.getAll();
   randIndexAssoc: Association;
@@ -33,24 +32,10 @@ export class AssociationComponent {
   }
 
   ngOnInit(): void {    
-    this.assocService.getRandomAssociation().subscribe(randAssoc => {
-      this.randIndexAssoc = randAssoc;
-      console.log(this.randIndexAssoc);
-      this.columnSolution = {
-        A: this.randIndexAssoc.solutions["columnA"],
-        B: this.randIndexAssoc.solutions["columnB"],
-        C: this.randIndexAssoc.solutions["columnC"],
-        D: this.randIndexAssoc.solutions["columnD"]
-      };
-    });
-  }
+}
 
   showText(item: string, column: string, index: number): void {
     const number: number = 1;
-    console.log(number);
-    console.log(item);
-    
-    
     this.assocService.getPosition(number,item).pipe(
       map((field: Field) => field.text),
       catchError(error => {
@@ -81,11 +66,22 @@ export class AssociationComponent {
 
   handleInputChange(column: string): void {    
     const number: number = 1;
-    const input = this.columnInput['columnA']; 
+    const input = this.columnInput['A']; 
+console.log(column);
 
     this.assocService.checkColumnSolution(number, column, input).subscribe(
-      a => console.log("aa", a)
+      a => console.log(a)
     );
+    // this.assocService.getRandomAssociation().subscribe(randAssoc => {
+    //   this.randIndexAssoc = randAssoc;
+    //   console.log(this.randIndexAssoc);
+    //   this.columnSolution = {
+    //     A: this.randIndexAssoc.solutions["columnA"],
+    //     B: this.randIndexAssoc.solutions["columnB"],
+    //     C: this.randIndexAssoc.solutions["columnC"],
+    //     D: this.randIndexAssoc.solutions["columnD"]
+    //   };
+    // });
     // if (input === solution) {
     //   console.log(column);
 

@@ -5,5 +5,6 @@ import lombok.Data;
 public class FieldRequest {
     private Long id;
     private String text;
+    private String columnPosition;
     private String position;
 }

@@ -21,6 +21,8 @@ public class Field {
     @Column(length = 255)
     private String text;
 
+    private String columnPosition;
+
     @Enumerated(EnumType.STRING)
     @Column(length = 255)
     private Position position;

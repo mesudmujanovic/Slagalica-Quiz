@@ -20,7 +20,7 @@ export class AssociationService {
   getRandomAssociation(): Observable<Association> {
     return this.getAll().pipe(
       map(allRes => {
-        const random = Math.floor(Math.random() * allRes.length);
+        const random = Math.floor(Math.random() * allRes.length + 1);
         return allRes[random];
       })
     );
