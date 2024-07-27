@@ -18,7 +18,7 @@ export class AssociationComponent {
   randIndexAssoc: Association;
   finallResult: string;
   itemText: { [key: string]: string[] };
-  columnInput: { [key: string]: string } = { A: '', B: '', C: '', D: '' };
+  columnInput: { [key: string]: string } = { columnA: '', columnB: '', columnC: '', columnD: '' };
   columnSolution: { [key: string]: string } = { A: '', B: '', C: '', D: '' };
   isColumnGuessed: { [key: string]: boolean } = { A: false, B: false, C: false, D: false, F: false };
   itemClicked: { A: boolean[]; B: boolean[]; C: boolean[]; D: boolean[]; };
@@ -32,7 +32,7 @@ export class AssociationComponent {
     };
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.assocService.getRandomAssociation().subscribe(randAssoc => {
       this.randIndexAssoc = randAssoc;
       console.log(this.randIndexAssoc);
@@ -46,7 +46,12 @@ export class AssociationComponent {
   }
 
   showText(item: string, column: string, index: number): void {
-    this.assocService.getPosition(item).pipe(
+    const number: number = 1;
+    console.log(number);
+    console.log(item);
+    
+    
+    this.assocService.getPosition(number,item).pipe(
       map((field: Field) => field.text),
       catchError(error => {
         console.error('Greška pri pretrazi:', error);
@@ -58,7 +63,6 @@ export class AssociationComponent {
       }
     );
   }
-
 
   // finallColumn() {
   //   if (this.assocService.checkFinalSolution(this.randIndexAssoc, this.finallResult)) {
@@ -75,23 +79,24 @@ export class AssociationComponent {
   //   }
   // }
 
-  handleInputChange(column: string): void {
-    
-    const solution = this.columnSolution['A'];
-    const input = this.columnInput[column];
-    console.log(solution);
-    console.log(input);
-    if (input === solution) {
-      console.log(column);
+  handleInputChange(column: string): void {    
+    const number: number = 1;
+    const input = this.columnInput['columnA']; 
 
-      this.itemText[column] = this.randIndexAssoc.fields
-        .filter(field => field.position.startsWith(column))
-        .map(field => field.text);
-      console.log(this.itemText[column]);
-      this.isColumnGuessed[column.toUpperCase()] = true;
-      this.scoreService.addToScore(5);
-    } else {
-      this.columnInput[column] = '';
-    }
+    this.assocService.checkColumnSolution(number, column, input).subscribe(
+      a => console.log("aa", a)
+    );
+    // if (input === solution) {
+    //   console.log(column);
+
+    //   this.itemText[column] = this.randIndexAssoc.fields
+    //     .filter(field => field.position.startsWith(column))
+    //     .map(field => field.text);
+    //   console.log(this.itemText[column]);
+    //   this.isColumnGuessed[column.toUpperCase()] = true;
+    //   this.scoreService.addToScore(5);
+    // } else {
+    //   this.columnInput[column] = '';
+    // }
   }
 }

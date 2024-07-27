@@ -3,17 +3,16 @@
     <div *ngFor="let item of itemText['A']; let i = index" (click)="showText(item, 'A', i)" class="item">
       <div class="text" *ngIf="itemText['A'][i]">{{itemText['A'][i]}}</div>
     </div>
-    <input type="text" [(ngModel)]="columnInput['A']" placeholder="Column A" [disabled]="isColumnGuessed['A']"
-      (change)="handleInputChange('A')">
+    <input type="text" [(ngModel)]="columnInput['columnA']" placeholder="Column A" [disabled]="isColumnGuessed['A']"
+      (change)="handleInputChange('columnA')">
   </div>
-
 
   <div class="column" *ngIf="randIndexAssoc">
     <div *ngFor="let item of itemText['B']; let i = index" (click)="showText(item, 'B', i)" class="item">
       <div class="text" *ngIf="!itemText['B'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['B'][i]">{{itemText['B'][i]}}</div>
     </div>
-    <input type="text" [(ngModel)]="columnInput['B']" [disabled]="isColumnGuessed['B']"
+    <input type="text" [(ngModel)]="columnInput['columnB']" [disabled]="isColumnGuessed['B']"
       (change)="handleInputChange('B')" placeholder="Column B">
   </div>
 </div>
@@ -30,7 +29,7 @@
       <div class="text" *ngIf="!itemText['C'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['C'][i]">{{itemText['C'][i]}}</div>
     </div>
-    <input type="text" placeholder="Column C" [(ngModel)]="columnInput['C']" [disabled]="isColumnGuessed['C']"
+    <input type="text" placeholder="Column C" [(ngModel)]="columnInput['columnC']" [disabled]="isColumnGuessed['C']"
       (change)="handleInputChange('C')">
   </div>
 
@@ -39,7 +38,7 @@
       <div class="text" *ngIf="!itemText['D'][i]">Kliknite da otkrijete</div>
       <div class="text" *ngIf="itemText['D'][i]">{{itemText['D'][i]}}</div>
     </div>
-    <input placeholder="Column D" type="text" [(ngModel)]="columnInput['D']" [disabled]="isColumnGuessed['D']"
+    <input placeholder="Column D" type="text" [(ngModel)]="columnInput['columnD']" [disabled]="isColumnGuessed['D']"
       (change)="handleInputChange('D')">
   </div>
 </div>

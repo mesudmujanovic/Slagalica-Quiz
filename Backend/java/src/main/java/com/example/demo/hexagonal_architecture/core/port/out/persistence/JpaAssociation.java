@@ -10,7 +10,4 @@ import java.util.Optional;
 
 @Repository
 public interface JpaAssociation extends JpaRepository<AssociationEntity, Long> {
-
-    @Query("SELECT a FROM AssociationEntity a JOIN a.fields f WHERE a.id = :id AND f.position = :position")
-    Optional<AssociationEntity> findByFieldsPosition(@Param("id") Long id, @Param("position") String position);
 }
