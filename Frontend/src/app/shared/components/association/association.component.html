@@ -1,44 +1,48 @@
 <div class="flex-container">
   <div class="column columnA">
-    <div *ngFor="let item of itemText['A']; let i = index" (click)="showText(item, 'A', i)" class="item">
-      <div class="text" *ngIf="itemText['A'][i]">{{itemText['A'][i]}}</div>
+    <div *ngFor="let item of itemText['A']; let i = index" class="item" 
+      (click)="!isColumnGuessed['A'] && !revealedItems['A'][i] && showText(item, 'A', i)">
+      <div class="text">{{ item }}</div>
     </div>
-    <input type="text" [(ngModel)]="columnInput['A']" placeholder="Column A" [disabled]="isColumnGuessed['A']"
+    <input type="text" [(ngModel)]="columnInput['A']" placeholder="Column A" 
+      [disabled]="isColumnGuessed['A']"
       (change)="handleInputChange('A')">
   </div>
 
   <div class="column">
-    <div *ngFor="let item of itemText['B']; let i = index" (click)="showText(item, 'B', i)" class="item">
-      <div class="text" *ngIf="!itemText['B'][i]">Kliknite da otkrijete</div>
-      <div class="text" *ngIf="itemText['B'][i]">{{itemText['B'][i]}}</div>
-    </div>
-    <input type="text" [(ngModel)]="columnInput['B']" [disabled]="isColumnGuessed['B']"
-      (change)="handleInputChange('B')" placeholder="Column B">
+    <div *ngFor="let item of itemText['B']; let i = index" class="item" 
+    (click)="!isColumnGuessed['B'] && !revealedItems['B'][i] && showText(item, 'B', i)">
+    <div class="text">{{ item }}</div>
+  </div>
+  <input type="text" [(ngModel)]="columnInput['B']" placeholder="Column B" 
+    [disabled]="isColumnGuessed['B']"
+    (change)="handleInputChange('B')">
   </div>
 </div>
 
-<!-- Finalna Rešenja -->
-<!-- <div class="finall">
+<div class="finall">
   <input type="text" placeholder="Final Solution" [disabled]="isColumnGuessed['D']" [(ngModel)]="finallResult"
-    (change)="finallColumn()">
-</div> -->
+    (change)="finalColumn()">
+</div> 
 
 <div class="flex-container flex">
   <div class="column">
-    <div *ngFor="let item of itemText['C']; let i = index" (click)="showText(item, 'C', i)" class="item">
-      <div class="text" *ngIf="!itemText['C'][i]">Kliknite da otkrijete</div>
-      <div class="text" *ngIf="itemText['C'][i]">{{itemText['C'][i]}}</div>
+    <div *ngFor="let item of itemText['C']; let i = index" class="item" 
+      (click)="!isColumnGuessed['C'] && !revealedItems['C'][i] && showText(item, 'C', i)">
+      <div class="text">{{ item }}</div>
     </div>
-    <input type="text" placeholder="Column C" [(ngModel)]="columnInput['C']" [disabled]="isColumnGuessed['C']"
+    <input type="text" [(ngModel)]="columnInput['C']" placeholder="Column C" 
+      [disabled]="isColumnGuessed['C']"
       (change)="handleInputChange('C')">
   </div>
 
   <div class="column">
-    <div *ngFor="let item of itemText['D']; let i = index" (click)="showText(item, 'D', i)" class="item">
-      <div class="text" *ngIf="!itemText['D'][i]">Kliknite da otkrijete</div>
-      <div class="text" *ngIf="itemText['D'][i]">{{itemText['D'][i]}}</div>
-    </div>
-    <input placeholder="Column D" type="text" [(ngModel)]="columnInput['D']" [disabled]="isColumnGuessed['D']"
-      (change)="handleInputChange('D')">
+    <div *ngFor="let item of itemText['D']; let i = index" class="item" 
+    (click)="!isColumnGuessed['D'] && !revealedItems['D'][i] && showText(item, 'D', i)">
+    <div class="text">{{ item }}</div>
+  </div>
+  <input type="text" [(ngModel)]="columnInput['D']" placeholder="Column D" 
+    [disabled]="isColumnGuessed['D']"
+    (change)="handleInputChange('D')">
   </div>
 </div>

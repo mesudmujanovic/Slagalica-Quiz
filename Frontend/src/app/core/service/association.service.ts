@@ -1,6 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 import { BASE_ULR } from '../../enviroments/const/apiBaseUrl';
 import { Association } from '../interface/Association-interface';
 import { Field } from '../interface/Field-interface';
@@ -30,6 +30,20 @@ export class AssociationService {
     return this.http.get<Field>(`${BASE_ULR}/fields/search/${associationId}/${position}`);
   }
 
+  getColumnByColumnPosition(associationId: number, columnPosition: string): Observable<Field[]> {
+    return this.http.get<Field[]>(`${BASE_ULR}/fields/association/${associationId}/column/${columnPosition}`);
+  }
+
+  checkFinalSolution(associationId: number, userInput: string): Observable<boolean> {
+    const url = `${BASE_ULR}/associations-game/checkFinalSolution/${associationId}/${userInput}`;
+    return this.http.get<boolean>(url).pipe(
+      catchError((error) => {
+        console.error('Error details:', error);
+        return throwError(() => new Error(error.message || 'An unexpected error occurred'));
+      })
+    );
+  }
+
   checkColumnSolution(associationId: number, column: string, userInput: string): Observable<MessageResponse> {
     return this.http.get<MessageResponse>(`${BASE_ULR}/associations-game/checkSolution/${associationId}/${column}/${userInput}`)
     .pipe(
@@ -38,35 +52,5 @@ export class AssociationService {
         return throwError(() => new Error('An error occurred while checking the solution.'));
       })
     )
-  }
-
-  // getColumnSolution(association: Association, key: string): string | undefined {
-  //   const formattedKey = key.toLowerCase() + ':';
-  //   const foundValue = association.solutions.find(item => {
-  //     return item.toLowerCase().startsWith(formattedKey);
-  //   });
-  //   return foundValue ? foundValue.split(': ')[1] : undefined;
-  // }
-
-  // checkFinalSolution(randAssoc: Association, finallResult: string): boolean {
-  //   const finalSolutionString =
-  //     Array.isArray(randAssoc.finallSolutions) ? randAssoc.finallSolutions.join(', ') : randAssoc.finallSolutions;
-  //   return finalSolutionString === finallResult;
-  // }
-
-  // getItemText(randAssoc: Association): { [key: string]: string[] } {
-  //   return {
-  //     'A': randAssoc.columnA,
-  //     'B': randAssoc.columnB,
-  //     'C': randAssoc.columnC,
-  //     'D': randAssoc.columnD
-  //   };
-  // }
-
-  updateColumnInputs(component: any): void {
-    component.columnInput['A'] = component.columnSolution['A'];
-    component.columnInput['B'] = component.columnSolution['B'];
-    component.columnInput['C'] = component.columnSolution['C'];
-    component.columnInput['D'] = component.columnSolution['D'];
   }
 }

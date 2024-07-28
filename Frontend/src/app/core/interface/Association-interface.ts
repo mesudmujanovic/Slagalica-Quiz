@@ -1,14 +1,13 @@
+import { Field } from "./Field-interface";
+
 export interface Association {
     id: number;
-    fields: {
-        text: string;
-        position: string;
-    }[];
-    finalSolutions: string[];
+    fields: Field[];
+    finalSolutions: string;
     solutions: {
-        "Column A": string;
-        "Column B": string;
-        "Column C": string;
-        "Column D": string;
+        "A": string;
+        "B": string;
+        "C": string;
+        "D": string;
     };
 }
