@@ -1,9 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.service;
 
-import com.example.demo.hexagonal_architecture.adapter.dto.FieldDTO;
-import com.example.demo.hexagonal_architecture.adapter.mapperDto.FieldDTOMapper;
 import com.example.demo.hexagonal_architecture.core.enitity.AssociationEntity;
-import com.example.demo.hexagonal_architecture.core.enitity.Field;
 import com.example.demo.hexagonal_architecture.core.exception.CorrectSolutionException;
 import com.example.demo.hexagonal_architecture.core.exception.IncorrectSolutionException;
 import com.example.demo.hexagonal_architecture.core.port.out.AssociationRepository;
@@ -14,7 +11,6 @@ import com.example.demo.hexagonal_architecture.adapter.dto.AssociationDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -55,6 +51,17 @@ public class AssociationServiceImpl implements AssociationService {
             } else {
                 throw new IncorrectSolutionException();
             }
+        } else {
+            throw new IncorrectSolutionException();
+        }
+    }
+
+    @Override
+    public boolean checkFinalSolution(Long associationId, String userInput) {
+        Optional<AssociationEntity> associationEntityOptional = associationRepo.findById(associationId);
+        if (associationEntityOptional.isPresent()) {
+            String getFinalSolution = associationEntityOptional.get().getFinalSolutions();
+            return Objects.equals(getFinalSolution, userInput);
         } else {
             throw new IncorrectSolutionException();
         }

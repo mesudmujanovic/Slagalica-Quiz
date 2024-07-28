@@ -27,10 +27,9 @@ public class AssociationEntity {
     @JsonManagedReference
     private List<Field> fields = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "final_solutions", joinColumns = @JoinColumn(name = "association_id"))
     @Column(name = "value")
-    private List<String> finalSolutions = new ArrayList<>();
+    private String finalSolutions;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "solutions", joinColumns = @JoinColumn(name = "association_id"))

@@ -8,7 +8,7 @@ import java.util.Map;
 @Data
 public class AssociationRequest {
         private List<FieldDTO> fields;
-        private List<String> finalSolutions;
+        private String finalSolutions;
         private Map<String, String> solutions;
 }
 

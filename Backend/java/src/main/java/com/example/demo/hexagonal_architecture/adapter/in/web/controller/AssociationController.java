@@ -47,4 +47,16 @@ public class AssociationController {
             throw new IncorrectSolutionException();
         }
     }
+
+    @GetMapping("/checkFinalSolution/{associationId}/{userInput}")
+    public ResponseEntity<Boolean> checkFinalSolution(
+            @PathVariable Long associationId,
+            @PathVariable String userInput) {
+        boolean isCorrect = associationService.checkFinalSolution(associationId, userInput);
+        if (isCorrect) {
+            throw new CorrectSolutionException();
+        } else {
+            throw new IncorrectSolutionException();
+        }
+    }
 }

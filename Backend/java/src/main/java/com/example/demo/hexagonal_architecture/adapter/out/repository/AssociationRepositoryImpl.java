@@ -16,14 +16,16 @@ public class AssociationRepositoryImpl implements AssociationRepository {
     @Override
     public AssociationEntity saveAssociation(AssociationEntity associationEntity) {
         return jpaAssociation.save(associationEntity);
-    }
+    };
+
     @Override
     public List<AssociationEntity> getAll() {
         return jpaAssociation.findAll();
-    }
+    };
 
     @Override
     public Optional<AssociationEntity> findById(Long id) {
         return jpaAssociation.findById(id);
-    }
+    };
+
 }

@@ -10,6 +10,6 @@ import java.util.Map;
 public class AssociationResponse {
     private Long id;
     private List<FieldDTO> fields;
-    private List<String> finalSolutions;
+    private String finalSolutions;
     private Map<String, String> solutions;
 }
