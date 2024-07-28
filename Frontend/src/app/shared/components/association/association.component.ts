@@ -13,7 +13,6 @@ export class AssociationComponent {
   private assocService = inject(AssociationService);
   private destroy$ = new Subject<void>();
 
-  allAssoc$: Observable<Association[]> = this.assocService.getAll();
   randIndexAssoc: Association;
   finallResult: string;
   itemText: { [key: string]: string[] };

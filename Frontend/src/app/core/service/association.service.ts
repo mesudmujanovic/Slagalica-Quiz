@@ -13,19 +13,6 @@ export class AssociationService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Association[]> {
-    return this.http.get<Association[]>(`${BASE_ULR}/associations-game/associations`);
-  }
-
-  getRandomAssociation(): Observable<Association> {
-    return this.getAll().pipe(
-      map(allRes => {
-        const random = Math.floor(Math.random() * allRes.length + 1);
-        return allRes[random];
-      })
-    );
-  }
-
   getPosition(associationId: number, position: string): Observable<Field> {
     return this.http.get<Field>(`${BASE_ULR}/fields/search/${associationId}/${position}`);
   }
