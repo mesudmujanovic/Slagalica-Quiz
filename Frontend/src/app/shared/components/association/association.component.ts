@@ -34,6 +34,9 @@ export class AssociationComponent {
   }
 
   ngOnInit() {
+    this.assocService.getRandomAssociation().subscribe( res => {
+       console.log(res)
+    });
   }
 
   ngOnDestroy() {
@@ -42,7 +45,7 @@ export class AssociationComponent {
   }
 
   showText(item: string, column: string, index: number): void {
-    const number: number = 1;
+    const number: number = 5;
     this.assocService.getPosition(number, item).pipe(
       map((field: Field) => field.text),
       catchError(error => {
@@ -61,7 +64,7 @@ export class AssociationComponent {
   }
 
   finalColumn() {
-    const number1: number = 1;
+    const number1: number = 5;
     console.log(this.finallResult);
     this.assocService.checkFinalSolution(number1, this.finallResult).pipe(
       takeUntil(this.destroy$)
@@ -76,7 +79,7 @@ export class AssociationComponent {
   }
 
   handleInputChange(column: string): void {
-    const number: number = 1;
+    const number: number = 5;
     const input = this.columnInput[column];
     this.assocService.checkColumnSolution(number, column, input).pipe(
       switchMap(checkSolution => {

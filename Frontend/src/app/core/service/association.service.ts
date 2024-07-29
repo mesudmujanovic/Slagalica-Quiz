@@ -13,6 +13,24 @@ export class AssociationService {
 
   constructor(private http: HttpClient) { }
 
+  getAll(): Observable<Association[]> {
+    return this.http.get<Association[]>(`${BASE_ULR}/associations-game/associations`);
+  }
+
+  getRandomAssociation(): Observable<Association> {
+    return this.getAll().pipe(
+      map(allRes => {
+        if (!allRes || allRes.length === 0) {
+          throw new Error('No associations available');
+        }
+        const random = Math.floor(Math.random() * allRes.length);
+        const allAssociation = allRes[random];
+        console.log(allAssociation);
+        return allAssociation;
+      })
+    );
+  }
+
   getPosition(associationId: number, position: string): Observable<Field> {
     return this.http.get<Field>(`${BASE_ULR}/fields/search/${associationId}/${position}`);
   }
