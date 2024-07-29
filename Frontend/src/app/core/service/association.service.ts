@@ -5,13 +5,14 @@ import { BASE_ULR } from '../../enviroments/const/apiBaseUrl';
 import { Association } from '../interface/Association-interface';
 import { Field } from '../interface/Field-interface';
 import { MessageResponse } from '../interface/MessageResponse';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssociationService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private sessionStorage: StorageService) { }
 
   getAll(): Observable<Association[]> {
     return this.http.get<Association[]>(`${BASE_ULR}/associations-game/associations`);
@@ -25,6 +26,7 @@ export class AssociationService {
         }
         const random = Math.floor(Math.random() * allRes.length);
         const allAssociation = allRes[random];
+        this.sessionStorage.setItem("associationId", allAssociation.id.toString());
         console.log(allAssociation);
         return allAssociation;
       })
@@ -51,11 +53,11 @@ export class AssociationService {
 
   checkColumnSolution(associationId: number, column: string, userInput: string): Observable<MessageResponse> {
     return this.http.get<MessageResponse>(`${BASE_ULR}/associations-game/checkSolution/${associationId}/${column}/${userInput}`)
-    .pipe(
-      catchError(error => {
-        console.error('Error', error);
-        return throwError(() => new Error('An error occurred while checking the solution.'));
-      })
-    )
+      .pipe(
+        catchError(error => {
+          console.error('Error', error);
+          return throwError(() => new Error('An error occurred while checking the solution.'));
+        })
+      )
   }
 }

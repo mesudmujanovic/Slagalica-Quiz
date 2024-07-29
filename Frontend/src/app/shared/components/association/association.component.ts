@@ -3,6 +3,7 @@ import { catchError, EMPTY, map, Observable, of, Subject, switchMap, takeUntil }
 import { Association } from 'src/app/core/interface/Association-interface';
 import { Field } from 'src/app/core/interface/Field-interface';
 import { AssociationService } from 'src/app/core/service/association.service';
+import { StorageService } from 'src/app/core/service/storage.service';
 
 @Component({
   selector: 'app-association',
@@ -11,7 +12,9 @@ import { AssociationService } from 'src/app/core/service/association.service';
 })
 export class AssociationComponent {
   private assocService = inject(AssociationService);
+  private sessionStorage = inject(StorageService);
   private destroy$ = new Subject<void>();
+  private associationId: number;
 
   randIndexAssoc: Association;
   finallResult: string;
@@ -30,13 +33,13 @@ export class AssociationComponent {
       B: ["B1", "B2", "B3", "B4"],
       C: ["C1", "C2", "C3", "C4"],
       D: ["D1", "D2", "D3", "D4"]
-    }; 
+    };
   }
 
   ngOnInit() {
-    this.assocService.getRandomAssociation().subscribe( res => {
-       console.log(res)
-    });
+    this.associationId = Number(this.sessionStorage.getItem("associationId"));
+    this.assocService.getRandomAssociation().subscribe(res => console.log(res))
+
   }
 
   ngOnDestroy() {
@@ -45,8 +48,7 @@ export class AssociationComponent {
   }
 
   showText(item: string, column: string, index: number): void {
-    const number: number = 5;
-    this.assocService.getPosition(number, item).pipe(
+    this.assocService.getPosition(this.associationId, item).pipe(
       map((field: Field) => field.text),
       catchError(error => {
         console.error('Greška pri pretrazi:', error);
@@ -63,14 +65,35 @@ export class AssociationComponent {
     );
   }
 
-  finalColumn() {
-    const number1: number = 5;
-    console.log(this.finallResult);
-    this.assocService.checkFinalSolution(number1, this.finallResult).pipe(
+  finalColumn(): void {
+    if (this.associationId === null) {
+      console.error("No association ID available");
+      return;
+    }
+    this.assocService.checkFinalSolution(this.associationId, this.finallResult).pipe(
       takeUntil(this.destroy$)
     ).subscribe({
       next: (result) => {
         console.log('Final solution checked:', result);
+        this.sessionStorage.removeItem("randomAssociationId");
+        this.assocService.getRandomAssociation().subscribe(res => {
+          if (res) {
+            console.log(res);
+            this.associationId = res.id;
+            this.sessionStorage.setItem("randomAssociationId", this.associationId.toString());
+
+            console.log(res);
+            this.columnInput;
+            console.log(this.columnInput);
+
+            Object.keys(res.solutions).forEach(column => {
+              const fields = res.solutions[column];
+              this.itemText[column] = fields.map(field => field.text);
+              this.columnInput[column] = this.itemText[column].join(', ');
+              this.isColumnGuessed[column.toUpperCase()] = true;
+            });
+          }
+        });
       },
       error: (error) => {
         console.error('Error checking final solution:', error);
@@ -79,12 +102,11 @@ export class AssociationComponent {
   }
 
   handleInputChange(column: string): void {
-    const number: number = 5;
     const input = this.columnInput[column];
-    this.assocService.checkColumnSolution(number, column, input).pipe(
+    this.assocService.checkColumnSolution(this.associationId, column, input).pipe(
       switchMap(checkSolution => {
         if (checkSolution.message) {
-          return this.assocService.getColumnByColumnPosition(number, column);
+          return this.assocService.getColumnByColumnPosition(this.associationId, column);
         } else {
           return EMPTY;
         }
