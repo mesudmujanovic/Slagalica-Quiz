@@ -20,7 +20,7 @@ export class AssociationComponent {
   finallResult: string;
   itemText: { [key: string]: string[] };
   columnInput: { [key: string]: string } = { A: '', B: '', C: '', D: '' };
-  isColumnGuessed: { [key: string]: boolean } = { A: false, B: false, C: false, D: false, F: false };
+  isColumnGuessed: { [key: string]: boolean } = { A: false, B: false, C: false, D: false };
   revealedItems = {
     A: [false, false, false, false],
     B: [false, false, false, false],
@@ -78,19 +78,21 @@ export class AssociationComponent {
         this.sessionStorage.removeItem("randomAssociationId");
         this.assocService.getRandomAssociation().subscribe(res => {
           if (res) {
-            console.log(res);
             this.associationId = res.id;
             this.sessionStorage.setItem("randomAssociationId", this.associationId.toString());
-
-            console.log(res);
-            this.columnInput;
-            console.log(this.columnInput);
-
-            Object.keys(res.solutions).forEach(column => {
-              const fields = res.solutions[column];
-              this.itemText[column] = fields.map(field => field.text);
-              this.columnInput[column] = this.itemText[column].join(', ');
-              this.isColumnGuessed[column.toUpperCase()] = true;
+            this.columnInput = (({ A, B, C, D }) => ({ A, B, C, D }))(res.solutions);
+            Object.keys(this.isColumnGuessed).forEach(key => {
+              this.isColumnGuessed[key] = true;
+            });
+            res.fields.forEach(field => {
+              const column = field.columnPosition;
+              const position = field.position;
+              const index = this.itemText[column].indexOf(position);
+              ////                       [A,A,A,A]         (0,1,2,3)
+              if (index != -1) {
+                this.itemText[column][index] = field.text;
+                ////  [A]     [0 prvi field]   = prvi field -> field.text 
+              }
             });
           }
         });
