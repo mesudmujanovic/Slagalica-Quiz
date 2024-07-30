@@ -1,5 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.enitity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,6 @@ public class Field {
 
     @ManyToOne
     @JoinColumn(name = "association_id")
-    @JsonIgnore
+    @JsonBackReference
     private AssociationEntity association;
 }

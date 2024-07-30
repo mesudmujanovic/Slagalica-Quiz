@@ -1,94 +1,220 @@
-{
-  "id": 1,
-  "fields": [
-    {
-      "id": 1,
-      "text": "vatra",
-      "position": "A1"
-    },
-    {
-      "id": 2,
-      "text": "cigarete",
-      "position": "A2"
-    },
-    {
-      "id": 3,
-      "text": "gust",
-      "position": "A3"
-    },
-    {
-      "id": 4,
-      "text": "signal",
-      "position": "A4"
-    },
-    {
-      "id": 5,
-      "text": "maska",
-      "position": "B1"
-    },
-    {
-      "id": 6,
-      "text": "metal",
-      "position": "B2"
-    },
-    {
-      "id": 7,
-      "text": "staro",
-      "position": "B3"
-    },
-    {
-      "id": 8,
-      "text": "krv",
-      "position": "B4"
-    },
-    {
-      "id": 9,
-      "text": "djakuzi",
-      "position": "C1"
-    },
-    {
-      "id": 10,
-      "text": "kupka",
-      "position": "C2"
-    },
-    {
-      "id": 11,
-      "text": "malter",
-      "position": "C3"
-    },
-    {
-      "id": 12,
-      "text": "korito",
-      "position": "C4"
-    },
-    {
-      "id": 13,
-      "text": "snizavanje",
-      "position": "D1"
-    },
-    {
-      "id": 14,
-      "text": "pritisak",
-      "position": "D2"
-    },
-    {
-      "id": 15,
-      "text": "rampa",
-      "position": "D3"
-    },
-    {
-      "id": 16,
-      "text": "tobogan",
-      "position": "D4"
+[
+  {
+    "id": 1,
+    "fields": [
+      {
+        "id": null,
+        "text": "cigara",
+        "columnPosition": "A",
+        "position": "A1"
+      },
+      {
+        "id": null,
+        "text": "cigarete",
+        "columnPosition": "A",
+        "position": "A2"
+      },
+      {
+        "id": null,
+        "text": "gust",
+        "columnPosition": "A",
+        "position": "A3"
+      },
+      {
+        "id": null,
+        "text": "signal",
+        "columnPosition": "A",
+        "position": "A4"
+      },
+      {
+        "id": null,
+        "text": "maska",
+        "columnPosition": "B",
+        "position": "B1"
+      },
+      {
+        "id": null,
+        "text": "metal",
+        "columnPosition": "B",
+        "position": "B2"
+      },
+      {
+        "id": null,
+        "text": "staro",
+        "columnPosition": "B",
+        "position": "B3"
+      },
+      {
+        "id": null,
+        "text": "krv",
+        "columnPosition": "B",
+        "position": "B4"
+      },
+      {
+        "id": null,
+        "text": "djakuzi",
+        "columnPosition": "C",
+        "position": "C1"
+      },
+      {
+        "id": null,
+        "text": "kupka",
+        "columnPosition": "C",
+        "position": "C2"
+      },
+      {
+        "id": null,
+        "text": "malter",
+        "columnPosition": "C",
+        "position": "C3"
+      },
+      {
+        "id": null,
+        "text": "korito",
+        "columnPosition": "C",
+        "position": "C4"
+      },
+      {
+        "id": null,
+        "text": "snizavanje",
+        "columnPosition": "D",
+        "position": "D1"
+      },
+      {
+        "id": null,
+        "text": "pritisak",
+        "columnPosition": "D",
+        "position": "D2"
+      },
+      {
+        "id": null,
+        "text": "rampa",
+        "columnPosition": "D",
+        "position": "D3"
+      },
+      {
+        "id": null,
+        "text": "tobogan",
+        "columnPosition": "D",
+        "position": "D4"
+      }
+    ],
+    "finalSolutions": "zavesa",
+    "solutions": {
+      "A": "dim",
+      "D": "spustanje",
+      "C": "kada",
+      "B": "gvozdje"
     }
-  ],
-  "finalSolutions": [
-    "zavesa"
-  ],
-  "solutions": {
-    "columnA": "dim",
-    "columnB": "gvozdje",
-    "columnC": "kada",
-    "columnD": "spustanje"
+  },
+
+  {
+    "id": 3,
+    "fields": [
+      {
+        "id": null,
+        "text": "tastatura",
+        "columnPosition": "A",
+        "position": "A1"
+      },
+      {
+        "id": null,
+        "text": "mis",
+        "columnPosition": "A",
+        "position": "A2"
+      },
+      {
+        "id": null,
+        "text": "monitor",
+        "columnPosition": "A",
+        "position": "A3"
+      },
+      {
+        "id": null,
+        "text": "stampac",
+        "columnPosition": "A",
+        "position": "A4"
+      },
+      {
+        "id": null,
+        "text": "racunar",
+        "columnPosition": "B",
+        "position": "B1"
+      },
+      {
+        "id": null,
+        "text": "sto",
+        "columnPosition": "B",
+        "position": "B2"
+      },
+      {
+        "id": null,
+        "text": "stolica",
+        "columnPosition": "B",
+        "position": "B3"
+      },
+      {
+        "id": null,
+        "text": "lampa",
+        "columnPosition": "B",
+        "position": "B4"
+      },
+      {
+        "id": null,
+        "text": "fajl",
+        "columnPosition": "C",
+        "position": "C1"
+      },
+      {
+        "id": null,
+        "text": "fascikla",
+        "columnPosition": "C",
+        "position": "C2"
+      },
+      {
+        "id": null,
+        "text": "olovka",
+        "columnPosition": "C",
+        "position": "C3"
+      },
+      {
+        "id": null,
+        "text": "sveska",
+        "columnPosition": "C",
+        "position": "C4"
+      },
+      {
+        "id": null,
+        "text": "projektor",
+        "columnPosition": "D",
+        "position": "D1"
+      },
+      {
+        "id": null,
+        "text": "belji zid",
+        "columnPosition": "D",
+        "position": "D2"
+      },
+      {
+        "id": null,
+        "text": "marker",
+        "columnPosition": "D",
+        "position": "D3"
+      },
+      {
+        "id": null,
+        "text": "gumica",
+        "columnPosition": "D",
+        "position": "D4"
+      }
+    ],
+    "finalSolutions": "kancelarija",
+    "solutions": {
+      "A": "ulazni",
+      "B": "nameštaj",
+      "C": "papirni materijal",
+      "D": "oprema"
+    }
   }
-}
+
+]

@@ -28,8 +28,14 @@ public class QuizMyNumberServiceImpl implements QuizMyNumberService {
     @Override
     public QuizMyNumberDTO createQuizWithRandomNumbers() {
         QuizMyNumberDTO quizDTO = generateQuizDTOWithRandomNumbers();
+        System.out.println("Generated Quiz DTO: " + quizDTO); // Debug: Prikazuje generisani DTO
+
         QuizMyNumberEntity quizEntity = quizMyNumberMapper.apply(quizDTO);
+        System.out.println("Mapped Entity: " + quizEntity); // Debug: Prikazuje mapirani entitet
+
         quizEntity = quizMyNumberRepository.createQuizWithRandomNumbers(quizEntity);
+        System.out.println("Saved Entity: " + quizEntity); // Debug: Prikazuje sačuvani entitet
+
         return quizMyNumberDtoMapper.apply(quizEntity);
     }
 
