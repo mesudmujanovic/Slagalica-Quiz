@@ -8,7 +8,7 @@ import { StorageService } from 'src/app/core/service/storage.service';
 @Component({
   selector: 'app-association',
   templateUrl: './association.component.html',
-  styleUrls: ['./association.component.css']
+  styleUrls: ['./association.component.scss']
 })
 export class AssociationComponent {
   private assocService = inject(AssociationService);
