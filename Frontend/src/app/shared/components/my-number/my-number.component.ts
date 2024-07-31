@@ -1,14 +1,16 @@
 import { Component, ElementRef, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NumberStateService } from 'src/app/core/service/number-state.service';
+import { WebSocketService } from 'src/app/core/service/web-socket.service';
 
 @Component({
   selector: 'app-my-number',
   templateUrl: './my-number.component.html',
-  styleUrls: ['./my-number.component.css']
+  styleUrls: ['./my-number.component.scss']
 })
 export class MyNumberComponent {
   private numberStateService = inject(NumberStateService);
+  private webSocketService = inject(WebSocketService);
 
   @ViewChildren('numDiv') numDivs: QueryList<ElementRef>;
   @ViewChild('containerCalc') containerCalc: ElementRef | undefined;
@@ -26,14 +28,40 @@ export class MyNumberComponent {
     this.result$ = this.numberStateService.getResult();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.webSocketService.getMessages().subscribe(message => {
+      console.log('Received message:', message);
+      this.handleReceivedMessage(message);
+    });
+  }
+
+  sendMessage(message: any): void {
+    this.webSocketService.sendMessage(message);
+  }
+
+  handleReceivedMessage(message: any): void {
+    alert(message);
+  }
+
+  compareResults() {
+    this.result$.subscribe(result => {
+      if (result !== undefined) {
+        const player1Difference = Math.abs(this.playerResults[0] - result);
+        const player2Difference = Math.abs(this.playerResults[1] - result);
+
+        if (player1Difference < player2Difference) {
+          this.sendMessage('Igrač 1 je pobednik!');
+        } else if (player2Difference < player1Difference) {
+          this.sendMessage('Igrač 2 je pobednik!');
+        } else {
+          this.sendMessage('Nerešeno!');
+        }
+      }
+    });
+  }
 
   nextPlayer(): void {
     this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
-  }
-
-  parseValue(value: string): number {
-    return parseInt(value, 10);
   }
 
   checkResult(playerResult: number) {
@@ -44,23 +72,10 @@ export class MyNumberComponent {
       this.nextPlayer();
     }
   }
- 
-  compareResults() {
-    this.result$.subscribe(result => {
-      if (result !== undefined) {
-        const player1Difference = Math.abs(this.playerResults[0] - result);
-        const player2Difference = Math.abs(this.playerResults[1] - result);
-
-        if (player1Difference < player2Difference) {
-          alert('Igrač 1 je pobednik!');
-        } else if (player2Difference < player1Difference) {
-          alert('Igrač 2 je pobednik!');
-        } else {
-          alert('Nerešeno!');
-        }
-      }
-    });
+  parseValue(value: string): number {
+    return parseInt(value, 10);
   }
+ 
 }
   
 

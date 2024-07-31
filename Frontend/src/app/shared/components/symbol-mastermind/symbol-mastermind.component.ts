@@ -6,7 +6,7 @@ import { SymbolMastermindService } from 'src/app/core/service/symbol-mastermind.
 @Component({
   selector: 'app-symbol-mastermind',
   templateUrl: './symbol-mastermind.component.html',
-  styleUrls: ['./symbol-mastermind.component.css']
+  styleUrls: ['./symbol-mastermind.component.scss']
 })
 export class SymbolMastermindComponent {
   private symbolMastermindService = inject(SymbolMastermindService);

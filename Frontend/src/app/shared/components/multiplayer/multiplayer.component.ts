@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SocketService } from 'src/app/core/service/socket.service';
 
 @Component({
   selector: 'app-multiplayer',
@@ -8,14 +7,4 @@ import { SocketService } from 'src/app/core/service/socket.service';
 })
 export class MultiplayerComponent {
   
-  recipient: string = '';
-  messageToSend: string = '';
-  receivedMessage: string = '';
-
-  constructor(private socketService: SocketService) { }
-
-  sendMessage() {
-    this.socketService.sendMessageToUser(this.recipient, this.messageToSend);
-    this.messageToSend = ''; 
-  }
 }
