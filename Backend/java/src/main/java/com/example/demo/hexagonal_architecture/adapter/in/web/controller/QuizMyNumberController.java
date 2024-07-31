@@ -19,7 +19,6 @@ public class QuizMyNumberController {
 
     @PostMapping("/my-number")
     public ResponseEntity<QuizMyNumberResponse> createQuizWithRandomNumbers(@RequestBody QuizMyNumberRequest quizRequest) {
-        QuizMyNumberDTO quizDTO = QuizMyNumberDTO.fromRequestToDto(quizRequest);
         QuizMyNumberResponse quizMyNumberResponse = quizMyNumberService.createQuizWithRandomNumbers().fromDtoToResponse();
         return ResponseEntity.ok(quizMyNumberResponse);
     }
