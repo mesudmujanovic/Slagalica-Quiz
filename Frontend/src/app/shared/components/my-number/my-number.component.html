@@ -1,4 +1,4 @@
-<div class="blue-bacground">
+<!-- <div class="blue-bacground">
     <div class="allDiv">
         <div *ngFor="let number of [1, 2, 3, 4, 5, 6]" #numDiv class="num" [ngClass]="{'numBig': number === 5 || number === 6}">
             {{ numbers[number - 1] }}
@@ -16,11 +16,37 @@
       {{ result$ | async }}
     </div>
     <app-calculator></app-calculator>
-    <div class="current-player">
-      Trenutni igrač: {{ currentPlayer }}
+  </div> -->
+
+  <div class="chat_window">
+    <div class="top_menu">
+      <div class="buttons">
+        <div class="button close"></div>
+        <div class="button minimize"></div>
+        <div class="button maximize"></div>
+      </div>
+      <div class="title">
+        WhatsApp
+      </div>
     </div>
-    <div class="result-input">
-      <input #playerResultInput type="number" placeholder="Unesite rezultat" />
-      <button (click)="checkResult(parseValue(playerResultInput.value))">Unesi rezultat</button>
+    <ul class="messages">
+      <li class="message right" *ngFor="let item of messageList"
+      [ngClass]="{'left': item.message_side === 'receiver', 'right': item.message_side === 'sender'}"
+      >
+        <div class="avatar"></div>
+        <div class="text_wrapper">
+          <div class="text">{{item.message}}</div>
+        </div>
+      </li>
+    </ul>
+    <div class="bottom_wrapper clearfix">
+      <div class="message_input_wrapper">
+        <input class="message_input" placeholder="Message..." [(ngModel)]="messageInput" 
+        (keyup.enter)="sendMessage()"/>
+      </div>
+      <div class="send_message" (click)="sendMessage()">
+        <div class="icon"></div>
+        <div class="text">Send</div>
+      </div>
     </div>
   </div>

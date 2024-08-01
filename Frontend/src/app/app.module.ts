@@ -1,4 +1,4 @@
-import { NgModule, Renderer2 } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +23,7 @@ import { LayoutModule } from './layout/layout.module';
     CalculatorComponent,
     SymbolMastermindComponent,
     AddNumToDivsDirective,
-    MultiplayerComponent
+    MultiplayerComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,9 +33,7 @@ import { LayoutModule } from './layout/layout.module';
     ReactiveFormsModule,
     LayoutModule
   ],
-  providers: [
-    NumberStateService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
