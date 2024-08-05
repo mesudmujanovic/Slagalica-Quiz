@@ -1,0 +1,53 @@
+#signs-container {
+    display: flex;
+    flex-wrap: wrap;
+  
+  .sign {
+    cursor: pointer;
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.arr1-1 {
+     img {
+      width: 30px !important;
+      height: 30px !important;
+      margin-right: 10px;
+    }
+  }
+
+  .hit {
+    margin-top: 10px;
+    display: flex;
+
+    h4 {
+      text-align: center;
+    }
+  
+    .red-text {
+      color: red;
+      border-radius: 50%;
+      background-color: red !important;
+      width: 30px !important;
+      height: 30px !important;
+    }
+    
+    .yellow-text {
+      color: yellow;
+      border-radius: 50%;
+      background-color: yellow !important;
+      width: 30px !important;
+      height: 30px !important;
+    }
+    
+    .black-text {
+      color: white;
+      border-radius: 50%;
+      background-color: white;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  

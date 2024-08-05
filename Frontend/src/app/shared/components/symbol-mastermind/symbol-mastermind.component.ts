@@ -24,6 +24,7 @@ export class SymbolMastermindComponent {
 
   ngOnInit(): void {
     console.log(this.finalCombination);
+
   };
 
   getSafeImage(symbols: SymbolMastemindI): string {

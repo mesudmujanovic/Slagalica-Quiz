@@ -1,10 +1,12 @@
-import { Directive, ElementRef, HostListener, Input, QueryList, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject, Input, QueryList, Renderer2 } from '@angular/core';
 import { NumberStateService } from 'src/app/core/service/number-state.service';
 
 @Directive({
   selector: '[appAddNumToDivs]'
 })
 export class AddNumToDivsDirective {
+  private numberStateService = inject(NumberStateService);
+
   @Input() currentDivIndex: number = 0;
   @Input() counterButton: number = 0;
   @Input() numDivs: QueryList<ElementRef> = new QueryList<ElementRef>();
@@ -12,7 +14,6 @@ export class AddNumToDivsDirective {
   @Input() operationType: 'numbers' | 'letters' = 'numbers';
 
   constructor(
-    private numberStateService: NumberStateService,
     private renderer: Renderer2,
   ) { }
 

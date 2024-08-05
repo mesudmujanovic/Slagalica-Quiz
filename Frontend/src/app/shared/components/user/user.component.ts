@@ -12,63 +12,60 @@ import { UserService } from 'src/app/core/service/user.service';
 })
 export class UserComponent {
 
-  public users$: Observable<User[]>
-  userScore = this.scoreService.getScore();
-  userForm: FormGroup
-  constructor(private scoreService: ScoreService,
-    private formBuilder: FormBuilder,
-    private userService: UserService) {
-    this.userForm = this.formBuilder.group({
-      username: ['', Validators.required]
-    })
-  }
+  // public users$: Observable<User[]>
+  // userForm: FormGroup
+  // constructor(
+  //   private formBuilder: FormBuilder) {
+  //   this.userForm = this.formBuilder.group({
+  //     username: ['', Validators.required]
+  //   })
+  // }
 
-  sortUsersByScoreDesc() {
-    this.users$ = this.users$.pipe(
-      map(users => users.sort((a, b) => a.userscore - b.userscore))
-    );
-  }
+  // sortUsersByScoreDesc() {
+  //   this.users$ = this.users$.pipe(
+  //     map(users => users.sort((a, b) => a.userscore - b.userscore))
+  //   );
+  // }
   
   
 
-  sortUsersByScoreAsc() {
-    this.users$ = this.users$.pipe(
-      map(users => users.sort((a, b) => b.userscore - a.userscore))
-    );
-  }
+  // sortUsersByScoreAsc() {
+  //   this.users$ = this.users$.pipe(
+  //     map(users => users.sort((a, b) => b.userscore - a.userscore))
+  //   );
+  // }
   
 
-  onUser() {
-    if (this.userForm.valid) {
-      const userscore = this.scoreService.getScore();
-      const username = this.userForm.get('username')?.value;
-      this.userService.addUser(userscore, username).pipe(
-        switchMap(() => this.allUsers()),
-        tap(response => {
-          console.log("ukupno", userscore, "username", username);
-        })
-      ).subscribe(() => {
-        console.log("subscribe");
-      })
-    }
-  }
+  // onUser() {
+  //   if (this.userForm.valid) {
+  //     const username = this.userForm.get('username')?.value;
+  //     this.userService.addUser(userscore, username).pipe(
+  //       switchMap(() => this.allUsers()),
+  //       tap(response => {
+  //         console.log("ukupno", userscore, "username", username);
+  //       })
+  //     ).subscribe(() => {
+  //       console.log("subscribe");
+  //     })
+  //   }
+  // }
 
-  allUsers(): Observable<User[]> {
-    return this.users$ = this.userService.allUsers().pipe(
-      catchError(error => {
-        console.log("error", error);
-        return of([]);
-      })
-    )
-  }
+  // allUsers(): Observable<User[]> {
+  //   return this.users$ = this.userService.allUsers().pipe(
+  //     catchError(error => {
+  //       console.log("error", error);
+  //       return of([]);
+  //     })
+  //   )
+  // }
 
-  ngOnInit() {
-    console.log("userscore", this.userScore);
+  // ngOnInit() {
+  //   console.log("userscore", this.userScore);
 
-    this.allUsers().subscribe(
-      users => {
-        console.log(users);
-      }
-    );
-  }
+  //   this.allUsers().subscribe(
+  //     users => {
+  //       console.log(users);
+  //     }
+  //   );
+  // }
 }
