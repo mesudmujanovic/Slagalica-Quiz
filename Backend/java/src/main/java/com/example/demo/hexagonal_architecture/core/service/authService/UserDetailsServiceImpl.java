@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.service.authService;
 
-import com.example.demo.hexagonal_architecture.core.port.out.persistence.user.UserJWTRepository;
+import com.example.demo.hexagonal_architecture.core.port.out.persistenceJpa.user.UserJWTRepository;
 import com.example.demo.hexagonal_architecture.core.enitity.user.UserAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

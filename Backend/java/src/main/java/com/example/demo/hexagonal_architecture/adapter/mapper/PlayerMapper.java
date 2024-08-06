@@ -4,7 +4,7 @@ import com.example.demo.hexagonal_architecture.adapter.dto.user.PlayerDTO;
 import com.example.demo.hexagonal_architecture.adapter.intergration.DtoMapper;
 import com.example.demo.hexagonal_architecture.core.enitity.user.PlayerEntity;
 import com.example.demo.hexagonal_architecture.core.enitity.user.UserAuth;
-import com.example.demo.hexagonal_architecture.core.port.out.persistence.user.UserJWTRepository;
+import com.example.demo.hexagonal_architecture.core.port.out.persistenceJpa.user.UserJWTRepository;
 import org.springframework.stereotype.Component;
 import java.util.Optional;
 

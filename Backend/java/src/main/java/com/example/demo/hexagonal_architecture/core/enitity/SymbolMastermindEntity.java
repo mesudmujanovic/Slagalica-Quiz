@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 @Entity
 @Builder
 @Table(name = "symbolMastermind")
-public class SymbolMastermind {
+public class SymbolMastermindEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

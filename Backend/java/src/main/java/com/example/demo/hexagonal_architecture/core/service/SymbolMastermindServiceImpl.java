@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.service;
 import com.example.demo.hexagonal_architecture.core.port.out.in.SymbolMastermindService;
-import com.example.demo.hexagonal_architecture.core.enitity.SymbolMastermind;
+import com.example.demo.hexagonal_architecture.core.enitity.SymbolMastermindEntity;
 import com.example.demo.hexagonal_architecture.core.port.out.SymbolMastermindRepository;
 import com.example.demo.hexagonal_architecture.adapter.mapperDto.SymbolMasterMindDTOMapper;
 import com.example.demo.hexagonal_architecture.adapter.mapper.SymbolMasterMindMapper;
@@ -28,9 +28,9 @@ public class SymbolMastermindServiceImpl implements SymbolMastermindService {
     public SymbolMastermindDTO createSymbolMastermind(SymbolMastermindDTO symbolMastermindDTO, MultipartFile multipartFile) {
         try {
             byte[] imageData = multipartFile.getBytes();
-            SymbolMastermind symbolMastermind = symbolMastermindMapper.apply(symbolMastermindDTO);
-            symbolMastermind.setImage(imageData);
-            SymbolMastermind savedMastermind = symbolMastermindRepository.createSymbolMastermind(symbolMastermind, multipartFile);
+            SymbolMastermindEntity symbolMastermindEntity = symbolMastermindMapper.apply(symbolMastermindDTO);
+            symbolMastermindEntity.setImage(imageData);
+            SymbolMastermindEntity savedMastermind = symbolMastermindRepository.createSymbolMastermind(symbolMastermindEntity, multipartFile);
             return symbolMastermindDTOMapper.apply(savedMastermind);
         } catch (IOException ioException) {
             log.error("Error while saving image for SymbolMastermind", ioException);

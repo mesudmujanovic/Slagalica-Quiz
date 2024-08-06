@@ -3,7 +3,7 @@ package com.example.demo.hexagonal_architecture.adapter.out.repository.associati
 import com.example.demo.hexagonal_architecture.core.enitity.association.Field;
 import com.example.demo.hexagonal_architecture.core.enitity.association.Position;
 import com.example.demo.hexagonal_architecture.core.port.out.FieldAssocRepository;
-import com.example.demo.hexagonal_architecture.core.port.out.persistence.association.JpaField;
+import com.example.demo.hexagonal_architecture.core.port.out.persistenceJpa.association.FieldJpa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -13,15 +13,15 @@ import java.util.Optional;
 @Repository
 @RequiredArgsConstructor
 public class FieldAssocRepositoryImpl implements FieldAssocRepository {
-    private final JpaField jpaField;
+    private final FieldJpa fieldJpa;
     @Override
     public Optional<Field> findByPosition(Long associationId, Position position) {
-        return jpaField.findFieldByPosition(associationId, position);
+        return fieldJpa.findFieldByPosition(associationId, position);
     }
 
     @Override
     public List<Field> findByAssociationIdAndColumnPosition(Long associationId, String columnPosition) {
-        return jpaField.findByAssociationIdAndColumnPosition(associationId, columnPosition);
+        return fieldJpa.findByAssociationIdAndColumnPosition(associationId, columnPosition);
     }
 
 
