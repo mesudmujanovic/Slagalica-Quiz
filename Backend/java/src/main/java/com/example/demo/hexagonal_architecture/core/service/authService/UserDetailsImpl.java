@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.service.authService;
 
-import com.example.demo.hexagonal_architecture.core.enitity.UserAuth;
+import com.example.demo.hexagonal_architecture.core.enitity.user.UserAuth;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

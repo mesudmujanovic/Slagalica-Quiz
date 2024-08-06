@@ -1,8 +1,8 @@
 package com.example.demo.hexagonal_architecture.adapter.out.repository;
 
-import com.example.demo.hexagonal_architecture.core.enitity.PlayerEntity;
+import com.example.demo.hexagonal_architecture.core.enitity.user.PlayerEntity;
 import com.example.demo.hexagonal_architecture.core.port.out.PlayerRepository;
-import com.example.demo.hexagonal_architecture.core.port.out.persistence.JpaPlayer;
+import com.example.demo.hexagonal_architecture.core.port.out.persistence.user.JpaPlayer;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,5 @@
 package com.example.demo.hexagonal_architecture.adapter.in.web.controller;
 
-import com.example.demo.hexagonal_architecture.core.enitity.QuizEntity;
-import com.example.demo.hexagonal_architecture.core.service.QuizService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

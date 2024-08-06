@@ -1,9 +1,9 @@
 package com.example.demo.hexagonal_architecture.core.service.authService;
 
-import com.example.demo.hexagonal_architecture.adapter.dto.UserAuthDTO;
-import com.example.demo.hexagonal_architecture.core.port.out.persistence.UserJWTRepository;
-import com.example.demo.hexagonal_architecture.core.enitity.UserAuth;
-import com.example.demo.hexagonal_architecture.core.port.out.in.UserAuthService;
+import com.example.demo.hexagonal_architecture.adapter.dto.user.UserAuthDTO;
+import com.example.demo.hexagonal_architecture.core.port.out.persistence.user.UserJWTRepository;
+import com.example.demo.hexagonal_architecture.core.enitity.user.UserAuth;
+import com.example.demo.hexagonal_architecture.core.port.out.in.user.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

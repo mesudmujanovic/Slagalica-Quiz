@@ -1,8 +1,8 @@
 package com.example.demo.hexagonal_architecture.adapter.mapperDto;
 
-import com.example.demo.hexagonal_architecture.adapter.dto.PlayerDTO;
+import com.example.demo.hexagonal_architecture.adapter.dto.user.PlayerDTO;
 import com.example.demo.hexagonal_architecture.adapter.intergration.DtoMapper;
-import com.example.demo.hexagonal_architecture.core.enitity.PlayerEntity;
+import com.example.demo.hexagonal_architecture.core.enitity.user.PlayerEntity;
 import org.springframework.stereotype.Component;
 
 @Component

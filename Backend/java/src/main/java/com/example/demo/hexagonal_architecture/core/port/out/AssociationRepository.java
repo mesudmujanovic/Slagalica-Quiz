@@ -1,6 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.port.out;
 
-import com.example.demo.hexagonal_architecture.core.enitity.AssociationEntity;
+import com.example.demo.hexagonal_architecture.core.enitity.association.AssociationEntity;
 import java.util.List;
 import java.util.Optional;
 
