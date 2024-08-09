@@ -12,6 +12,7 @@ import { MultiplayerComponent } from './shared/components/multiplayer/multiplaye
 import { LayoutModule } from './layout/layout.module';
 import { AddNumToDivsDirective } from './shared/directives/add-num-to-divs.directive';
 import { UserComponent } from './shared/components/user/user.component';
+import { LetterWordComponent } from './shared/components/letter-word/letter-word.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserComponent } from './shared/components/user/user.component';
     SymbolMastermindComponent,
     MultiplayerComponent,
     AddNumToDivsDirective,
-    UserComponent
+    UserComponent,
+    LetterWordComponent
   ],
   imports: [
     BrowserModule,

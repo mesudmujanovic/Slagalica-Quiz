@@ -1,7 +1,5 @@
 import { Component, ElementRef, inject, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ChatMessage } from 'src/app/core/interface/ChatMessage';
 import { NumberStateService } from 'src/app/core/service/number-state.service';
 
 @Component({
@@ -21,17 +19,16 @@ export class MyNumberComponent {
   public counterButton: number = 0;
   numbers: (number | undefined)[] = [undefined, undefined, undefined, undefined, undefined, undefined];
   result$: Observable<number | undefined>;
-  currentPlayer: number = 1; 
-  playerResults: number[] = [0, 0]; 
+  currentPlayer: number = 1;
+  playerResults: number[] = [0, 0];
   messageInput: string = '';
-  userId: string="";
+  userId: string = "";
   messageList: any[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-    ){
-      this.result$ = this.numberStateService.getResult();
+  ) {
+    this.result$ = this.numberStateService.getResult();
   }
 }
-  
+
 

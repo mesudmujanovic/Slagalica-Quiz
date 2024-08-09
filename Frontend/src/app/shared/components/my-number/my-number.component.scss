@@ -2,56 +2,57 @@
   background-color: aqua;
   height: 97vh;
 
-.numSpin::before {
-  position: relative;
-  content: "5";
-  animation: animate2 infinite 0.3s;
-}
-
-.animatedNum  {
-  color: red;
-  position: relative;
-  content: "5";
-  animation: animate2 infinite 0.3s;
-}
-
-@keyframes animate2 {
-  0% {
-    content: "1";
-  }
-  10% {
+  .numSpin::before {
+    position: relative;
     content: "5";
+    animation: animate2 infinite 0.3s;
   }
 
-  25% {
-    content: "4";
+  .animatedNum {
+    color: red;
+    position: relative;
+    content: "5";
+    animation: animate2 infinite 0.3s;
   }
 
-  40% {
-    content: "25";
+  @keyframes animate2 {
+    0% {
+      content: "1";
+    }
+
+    10% {
+      content: "5";
+    }
+
+    25% {
+      content: "4";
+    }
+
+    40% {
+      content: "25";
+    }
+
+    70% {
+      content: "75";
+    }
+
+    100% {
+      content: "100";
+    }
   }
 
-  70% {
-    content: "75";
-  }
+  .allDiv {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 
-  100% {
-    content: "100";
-  }
-}
-
-.allDiv {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  .num {
+    .num {
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -64,7 +65,7 @@
       border: 2px solid wheat;
       margin: 5px;
     }
-    
+
     .numBig {
       margin-left: 50px;
       width: 80px;
@@ -79,17 +80,17 @@
       height: 40px;
       margin-bottom: 10px;
     }
-    
+
     .containerCalc.hide {
       display: none;
     }
-    
+
     .containerCalc .btt {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 5px;
     }
-    
+
     .containerCalc .btt button {
       width: 100%;
       height: 40px;
@@ -103,28 +104,29 @@
       text-align: center;
       width: 150px;
       height: 80px;
-    }    
-}
- .result {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-40%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  background-color: blue;
-  border-radius: 5px;
-  width: 100px;
-  height: 60px;
-}
-
-@media (max-width: 600px) {
-  .numBig {
-    margin-left: 0;
+    }
   }
-}
+
+  .result {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: blue;
+    border-radius: 5px;
+    width: 100px;
+    height: 60px;
+  }
+
+  @media (max-width: 600px) {
+    .numBig {
+      margin-left: 0;
+    }
+  }
 }
 
 * {

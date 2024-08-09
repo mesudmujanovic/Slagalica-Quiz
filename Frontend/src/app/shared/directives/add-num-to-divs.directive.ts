@@ -36,11 +36,6 @@ export class AddNumToDivsDirective {
         if (nextDiv) {
           this.renderer.addClass(nextDiv, 'numSpin');
         }
-        // this.counterButton++;
-        // if (this.counterButton === 6 && this.containerCalc) {
-        //   this.renderer.removeClass(this.containerCalc.nativeElement, 'hide');
-        // }
-
       } else {
         this.renderer.addClass(currentDiv, 'numSpin');
       }

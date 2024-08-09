@@ -11,7 +11,7 @@ export class MyNumberService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllNumber(): Observable<MyNumber[]>{ 
+  public getAllNumber(): Observable<MyNumber[]> {
     return this.http.get<MyNumber[]>(`${BASE_ULR}/number-game/my-numbers`).pipe(
       catchError(err => {
         console.error('Error problwm:', err);
