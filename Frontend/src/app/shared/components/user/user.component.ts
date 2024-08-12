@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
-import { User } from 'src/app/core/interface/User-Interface';
-import { ScoreService } from 'src/app/core/service/score.service';
-import { UserService } from 'src/app/core/service/user.service';
+import { Subject, catchError, takeUntil, tap } from 'rxjs';
+import { AuthService } from 'src/app/core/service/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -11,61 +9,64 @@ import { UserService } from 'src/app/core/service/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent {
+  private authService = inject(AuthService);
+  private destroy$ = new Subject<void>();
+  authForm!: FormGroup;
+  isSubmitted = false;
+  isLoginMode = true;
 
-  // public users$: Observable<User[]>
-  // userForm: FormGroup
-  // constructor(
-  //   private formBuilder: FormBuilder) {
-  //   this.userForm = this.formBuilder.group({
-  //     username: ['', Validators.required]
-  //   })
-  // }
+  constructor(private formBuilder: FormBuilder) {}
 
-  // sortUsersByScoreDesc() {
-  //   this.users$ = this.users$.pipe(
-  //     map(users => users.sort((a, b) => a.userscore - b.userscore))
-  //   );
-  // }
-  
-  
+  ngOnInit(): void {
+    this.authForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
 
-  // sortUsersByScoreAsc() {
-  //   this.users$ = this.users$.pipe(
-  //     map(users => users.sort((a, b) => b.userscore - a.userscore))
-  //   );
-  // }
-  
+  get formControls() {
+    return this.authForm.controls;
+  }
 
-  // onUser() {
-  //   if (this.userForm.valid) {
-  //     const username = this.userForm.get('username')?.value;
-  //     this.userService.addUser(userscore, username).pipe(
-  //       switchMap(() => this.allUsers()),
-  //       tap(response => {
-  //         console.log("ukupno", userscore, "username", username);
-  //       })
-  //     ).subscribe(() => {
-  //       console.log("subscribe");
-  //     })
-  //   }
-  // }
+  switchMode(): void {
+    this.isLoginMode = !this.isLoginMode;
+  }
 
-  // allUsers(): Observable<User[]> {
-  //   return this.users$ = this.userService.allUsers().pipe(
-  //     catchError(error => {
-  //       console.log("error", error);
-  //       return of([]);
-  //     })
-  //   )
-  // }
+  onSubmit(): void {
+    this.isSubmitted = true;
+    if (this.authForm.invalid) {
+      return;
+    }
 
-  // ngOnInit() {
-  //   console.log("userscore", this.userScore);
+    const { username, password } = this.authForm.value;
 
-  //   this.allUsers().subscribe(
-  //     users => {
-  //       console.log(users);
-  //     }
-  //   );
-  // }
+    const request$ = this.isLoginMode 
+    ? this.authService.login(username, password) 
+    : this.authService.signup(username, password);
+
+    request$.pipe(
+      tap((response) => {
+        if (this.isLoginMode) {
+          console.log('Login successful', response);
+        } else {
+          console.log('Signup successful', response);
+          this.isLoginMode = true;
+        }
+      }),
+      catchError((error) => {
+        if (this.isLoginMode) {
+          console.error('Login failed', error);
+        } else {
+          console.error('Signup failed', error);
+        }
+        return []; 
+      }),
+      takeUntil(this.destroy$)
+    ).subscribe(); 
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

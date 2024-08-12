@@ -1,20 +1,32 @@
-<!-- <form [formGroup]="userForm" (ngSubmit)="onUser()" class="form">
-  <div class="form-group">
-    <label for="username">User Name</label>
-    <input type="text" class="form-control" name="username" formControlName="username">
+<form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="username">Username</label>
+    <input id="username" type="text" formControlName="username" />
+    <div *ngIf="isSubmitted && formControls['username'].errors">
+      <span *ngIf="formControls['username'].errors['required']">Username is required</span>
+      <span *ngIf="formControls['username'].errors['minlength']">Username must be at least 4 characters</span>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+
+  <div>
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password" />
+    <div *ngIf="isSubmitted && formControls['password'].errors">
+      <span *ngIf="formControls['password'].errors['required']">Password is required</span>
+      <span *ngIf="formControls['password'].errors['minlength']">Password must be at least 6 characters</span>
+    </div>
+  </div>
+
+  <div>
+    <button type="submit" *ngIf="isLoginMode">Login</button>
+    <button type="submit" *ngIf="!isLoginMode">Signup</button>
+  </div>
 </form>
 
-<div *ngIf="users$ | async as users">
-  <h4>
-    Sort by:
-    <button class="btn btn-primary" (click)="sortUsersByScoreDesc()">Highest to Lowest</button>
-    <button class="btn btn-primary" (click)="sortUsersByScoreAsc()">Lowest to Highest</button>
-  </h4>
-  <div *ngFor="let user of users">
-    <h4>{{ user.username }}</h4>
-    <p>Score: {{ user.userscore }}</p>
-  </div>
+<div *ngIf="isLoginMode">
+  <p>Don't have an account? <a href="#" (click)="switchMode()">Sign up</a></p>
 </div>
- -->
+
+<div *ngIf="!isLoginMode">
+  <p>Already have an account? <a href="#" (click)="switchMode()">Log in</a></p>
+</div>

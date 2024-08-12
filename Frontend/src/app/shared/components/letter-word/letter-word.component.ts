@@ -16,14 +16,6 @@ export class LetterWordComponent {
   constructor() { }
 
 
-
   ngOnInit() {
-    this.letterWordService.getRandomLetterWord().subscribe(
-      a => {
-        this.letterWord = a;
-      }
-    )
-
   }
-
 }

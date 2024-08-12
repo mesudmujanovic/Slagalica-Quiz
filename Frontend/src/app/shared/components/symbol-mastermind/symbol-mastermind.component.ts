@@ -21,7 +21,7 @@ export class SymbolMastermindComponent {
   counter: number = 0;
 
   constructor(private renderer: Renderer2) { }
-
+  
   ngOnInit(): void {
     console.log(this.finalCombination);
 
