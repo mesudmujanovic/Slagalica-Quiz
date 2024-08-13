@@ -38,6 +38,7 @@ export class AssociationComponent {
 
   ngOnInit() {
     this.associationId = Number(this.sessionStorage.getItem("associationId"));
+
   }
 
   ngOnDestroy() {

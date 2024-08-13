@@ -11,10 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/letter-words")
+@RequestMapping("/letter-words")
 @RequiredArgsConstructor
 public class LetterWordController {
 
@@ -28,12 +29,28 @@ public class LetterWordController {
         return ResponseEntity.ok(letterWordResponse);
     }
 
-    @GetMapping()
-    public ResponseEntity<List<LetterWordResponse>> getLetterWord(@PathVariable Long id) {
+    @GetMapping
+    public ResponseEntity<List<LetterWordResponse>> getLetterWord() {
        List<LetterWordDTO> letterWordDTOList = letterWordServiceImpl.getAll();
        List<LetterWordResponse> letterWordResponse = letterWordDTOList
                .stream()
                .map(lettersWords -> LetterWordDTO.fromDTOToResponse(lettersWords)).collect(Collectors.toList());
        return ResponseEntity.ok(letterWordResponse);
+    }
+
+    @GetMapping("/{letterWordId}")
+    public ResponseEntity<Optional<LetterWordResponse>> getLetterWordById(@PathVariable Long letterWordId) {
+        Optional<LetterWordDTO> letterWordDTOOptional = letterWordServiceImpl.findById(letterWordId);
+        Optional<LetterWordResponse> letterWordResponse = letterWordDTOOptional.stream().map(a -> LetterWordDTO.fromDTOToResponse(a)).findFirst();
+        return ResponseEntity.ok(letterWordResponse);
+    }
+
+    @GetMapping("/random")
+    public ResponseEntity<LetterWordResponse> getRandomLetterWord() {
+        Optional<LetterWordDTO> letterWordDTOOptional = letterWordServiceImpl.findRandomLetterWordById();
+        return letterWordDTOOptional
+                .map(dto -> LetterWordDTO.fromDTOToResponse(dto))
+                .map(response -> ResponseEntity.ok(response))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

@@ -2,10 +2,7 @@ package com.example.demo.hexagonal_architecture.adapter.dto;
 
 import com.example.demo.hexagonal_architecture.adapter.request.LetterWordRequest;
 import com.example.demo.hexagonal_architecture.adapter.response.LetterWordResponse;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.List;
 
 @Data

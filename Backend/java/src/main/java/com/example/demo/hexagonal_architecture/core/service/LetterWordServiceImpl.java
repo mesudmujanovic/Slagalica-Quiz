@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +19,7 @@ public class LetterWordServiceImpl implements LetterWordService {
     private final LetterWordMapper letterWordMapper;
     private final LetterWordDTOMapper letterWordDTOMapper;
     private final LetterWordRepository letterWordRepository;
+
 
     @Override
     public LetterWordDTO saveLetterWord(LetterWordDTO letterWordDTO) {
@@ -33,5 +35,26 @@ public class LetterWordServiceImpl implements LetterWordService {
                 .stream()
                 .map(lettersWords -> letterWordDTOMapper.apply(lettersWords)).collect(Collectors.toList());
         return letterWordDTO;
+    }
+
+    @Override
+    public Optional<LetterWordDTO> findById(Long letterWordId) {
+       Optional<LetterWordEntity> letterWordEntity = letterWordRepository.findById(letterWordId);
+       Optional<LetterWordDTO> letterWordDTO = letterWordEntity.
+               stream()
+               .map(a -> letterWordDTOMapper.apply(a))
+               .findFirst();
+       return letterWordDTO;
+    }
+
+    public Optional<LetterWordDTO> findRandomLetterWordById() {
+        List<LetterWordDTO> allLetterWords = getAll();
+
+        if(allLetterWords.isEmpty()) {
+         return Optional.empty();
+        }
+
+        int randomIndex = (int) (Math.random() * allLetterWords.size());
+        return Optional.of(allLetterWords.get(randomIndex));
     }
 }

@@ -1,7 +1,6 @@
 package com.example.demo.hexagonal_architecture.adapter.response;
 
 import lombok.Data;
-
 import java.util.List;
 
 @Data
