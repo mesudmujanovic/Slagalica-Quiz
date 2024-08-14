@@ -7,10 +7,14 @@ import com.example.demo.hexagonal_architecture.core.port.out.in.association.Asso
 import com.example.demo.hexagonal_architecture.adapter.request.association.AssociationRequest;
 import com.example.demo.hexagonal_architecture.adapter.response.association.AssociationResponse;
 import com.example.demo.hexagonal_architecture.adapter.dto.association.AssociationDTO;
+import com.example.demo.hexagonal_architecture.core.service.association.AssociationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -18,6 +22,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AssociationController {
     private final AssociationService associationService;
+    private final AssociationServiceImpl associationServiceImpl;
 
     @PostMapping("/association")
     public ResponseEntity<AssociationResponse> saveAssociation(@RequestBody AssociationRequest associationRequest) {
@@ -34,6 +39,15 @@ public class AssociationController {
                 .map(AssociationDTO::fromDtoToAssociationResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(associationResponses);
+    }
+
+    @GetMapping("/associations/{associationId}")
+    public ResponseEntity<AssociationResponse> getAssociationById(@PathVariable Long associationId) {
+        Optional<AssociationDTO> associationDTO = associationService.findById(associationId);
+        AssociationResponse associationResponse = associationDTO
+                .map(AssociationDTO::fromDtoToAssociationResponse)
+                .orElse(new AssociationResponse());
+        return ResponseEntity.ok(associationResponse);
     }
 
     @GetMapping("/checkSolution/{associationId}/{column}/{userInput}")
@@ -59,5 +73,14 @@ public class AssociationController {
         } else {
             throw new IncorrectSolutionException();
         }
+    }
+
+    @GetMapping("/random")
+    public ResponseEntity<Long> getRandomAssociationId(){
+        Optional<AssociationDTO> associationDTO = associationServiceImpl.findByRandomNumber();
+        AssociationResponse associationResponse = associationDTO
+                .map(AssociationDTO::fromDtoToAssociationResponse)
+                .orElse(new AssociationResponse());
+        return ResponseEntity.ok(associationResponse.getId());
     }
 }

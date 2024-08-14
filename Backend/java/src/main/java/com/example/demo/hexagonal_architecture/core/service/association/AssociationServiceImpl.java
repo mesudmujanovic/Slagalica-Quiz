@@ -41,6 +41,13 @@ public class AssociationServiceImpl implements AssociationService {
     }
 
     @Override
+    public Optional<AssociationDTO> findById(Long id) {
+        Optional<AssociationEntity> associationEntity = associationRepo.findById(id);
+        Optional<AssociationDTO> associationDTO = associationEntity.map(associationDtoMapper::apply);
+        return associationDTO;
+    }
+
+    @Override
     public boolean checkSolution(Long associationId, String column, String userInput) {
         Optional<AssociationEntity> associationEntityOptional = associationRepo.findById(associationId);
         if (associationEntityOptional.isPresent()) {
@@ -65,5 +72,14 @@ public class AssociationServiceImpl implements AssociationService {
         } else {
             throw new IncorrectSolutionException();
         }
+    }
+
+    public Optional<AssociationDTO> findByRandomNumber(){
+        List<AssociationDTO> associationDTOS = getAll();
+        if(associationDTOS.isEmpty()) {
+            return Optional.empty();
+        }
+        int randomIndex = (int) (Math.random() * associationDTOS.size());
+        return Optional.of(associationDTOS.get(randomIndex));
     }
 }
