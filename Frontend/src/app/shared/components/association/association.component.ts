@@ -38,7 +38,10 @@ export class AssociationComponent {
 
   ngOnInit() {
     this.associationId = Number(this.sessionStorage.getItem("associationId"));
-
+    this.assocService.getRandomAssociationOnlyById().subscribe(a => {
+      this.associationId = a;
+    }
+    )
   }
 
   ngOnDestroy() {

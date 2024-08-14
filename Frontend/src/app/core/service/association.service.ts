@@ -18,6 +18,10 @@ export class AssociationService {
     return this.http.get<Association[]>(`${BASE_ULR}/associations-game/associations`);
   }
 
+  getRandomAssociationOnlyById(): Observable<number> {
+    return this.http.get<number>(`${BASE_ULR}/associations-game/random`);
+  }
+
   getRandomAssociation(): Observable<Association> {
     return this.getAll().pipe(
       map(allRes => {
@@ -26,11 +30,20 @@ export class AssociationService {
         }
         const random = Math.floor(Math.random() * allRes.length);
         const allAssociation = allRes[random];
-        this.sessionStorage.setItem("associationId", allAssociation.id.toString());
-        console.log(allAssociation);
+        this.sessionStorage.setItem('associationId', allAssociation.id.toString());
+        console.log(`Saved ID: ${this.sessionStorage.getItem("associationId")}`);
         return allAssociation;
       })
     );
+  }
+
+  getAssociationById(associationId: number): Observable<Association> {
+    return this.http.get<Association>(`${BASE_ULR}/associations-game/associations/${associationId}`).pipe(
+      catchError((error) => {
+        console.error('Error details', error)
+        return throwError(() => new Error(error.message || 'An unexpected error occured'));
+      })
+    )
   }
 
   getPosition(associationId: number, position: string): Observable<Field> {
