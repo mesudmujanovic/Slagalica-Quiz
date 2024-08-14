@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { BASE_ULR } from '../../enviroments/const/apiBaseUrl';
 import { Association } from '../interface/Association-interface';
 import { Field } from '../interface/Field-interface';
@@ -14,27 +14,8 @@ export class AssociationService {
 
   constructor(private http: HttpClient, private sessionStorage: StorageService) { }
 
-  getAll(): Observable<Association[]> {
-    return this.http.get<Association[]>(`${BASE_ULR}/associations-game/associations`);
-  }
-
   getRandomAssociationOnlyById(): Observable<number> {
     return this.http.get<number>(`${BASE_ULR}/associations-game/random`);
-  }
-
-  getRandomAssociation(): Observable<Association> {
-    return this.getAll().pipe(
-      map(allRes => {
-        if (!allRes || allRes.length === 0) {
-          throw new Error('No associations available');
-        }
-        const random = Math.floor(Math.random() * allRes.length);
-        const allAssociation = allRes[random];
-        this.sessionStorage.setItem('associationId', allAssociation.id.toString());
-        console.log(`Saved ID: ${this.sessionStorage.getItem("associationId")}`);
-        return allAssociation;
-      })
-    );
   }
 
   getAssociationById(associationId: number): Observable<Association> {

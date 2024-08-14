@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { catchError, EMPTY, map, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
+import { catchError, EMPTY, map, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { Association } from 'src/app/core/interface/Association-interface';
 import { Field } from 'src/app/core/interface/Field-interface';
 import { AssociationService } from 'src/app/core/service/association.service';
@@ -37,11 +37,13 @@ export class AssociationComponent {
   }
 
   ngOnInit() {
-    this.associationId = Number(this.sessionStorage.getItem("associationId"));
-    this.assocService.getRandomAssociationOnlyById().subscribe(a => {
-      this.associationId = a;
-    }
-    )
+    this.assocService.getRandomAssociationOnlyById().pipe(
+      takeUntil(this.destroy$),
+      switchMap((assocId: number) => {
+        this.associationId = assocId;
+        return this.assocService.getAssociationById(this.associationId);
+      })
+    ).subscribe();
   }
 
   ngOnDestroy() {
@@ -50,6 +52,8 @@ export class AssociationComponent {
   }
 
   showText(item: string, column: string, index: number): void {
+    console.log(this.associationId);
+
     this.assocService.getPosition(this.associationId, item).pipe(
       map((field: Field) => field.text),
       catchError(error => {
@@ -78,7 +82,7 @@ export class AssociationComponent {
       next: (result) => {
         console.log('Final solution checked:', result);
         this.sessionStorage.removeItem("randomAssociationId");
-        this.assocService.getRandomAssociation().subscribe(res => {
+        this.assocService.getAssociationById(this.associationId).subscribe(res => {
           if (res) {
             this.associationId = res.id;
             this.sessionStorage.setItem("randomAssociationId", this.associationId.toString());

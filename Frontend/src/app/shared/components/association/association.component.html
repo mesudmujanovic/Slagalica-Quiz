@@ -7,7 +7,7 @@
             (click)="!isColumnGuessed['A'] && !revealedItems['A'][i] && showText(item, 'A', i)">
             <div class="text">{{ item }}</div>
           </div>
-          <input type="text-input" [(ngModel)]="columnInput['A']" placeholder="Column A"
+          <input class="item inputA" type="text" [(ngModel)]="columnInput['A']" placeholder="Column A"
             [disabled]="isColumnGuessed['A']" (change)="handleInputChange('A')">
         </div>
       </div>
@@ -19,20 +19,20 @@
             (click)="!isColumnGuessed['B'] && !revealedItems['B'][i] && showText(item, 'B', i)">
             <div class="text">{{ item }}</div>
           </div>
-          <input type="text" [(ngModel)]="columnInput['B']" placeholder="Column B" [disabled]="isColumnGuessed['B']"
-            (change)="handleInputChange('B')">
+          <input class="item inputB" type="text" [(ngModel)]="columnInput['B']" placeholder="Column B"
+            [disabled]="isColumnGuessed['B']" (change)="handleInputChange('B')">
         </div>
       </div>
     </div>
     <div class="finall">
-      <input type="text" placeholder="Final Solution" [disabled]="isColumnGuessed['D']" [(ngModel)]="finallResult"
-        (change)="finalColumn()">
+      <input class="finall-input" type="text" placeholder="Final Solution" [disabled]="isColumnGuessed['D']"
+        [(ngModel)]="finallResult" (change)="finalColumn()">
     </div>
     <div class="col-6">
       <div class="column c">
         <div class="columnC">
-          <input type="text" [(ngModel)]="columnInput['C']" placeholder="Column C" [disabled]="isColumnGuessed['C']"
-            (change)="handleInputChange('C')">
+          <input class="item inputC" type="text" [(ngModel)]="columnInput['C']" placeholder="Column C"
+            [disabled]="isColumnGuessed['C']" (change)="handleInputChange('C')">
           <div *ngFor="let item of itemText['C']; let i = index" class="item"
             (click)="!isColumnGuessed['C'] && !revealedItems['C'][i] && showText(item, 'C', i)">
             <div class="text">{{ item }}</div>
@@ -44,8 +44,8 @@
     <div class="col-6">
       <div class="column d">
         <div class="columnD">
-          <input type="text" [(ngModel)]="columnInput['D']" placeholder="Column D" [disabled]="isColumnGuessed['D']"
-            (change)="handleInputChange('D')">
+          <input class="item inputD" type="text" [(ngModel)]="columnInput['D']" placeholder="Column D"
+            [disabled]="isColumnGuessed['D']" (change)="handleInputChange('D')">
           <div *ngFor="let item of itemText['D']; let i = index" class="item"
             (click)="!isColumnGuessed['D'] && !revealedItems['D'][i] && showText(item, 'D', i)">
             <div class="text">{{ item }}</div>
