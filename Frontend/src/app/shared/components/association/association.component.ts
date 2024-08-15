@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { catchError, EMPTY, map, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { ChangeDetectorRef, Component, ElementRef, inject, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { catchError, EMPTY, map, Observable, of, Subject, switchAll, switchMap, takeUntil, tap } from 'rxjs';
 import { Association } from 'src/app/core/interface/Association-interface';
 import { Field } from 'src/app/core/interface/Field-interface';
 import { AssociationService } from 'src/app/core/service/association.service';
@@ -13,9 +13,17 @@ import { StorageService } from 'src/app/core/service/storage.service';
 export class AssociationComponent {
   private assocService = inject(AssociationService);
   private sessionStorage = inject(StorageService);
+  private renderer = inject(Renderer2);
+  private el = inject(ElementRef);
+
+  @ViewChildren('itemA') itemElementsA!: QueryList<ElementRef>;
+  @ViewChildren('itemB') itemElementsB!: QueryList<ElementRef>;
+  @ViewChildren('itemC') itemElementsC!: QueryList<ElementRef>;
+  @ViewChildren('itemD') itemElementsD!: QueryList<ElementRef>;
+  @ViewChild('finall') finall!: ElementRef;
+
   private destroy$ = new Subject<void>();
   private associationId: number;
-
   randIndexAssoc: Association;
   finallResult: string;
   itemText: { [key: string]: string[] };
@@ -27,7 +35,7 @@ export class AssociationComponent {
     C: [false, false, false, false],
     D: [false, false, false, false]
   };
-  constructor() {
+  constructor(private cdr: ChangeDetectorRef) {
     this.itemText = {
       A: ["A1", "A2", "A3", "A4"],
       B: ["B1", "B2", "B3", "B4"],
@@ -35,12 +43,14 @@ export class AssociationComponent {
       D: ["D1", "D2", "D3", "D4"]
     };
   }
-
+  ngAfterViewInit(): void {
+    this.cdr.detectChanges(); // Osvežava promene u DOM-u
+  }
   ngOnInit() {
     this.assocService.getRandomAssociationOnlyById().pipe(
       takeUntil(this.destroy$),
       switchMap((assocId: number) => {
-        this.associationId = assocId;
+        this.associationId = 1;
         return this.assocService.getAssociationById(this.associationId);
       })
     ).subscribe();
@@ -89,6 +99,7 @@ export class AssociationComponent {
             this.columnInput = (({ A, B, C, D }) => ({ A, B, C, D }))(res.solutions);
             Object.keys(this.isColumnGuessed).forEach(key => {
               this.isColumnGuessed[key] = true;
+
             });
             res.fields.forEach(field => {
               const column = field.columnPosition;
@@ -97,6 +108,10 @@ export class AssociationComponent {
               ////                       [A,A,A,A]         (0,1,2,3)
               if (index != -1) {
                 this.itemText[column][index] = field.text;
+                this.cdr.detectChanges();
+                this.updateElements(column);
+                this.renderer.addClass(this.finall.nativeElement, 'background-class');
+
                 ////  [A]     [0 prvi field]   = prvi field -> field.text 
               }
             });
@@ -111,6 +126,7 @@ export class AssociationComponent {
 
   handleInputChange(column: string): void {
     const input = this.columnInput[column];
+
     this.assocService.checkColumnSolution(this.associationId, column, input).pipe(
       switchMap(checkSolution => {
         if (checkSolution.message) {
@@ -124,10 +140,37 @@ export class AssociationComponent {
       next: (fields) => {
         this.itemText[column] = fields.map(field => field.text);
         this.isColumnGuessed[column.toUpperCase()] = true;
+        this.cdr.detectChanges();
+        this.updateElements(column);
       },
       error: (error) => {
         console.error('Error handling input change:', error);
       }
     });
   }
+
+  updateElements(column: string): void {
+    let elements: QueryList<ElementRef> | undefined;
+    switch (column) {
+      case 'A':
+        elements = this.itemElementsA;
+        break;
+      case 'B':
+        elements = this.itemElementsB;
+        break;
+      case 'C':
+        elements = this.itemElementsC;
+        break;
+      case 'D':
+        elements = this.itemElementsD;
+        break;
+    }
+
+    if (elements) {
+      elements.forEach((item) => {
+        this.renderer.addClass(item.nativeElement, 'background-class');
+      });
+    }
+  }
+
 }

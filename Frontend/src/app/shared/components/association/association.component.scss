@@ -1,9 +1,6 @@
 .wrapper {
 
     height: 100vh;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
 
     .finall {
         text-align: center;
@@ -11,7 +8,7 @@
 
         .finall-input {
             width: 300px;
-            background-color: red;
+            background-color: #5356FF;
             text-align: center;
             border: 2px solid black;
             border-radius: 5px;
@@ -19,6 +16,10 @@
 
             &::placeholder {
                 color: white;
+            }
+
+            &.background-class {
+                background-color: red !important;
             }
         }
     }
@@ -39,7 +40,7 @@
                 .item {
                     border: 2px solid black;
                     border-radius: 5px;
-                    background-color: red;
+                    background-color: #5356FF;
                     margin-bottom: 5px;
                     width: 200px;
                     padding: 2px;
@@ -60,11 +61,16 @@
                     &:nth-child(4) {
                         margin-left: 120px;
                     }
+
+                    &.background-class {
+                        background-color: red !important;
+                    }
                 }
 
                 .inputA {
                     margin-left: 160px;
                     cursor: pointer;
+                    text-align: center;
 
                     &::placeholder {
                         color: white;
@@ -84,7 +90,7 @@
                 .item {
                     border: 2px solid black;
                     border-radius: 5px;
-                    background-color: red;
+                    background-color: #5356FF;
                     margin-bottom: 5px;
                     width: 200px;
                     padding: 2px;
@@ -105,11 +111,16 @@
                     &:nth-child(4) {
                         margin-left: 30px;
                     }
+
+                    &.background-class {
+                        background-color: red !important;
+                    }
                 }
 
                 .inputB {
                     margin-right: 160px;
                     cursor: pointer;
+                    text-align: center;
 
                     &::placeholder {
                         color: white;
@@ -131,7 +142,7 @@
                 .item {
                     border: 2px solid black;
                     border-radius: 5px;
-                    background-color: red;
+                    background-color: #5356FF;
                     margin-bottom: 5px;
                     width: 200px;
                     padding: 2px;
@@ -152,11 +163,16 @@
                     &:nth-child(4) {
                         margin-left: 30px;
                     }
+
+                    &.background-class {
+                        background-color: red !important;
+                    }
                 }
 
                 .inputC {
                     margin-left: 160px;
                     cursor: pointer;
+                    text-align: center;
 
                     &::placeholder {
                         color: white;
@@ -177,7 +193,7 @@
                 .item {
                     border: 2px solid black;
                     border-radius: 5px;
-                    background-color: red;
+                    background-color: #5356FF;
                     margin-bottom: 5px;
                     width: 200px;
                     padding: 2px;
@@ -198,11 +214,16 @@
                     &:nth-child(4) {
                         margin-left: 90px;
                     }
+
+                    &.background-class {
+                        background-color: red !important;
+                    }
                 }
 
                 .inputD {
                     margin-right: 160px;
                     cursor: pointer;
+                    text-align: center;
 
                     &::placeholder {
                         color: white;
@@ -223,7 +244,7 @@
     }
 
     .input {
-        background-color: red;
+        background-color: #5356FF;
         margin-left: 160px;
         border: 2px solid black;
         border-radius: 5px;
