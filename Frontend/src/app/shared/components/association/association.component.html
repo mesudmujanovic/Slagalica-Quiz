@@ -1,5 +1,8 @@
 <div class="container wrapper">
   <div class="row">
+    <div class="timer">
+      <div class="timer-bar" #timebar></div>
+    </div>
     <div class="col-6">
       <div class="column a">
         <div class="columnA">
@@ -26,7 +29,7 @@
     </div>
     <div class="finall">
       <input class="finall-input" type="text" placeholder="Final Solution" [disabled]="isColumnGuessed['D']"
-        [(ngModel)]="finallResult" (change)="finalColumn()" #finall>
+        [(ngModel)]="finallResult" (change)="finalColumn(finallResult)" #finall>
     </div>
     <div class="col-6">
       <div class="column c">

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, inject, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { catchError, EMPTY, map, Observable, of, Subject, switchAll, switchMap, takeUntil, tap } from 'rxjs';
+import { catchError, EMPTY, interval, map, Observable, of, Subject, Subscription, switchAll, switchMap, takeUntil, tap } from 'rxjs';
 import { Association } from 'src/app/core/interface/Association-interface';
 import { Field } from 'src/app/core/interface/Field-interface';
 import { AssociationService } from 'src/app/core/service/association.service';
@@ -14,18 +14,21 @@ export class AssociationComponent {
   private assocService = inject(AssociationService);
   private sessionStorage = inject(StorageService);
   private renderer = inject(Renderer2);
-  private el = inject(ElementRef);
+  private cdr = inject(ChangeDetectorRef);
+  private elRef = inject(ElementRef);
 
   @ViewChildren('itemA') itemElementsA!: QueryList<ElementRef>;
   @ViewChildren('itemB') itemElementsB!: QueryList<ElementRef>;
   @ViewChildren('itemC') itemElementsC!: QueryList<ElementRef>;
   @ViewChildren('itemD') itemElementsD!: QueryList<ElementRef>;
   @ViewChild('finall') finall!: ElementRef;
+  @ViewChild('timebar') timeBar!: ElementRef;
 
   private destroy$ = new Subject<void>();
   private associationId: number;
   randIndexAssoc: Association;
   finallResult: string;
+  seconds = 30;
   itemText: { [key: string]: string[] };
   columnInput: { [key: string]: string } = { A: '', B: '', C: '', D: '' };
   isColumnGuessed: { [key: string]: boolean } = { A: false, B: false, C: false, D: false };
@@ -35,7 +38,8 @@ export class AssociationComponent {
     C: [false, false, false, false],
     D: [false, false, false, false]
   };
-  constructor(private cdr: ChangeDetectorRef) {
+
+  constructor() {
     this.itemText = {
       A: ["A1", "A2", "A3", "A4"],
       B: ["B1", "B2", "B3", "B4"],
@@ -43,10 +47,15 @@ export class AssociationComponent {
       D: ["D1", "D2", "D3", "D4"]
     };
   }
+  private timerSubscription?: Subscription;
+
   ngAfterViewInit(): void {
-    this.cdr.detectChanges(); // Osvežava promene u DOM-u
+    this.cdr.detectChanges();
   }
+
+
   ngOnInit() {
+    this.startTimer();
     this.assocService.getRandomAssociationOnlyById().pipe(
       takeUntil(this.destroy$),
       switchMap((assocId: number) => {
@@ -54,6 +63,31 @@ export class AssociationComponent {
         return this.assocService.getAssociationById(this.associationId);
       })
     ).subscribe();
+  }
+
+  private startTimer() {
+    this.seconds = 5;
+
+    this.timerSubscription = interval(1000).subscribe(() => {
+      if (this.seconds > 0) {
+        this.seconds--;
+        this.updateTimerBar();
+      } else {
+        if (this.timerSubscription) {
+          this.timerSubscription.unsubscribe();
+        }
+        this.assocService.getAssociationById(1).subscribe((a) => {
+          const getFinalSolutionIfGameIsOver = a.finalSolutions;
+          this.finalColumn(getFinalSolutionIfGameIsOver);
+        });
+      }
+    });
+  }
+
+  private updateTimerBar() {
+    const percentage = ((5 - this.seconds) / 5) * 100;
+    const timerBar = this.timeBar.nativeElement as HTMLElement;
+    timerBar.style.height = `${percentage}%`;
   }
 
   ngOnDestroy() {
@@ -81,12 +115,13 @@ export class AssociationComponent {
     );
   }
 
-  finalColumn(): void {
+  finalColumn(finallSolution: string): void {
     if (this.associationId === null) {
       console.error("No association ID available");
       return;
     }
-    this.assocService.checkFinalSolution(this.associationId, this.finallResult).pipe(
+
+    this.assocService.checkFinalSolution(this.associationId, finallSolution).pipe(
       takeUntil(this.destroy$)
     ).subscribe({
       next: (result) => {
@@ -144,12 +179,13 @@ export class AssociationComponent {
         this.updateElements(column);
       },
       error: (error) => {
+        this.columnInput[column] = ""
         console.error('Error handling input change:', error);
       }
     });
   }
 
-  updateElements(column: string): void {
+  updateElements(column?: string): void {
     let elements: QueryList<ElementRef> | undefined;
     switch (column) {
       case 'A':

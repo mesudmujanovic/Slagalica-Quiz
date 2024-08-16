@@ -1,6 +1,33 @@
 .wrapper {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
+    position: relative;
+
+    .timer {
+        position: absolute;
+        width: 10px;
+        height: 150px;
+        background-color: white;
+        padding: 0;
+        left: 50%;
+        top: 38%;
+        transform: translate(-50%, -46%);
+        border: 1px solid #5356FF;
+
+
+        .timer-bar {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 0%;
+            width: 9px;
+            padding: 0;
+            background: red;
+            transition: height 1s linear;
+        }
+    }
 
     .finall {
         text-align: center;
@@ -13,6 +40,7 @@
             border: 2px solid black;
             border-radius: 5px;
             padding: 2px;
+            color: white;
 
             &::placeholder {
                 color: white;
