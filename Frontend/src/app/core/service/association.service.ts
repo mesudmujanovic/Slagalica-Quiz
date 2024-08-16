@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, interval, Observable, startWith, switchMap, takeUntil, tap, throwError, timer } from 'rxjs';
 import { BASE_ULR } from '../../enviroments/const/apiBaseUrl';
 import { Association } from '../interface/Association-interface';
 import { Field } from '../interface/Field-interface';
@@ -13,6 +13,14 @@ import { StorageService } from './storage.service';
 export class AssociationService {
 
   constructor(private http: HttpClient, private sessionStorage: StorageService) { }
+
+  getCounter(): Observable<number> {
+    const stopAfter30s$ = timer(33000);
+    return interval(1000).pipe(
+      switchMap(() => this.http.get<number>(`${BASE_ULR}/associations-game/counter`)),
+      takeUntil(stopAfter30s$)
+    );
+  }
 
   getRandomAssociationOnlyById(): Observable<number> {
     return this.http.get<number>(`${BASE_ULR}/associations-game/random`);

@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, inject, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { catchError, EMPTY, interval, map, Observable, of, Subject, Subscription, switchAll, switchMap, takeUntil, tap } from 'rxjs';
+import { catchError, EMPTY, interval, map, Observable, of, Subject, Subscription, switchAll, switchMap, takeUntil, tap, timer } from 'rxjs';
 import { Association } from 'src/app/core/interface/Association-interface';
 import { Field } from 'src/app/core/interface/Field-interface';
 import { AssociationService } from 'src/app/core/service/association.service';
@@ -23,12 +23,11 @@ export class AssociationComponent {
   @ViewChildren('itemD') itemElementsD!: QueryList<ElementRef>;
   @ViewChild('finall') finall!: ElementRef;
   @ViewChild('timebar') timeBar!: ElementRef;
-
+  counter = 30;
   private destroy$ = new Subject<void>();
   private associationId: number;
   randIndexAssoc: Association;
   finallResult: string;
-  seconds = 30;
   itemText: { [key: string]: string[] };
   columnInput: { [key: string]: string } = { A: '', B: '', C: '', D: '' };
   isColumnGuessed: { [key: string]: boolean } = { A: false, B: false, C: false, D: false };
@@ -55,6 +54,16 @@ export class AssociationComponent {
 
 
   ngOnInit() {
+    this.assocService.getCounter().pipe(
+    ).subscribe(
+      counter => {
+        this.counter = counter;
+      },
+      error => {
+        console.error('Error fetching counter:', error);
+      }
+    );
+
     this.startTimer();
     this.assocService.getRandomAssociationOnlyById().pipe(
       takeUntil(this.destroy$),
@@ -66,26 +75,27 @@ export class AssociationComponent {
   }
 
   private startTimer() {
-    this.seconds = 5;
-
-    this.timerSubscription = interval(1000).subscribe(() => {
-      if (this.seconds > 0) {
-        this.seconds--;
-        this.updateTimerBar();
-      } else {
-        if (this.timerSubscription) {
+    const stopAfter30s$ = timer(33000);
+    this.timerSubscription = interval(1000).pipe(
+      takeUntil(stopAfter30s$),
+      tap(() => {
+        if (this.counter > 0) {
+          console.log(this.counter);
+          this.updateTimerBar();
+          this.counter--;
+        } else {
           this.timerSubscription.unsubscribe();
+          this.assocService.getAssociationById(1).subscribe((a) => {
+            const getFinalSolutionIfGameIsOver = a.finalSolutions;
+            this.finalColumn(getFinalSolutionIfGameIsOver);
+          });
         }
-        this.assocService.getAssociationById(1).subscribe((a) => {
-          const getFinalSolutionIfGameIsOver = a.finalSolutions;
-          this.finalColumn(getFinalSolutionIfGameIsOver);
-        });
-      }
-    });
+      })
+    ).subscribe();
   }
 
   private updateTimerBar() {
-    const percentage = ((5 - this.seconds) / 5) * 100;
+    const percentage = ((30 - this.counter) / 29) * 100;
     const timerBar = this.timeBar.nativeElement as HTMLElement;
     timerBar.style.height = `${percentage}%`;
   }

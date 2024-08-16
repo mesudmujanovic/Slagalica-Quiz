@@ -10,10 +10,13 @@ import com.example.demo.hexagonal_architecture.adapter.mapper.association.Associ
 import com.example.demo.hexagonal_architecture.adapter.dto.association.AssociationDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Collectors;
 
 @Transactional

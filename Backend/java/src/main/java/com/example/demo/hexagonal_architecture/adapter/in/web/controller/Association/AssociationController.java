@@ -7,6 +7,7 @@ import com.example.demo.hexagonal_architecture.core.port.out.in.association.Asso
 import com.example.demo.hexagonal_architecture.adapter.request.association.AssociationRequest;
 import com.example.demo.hexagonal_architecture.adapter.response.association.AssociationResponse;
 import com.example.demo.hexagonal_architecture.adapter.dto.association.AssociationDTO;
+import com.example.demo.hexagonal_architecture.core.service.CounterService;
 import com.example.demo.hexagonal_architecture.core.service.association.AssociationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,13 @@ import java.util.stream.Collectors;
 public class AssociationController {
     private final AssociationService associationService;
     private final AssociationServiceImpl associationServiceImpl;
+    private final CounterService counterService;
+
+
+    @GetMapping("/counter")
+    public int getCounter() {
+        return counterService.decrementCounter();
+    }
 
     @PostMapping("/association")
     public ResponseEntity<AssociationResponse> saveAssociation(@RequestBody AssociationRequest associationRequest) {
