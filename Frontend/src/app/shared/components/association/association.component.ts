@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, ElementRef, inject, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { catchError, EMPTY, interval, map, Observable, of, Subject, Subscription, switchAll, switchMap, takeUntil, tap, timer } from 'rxjs';
+import { catchError, EMPTY, interval, map, of, Subject, Subscription, switchMap, takeUntil, tap, timer } from 'rxjs';
 import { Association } from 'src/app/core/interface/Association-interface';
 import { Field } from 'src/app/core/interface/Field-interface';
 import { AssociationService } from 'src/app/core/service/association.service';
@@ -23,7 +23,8 @@ export class AssociationComponent {
   @ViewChildren('itemD') itemElementsD!: QueryList<ElementRef>;
   @ViewChild('finall') finall!: ElementRef;
   @ViewChild('timebar') timeBar!: ElementRef;
-  counter = 30;
+
+  counter: number = 30;
   private destroy$ = new Subject<void>();
   private associationId: number;
   randIndexAssoc: Association;
@@ -32,18 +33,14 @@ export class AssociationComponent {
   columnInput: { [key: string]: string } = { A: '', B: '', C: '', D: '' };
   isColumnGuessed: { [key: string]: boolean } = { A: false, B: false, C: false, D: false };
   revealedItems = {
-    A: [false, false, false, false],
-    B: [false, false, false, false],
-    C: [false, false, false, false],
-    D: [false, false, false, false]
+    A: [false, false, false, false], B: [false, false, false, false],
+    C: [false, false, false, false], D: [false, false, false, false]
   };
 
   constructor() {
     this.itemText = {
-      A: ["A1", "A2", "A3", "A4"],
-      B: ["B1", "B2", "B3", "B4"],
-      C: ["C1", "C2", "C3", "C4"],
-      D: ["D1", "D2", "D3", "D4"]
+      A: ["A1", "A2", "A3", "A4"], B: ["B1", "B2", "B3", "B4"],
+      C: ["C1", "C2", "C3", "C4"], D: ["D1", "D2", "D3", "D4"]
     };
   }
   private timerSubscription?: Subscription;
@@ -52,17 +49,10 @@ export class AssociationComponent {
     this.cdr.detectChanges();
   }
 
-
   ngOnInit() {
     this.assocService.getCounter().pipe(
-    ).subscribe(
-      counter => {
-        this.counter = counter;
-      },
-      error => {
-        console.error('Error fetching counter:', error);
-      }
-    );
+      takeUntil(this.destroy$)
+    ).subscribe(counter => this.counter = counter)
 
     this.startTimer();
     this.assocService.getRandomAssociationOnlyById().pipe(
@@ -140,6 +130,7 @@ export class AssociationComponent {
         this.assocService.getAssociationById(this.associationId).subscribe(res => {
           if (res) {
             this.associationId = res.id;
+            this.finallResult = res.finalSolutions;
             this.sessionStorage.setItem("randomAssociationId", this.associationId.toString());
             this.columnInput = (({ A, B, C, D }) => ({ A, B, C, D }))(res.solutions);
             Object.keys(this.isColumnGuessed).forEach(key => {

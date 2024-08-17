@@ -15,7 +15,6 @@
         left: 50%;
         top: 32%;
         transform: translate(-50%, -46%);
-        border: 1px solid #5356FF;
 
 
         .timer-bar {
@@ -23,7 +22,7 @@
             flex-direction: column;
             justify-content: center;
             height: 0%;
-            width: 9px;
+            width: 8px;
             padding: 0;
             background: red;
             transition: height 1s linear;
