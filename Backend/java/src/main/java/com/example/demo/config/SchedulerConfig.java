@@ -11,7 +11,7 @@ public class SchedulerConfig {
     @Bean
     public TaskScheduler taskScheduler() {
         ThreadPoolTaskScheduler taskScheduler = new ThreadPoolTaskScheduler();
-        taskScheduler.setPoolSize(10); // Postavite veličinu pool-a po potrebi
+        taskScheduler.setPoolSize(10);
         taskScheduler.setThreadNamePrefix("MyScheduler-");
         taskScheduler.initialize();
         return taskScheduler;

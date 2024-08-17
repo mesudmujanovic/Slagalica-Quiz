@@ -1,5 +1,6 @@
 package com.example.demo.hexagonal_architecture.core.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.TaskScheduler;
@@ -7,14 +8,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.util.concurrent.ScheduledFuture;
 
 @Service
+@RequiredArgsConstructor
 public class CounterService {
 
-    private int COUNTER = 31; // Početna vrednost COUNTER
+    private int COUNTER = 31;
     private boolean isActive = true;
     private ScheduledFuture<?> scheduledFuture;
 
-    @Autowired
-    private TaskScheduler taskScheduler;
+    private final TaskScheduler taskScheduler;
 
     public void startCounterTask() {
         scheduledFuture = taskScheduler.scheduleAtFixedRate(this::decrementCounter, 1000);
@@ -35,7 +36,7 @@ public class CounterService {
             }
             if (COUNTER == 0) {
                 isActive = false;
-                stopCounterTask(); // Zaustavi zadatak kada COUNTER dostigne 0
+                stopCounterTask();
             }
         }
         return COUNTER;

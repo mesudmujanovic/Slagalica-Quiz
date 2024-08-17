@@ -14,7 +14,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -33,6 +35,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-websocket:3.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-messaging:6.1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:6.1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-websocket:6.1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:6.1.10" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.4.0" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.5.6" level="project" />
@@ -84,11 +91,9 @@
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:10.1.25" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:10.1.25" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:6.1.10" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:6.1.10" level="project" />
     <orderEntry type="library" name="Maven: io.micrometer:micrometer-observation:1.13.1" level="project" />
     <orderEntry type="library" name="Maven: io.micrometer:micrometer-commons:1.13.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:6.1.10" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:6.1.10" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:6.1.10" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:3.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:6.1.10" level="project" />
@@ -132,8 +137,5 @@
     <orderEntry type="library" name="Maven: com.sun.istack:istack-commons-runtime:4.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.jvnet.staxex:stax-ex:2.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.sun.xml.fastinfoset:FastInfoset:2.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-websocket:3.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-messaging:6.1.10" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-websocket:6.1.10" level="project" />
   </component>
 </module>
