@@ -1,1 +1,29 @@
-<p>letter-word works!</p>
+<div class="wrapper">
+    <div class="allDiv">
+        <div *ngFor="let letter of [1,2,3,4,5,6,7,8,9,10]; let i = index" #numDiv class="num">
+            {{ letters[letter - 1] }}
+        </div>
+        <div class="button-container">
+            <button class="button" appAddNumToDivs [currentDivIndex]="currentDivIndex" [counterButton]="counterButton"
+                [numDivs]="numDivs" [containerCalc]="containerCalc" [operationType]="'letters'">Dodaj brojeve</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="blue-bacground">
+    <div class="allDiv">
+        <div *ngFor="let number of [1, 2, 3, 4, 5, 6]" #numDiv class="num"
+            [ngClass]="{'numBig': number === 5 || number === 6}">
+            {{ numbers[number - 1] }}
+        </div>
+        <div class="button-container">
+            <button class="button" appAddNumToDivs [currentDivIndex]="currentDivIndex" [counterButton]="counterButton"
+                [numDivs]="numDivs" [containerCalc]="containerCalc">Dodaj brojeve</button>
+        </div>
+    </div>
+    <div *ngIf="(result$ | async) !== undefined" class="result">
+        {{ result$ | async }}
+    </div>
+    <app-calculator></app-calculator>
+</div> -->

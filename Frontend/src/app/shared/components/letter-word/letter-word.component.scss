@@ -1,0 +1,49 @@
+.num {
+    width: 50px;
+    height: 50px;
+    background-color: aqua;
+    margin: 3px;
+    color: black;
+    text-align: center;
+    font-size: 20px;
+}
+
+.letterSpin::before {
+    position: relative;
+    content: "5";
+    animation: animate2 infinite 0.3s;
+    color: black;
+}
+
+.animatedNum {
+    color: red;
+    position: relative;
+    content: "5";
+    animation: animate2 infinite 0.3s;
+}
+
+@keyframes animate2 {
+    0% {
+        content: "A";
+    }
+
+    10% {
+        content: "B";
+    }
+
+    25% {
+        content: "C";
+    }
+
+    40% {
+        content: "F";
+    }
+
+    70% {
+        content: "M";
+    }
+
+    100% {
+        content: "L";
+    }
+}

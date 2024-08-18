@@ -1,4 +1,4 @@
 export interface LetterWord {
-    letters: string[];
-    words: string[];
+    letters?: string[];
+    words?: string[];
 }

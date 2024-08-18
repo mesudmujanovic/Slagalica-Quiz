@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { BASE_ULR } from 'src/app/enviroments/const/apiBaseUrl';
 import { LetterWord } from '../interface/LetterWord-interface';
 

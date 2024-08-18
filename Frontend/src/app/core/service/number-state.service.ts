@@ -3,6 +3,7 @@ import { MyNumber } from '../interface/MyNumber-Interface';
 import { MyNumberService } from './my-number.service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { LetterWordService } from './letter-word.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,23 @@ export class NumberStateService implements OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   public numbers: MyNumber | undefined;
+  public letters: string[] = [];
   allNumber$: Observable<MyNumber[]> = this.myNumberService.getAllNumber();
   private resultSubject: BehaviorSubject<number | undefined> = new BehaviorSubject<number | undefined>(undefined);
   result$: Observable<number | undefined> = this.resultSubject.asObservable();
 
-  constructor(private myNumberService: MyNumberService) {
+  constructor(private myNumberService: MyNumberService, private letterService: LetterWordService) {
     this.fetchNumbers();
+    this.getLetter()
+  }
+
+  getLetter(): string[] {
+    this.letterService.getRandomLetterWord().subscribe(a => {
+      if (a.letters) {
+        this.letters = a.letters;
+      }
+    });
+    return this.letters
   }
 
   fetchNumbers() {
